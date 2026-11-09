@@ -1,0 +1,1141 @@
+<!doctype html>
+<html lang="nl" class="nojs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Umrah</title>
+<meta name="description" content="Offline gids voor de umrah volgens de Sunnah, met du'a's, rondeteller en du'a-lijst.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Umrah">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#131312">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" href="icon-192.png">
+<script>document.documentElement.className="js";window.USE_SW=true;</script>
+<style>/* Kiswah-zwart met gouden draad op marmerwit; alleen systeemlettertypes zodat alles offline werkt */
+:root{
+  --bg:#f4f5f3; --surface:#fff; --ink:#18191b; --muted:#585c62; --line:#dadddc;
+  --gold:#83641a; --gold-soft:#f0e7d0; --band:#131312; --band-ink:#efe9da; --band-gold:#d2b05a;
+  --on-gold:#fff;
+  --f-display:"New York","Iowan Old Style",ui-serif,Georgia,serif;
+  --f-body:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,sans-serif;
+  --f-ar:"Geeza Pro","Noto Naskh Arabic","Traditional Arabic","Amiri",serif;
+  --ar:26px;
+  --tabbar:64px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#0f0f0e; --surface:#1b1b19; --ink:#ebe9e3; --muted:#a3a198; --line:#2e2d29;
+  --gold:#d6b65e; --gold-soft:#29231a; --on-gold:#14130f; color-scheme:dark}}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-padding-top:calc(16px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.55 var(--f-body);
+  padding-bottom:calc(var(--tabbar) + env(safe-area-inset-bottom,0px) + 24px)}
+.nojs body{padding-bottom:24px}
+a{color:var(--gold)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* Weergaven */
+.js .view{display:none}
+.js .view.active{display:block}
+.js .nojs-only{display:none}
+.nojs .seg-ctl,.nojs #ring,.nojs #hint,.nojs #plus,.nojs .row2,.nojs .awake,.nojs .addrow,.nojs #mylist,.nojs #uncheck,.nojs #count,.nojs .search,.nojs .sizer,.nojs .star{display:none}
+.nojs .view{border-top:1px solid var(--line)}
+
+/* Kop */
+.hero{background:var(--band);color:var(--band-ink);border-bottom:3px solid var(--band-gold);
+  padding:calc(28px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) 22px max(20px,env(safe-area-inset-left,0px))}
+.hero>*{max-width:680px;margin-left:auto;margin-right:auto}
+.ar-title{font-family:var(--f-ar);font-size:30px;color:var(--band-gold);text-align:right;margin:0 auto 6px}
+.hero h1{font:500 clamp(32px,9vw,44px)/1.08 var(--f-display);margin:0 auto 12px}
+.hero p{margin:0 auto;opacity:.82}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:18px!important;background:rgba(210,176,90,.4);border:1px solid rgba(210,176,90,.4)}
+.pillars div{background:var(--band);padding:9px 10px}
+.pillars span{display:block;font-size:12px;font-weight:600;color:var(--band-gold)}
+.pillars b{font:500 17px var(--f-display)}
+
+/* Typografie */
+h1,h2,h3{text-wrap:balance}
+.vhead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-top:calc(18px + env(safe-area-inset-top,0px))}
+.vhead h1{font:700 34px/1.1 var(--f-body);margin:8px 0}
+.group{font:600 15px var(--f-body);color:var(--muted);margin:28px 4px 8px}
+.eyebrow,.eyebrow-s{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--gold);margin:0 0 4px}
+.eyebrow-s{display:block;color:var(--muted);font-size:11px}
+.ch-title{font:500 32px/1.15 var(--f-display);margin:0 0 14px}
+h3{font:600 21px/1.25 var(--f-display);margin:24px 0 8px}
+p{margin:0 0 12px}
+.lead{color:var(--muted);font-size:18px}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.empty{color:var(--muted);font-style:italic}
+
+/* Inhoudsopgave */
+.toc{list-style:none;margin:0;padding:0;background:var(--surface);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.toc li+li{border-top:1px solid var(--line)}
+.toc a{display:block;padding:12px 16px;text-decoration:none;color:var(--ink)}
+.toc-t{font:500 19px var(--f-display)}
+
+.chapter{padding:36px 0 8px;border-top:1px solid var(--line);margin-top:28px}
+.ch-nav{display:flex;gap:10px;align-items:stretch;margin:22px 0 4px}
+.ch-nav .up{align-self:center;text-decoration:none;font-size:15px;white-space:nowrap}
+.next{flex:1;display:flex;flex-direction:column;text-decoration:none;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--ink)}
+.next span{font-size:13px;color:var(--muted)}
+.next b{font:500 17px var(--f-display)}
+
+/* Bronnen en labels */
+.src{display:inline-block;font-size:12.5px;line-height:1.3;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:2px 7px;white-space:nowrap;vertical-align:1px;margin-top:4px}
+.tag{display:inline-block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;padding:2px 7px;border-radius:4px;margin-bottom:6px}
+.t-rukn{background:var(--ink);color:var(--bg)}
+.t-wajib{background:var(--gold);color:var(--on-gold)}
+.t-sunnah{border:1px solid var(--gold);color:var(--gold)}
+
+/* Lijsten */
+.bullets{padding-left:20px;margin:0 0 14px}
+.bullets li{margin-bottom:12px}
+.bullets li::marker{color:var(--gold)}
+.steps{list-style:none;padding:0;margin:8px 0 16px;counter-reset:s}
+.steps>li{counter-increment:s;position:relative;padding:0 0 22px 44px}
+.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;border:1.5px solid var(--gold);color:var(--gold);font-weight:600;font-size:14px;display:grid;place-items:center}
+.steps>li::after{content:"";position:absolute;left:14px;top:32px;bottom:4px;width:1px;background:var(--line)}
+.steps>li:last-child::after{display:none}
+.step-t{display:block;font-size:18px;margin:2px 0 4px}
+.steps p{margin:0 0 6px}
+
+.note{background:var(--gold-soft);border-left:3px solid var(--gold);border-radius:0 10px 10px 0;padding:12px 14px;margin:14px 0}
+.note .h{display:block;margin-bottom:4px}
+.note p{margin:0}
+
+.table{background:var(--surface);border:1px solid var(--line);border-radius:12px;margin:10px 0 16px}
+.trow{padding:12px 14px}
+.trow+.trow{border-top:1px solid var(--line)}
+.trow-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:4px}
+.trow-h .tag{margin:2px 0 0}
+.kv{display:grid;grid-template-columns:92px 1fr;gap:8px;font-size:15px}
+.kv span:first-child{color:var(--muted);font-size:13px;padding-top:2px}
+
+.cards{display:grid;gap:10px;margin:10px 0 16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.card p{color:var(--muted);font-size:15px;margin:4px 0 4px}
+
+.check{list-style:none;padding:0;margin:6px 0 14px}
+.check li{border-bottom:1px solid var(--line)}
+.check label{display:flex;gap:12px;align-items:flex-start;padding:11px 2px;cursor:pointer}
+.check input{width:22px;height:22px;margin-top:2px;accent-color:var(--gold);flex:none}
+.check input:checked+span{color:var(--muted);text-decoration:line-through}
+
+/* Du'a-kaarten */
+.dua-list{display:grid;gap:12px;margin:12px 0}
+.dua{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dua-list .dua{margin:0}
+.dua-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.when{font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;color:var(--gold);padding-top:4px}
+.star{background:none;border:0;color:var(--gold);font-size:24px;line-height:1;padding:2px 4px;cursor:pointer;min-width:40px;min-height:36px}
+.ar{font-family:var(--f-ar);font-size:var(--ar);line-height:1.95;text-align:right;margin:6px 0 8px;color:var(--ink)}
+.tr{font-style:italic;margin:0 0 6px}
+.nl{color:var(--muted);margin:0 0 6px}
+.note-s{font-size:14px;color:var(--muted);border-left:2px solid var(--line);padding-left:10px;margin:4px 0 6px}
+.note-s:empty{display:none}
+
+.search{width:100%;font:inherit;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);margin:4px 0 4px;-webkit-appearance:none}
+.sizer{display:flex;gap:6px}
+.sizer button,.detail-bar button{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 12px;color:var(--gold);font-weight:600;cursor:pointer}
+
+/* Volledig scherm */
+.detail{position:fixed;inset:0;z-index:30;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
+.detail-bar{position:sticky;top:0;display:flex;gap:8px;align-items:center;background:var(--bg);border-bottom:1px solid var(--line);
+  padding:calc(10px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px))}
+.detail-bar .grow{flex:1}
+#d-star{font-size:20px;padding:4px 12px}
+.detail-body{max-width:720px;margin:0 auto;padding:18px max(18px,env(safe-area-inset-right,0px)) 60px max(18px,env(safe-area-inset-left,0px))}
+.detail-body h2{font:500 30px/1.15 var(--f-display);margin:0 0 4px}
+.ar.big{font-size:calc(var(--ar) * 1.3);margin:18px 0 22px}
+.big-tr{font-size:20px}
+
+/* Teller */
+.seg-ctl{display:grid;grid-template-columns:1fr 1fr;background:var(--line);border-radius:12px;padding:3px;margin:8px 0 18px}
+.seg-ctl button{border:0;background:none;padding:9px;border-radius:9px;font-weight:600;cursor:pointer}
+.seg-ctl button[aria-selected="true"]{background:var(--surface);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.ring{display:block;position:relative;width:min(260px,70vw);aspect-ratio:1;margin:0 auto;border:0;background:none;padding:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ring svg{width:100%;height:100%}
+.seg{fill:none;stroke:var(--line);stroke-width:14;stroke-linecap:round;transition:stroke .2s}
+.seg.on{stroke:var(--gold)}
+.ring-n{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-n b{font:500 84px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.ring-n small{color:var(--muted);font-size:17px;font-weight:600}
+.hint{text-align:center;color:var(--muted);min-height:3.2em;margin:16px 0}
+.primary{display:block;width:100%;border:0;border-radius:16px;padding:20px;background:var(--gold);color:var(--on-gold);font-size:20px;font-weight:600;cursor:pointer}
+.primary:disabled{opacity:.45}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.ghost{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px;cursor:pointer;font-weight:500}
+.ghost:disabled{opacity:.45}
+.awake{display:flex;align-items:center;justify-content:center;gap:8px;color:var(--muted);font-size:15px;margin-top:16px}
+.awake input{accent-color:var(--gold);width:18px;height:18px}
+
+/* Mijn lijst */
+.addrow{display:flex;gap:8px;margin:8px 0 10px}
+.addrow input{flex:1;min-width:0;font:inherit;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink)}
+.addrow button{border:0;border-radius:12px;padding:0 16px;background:var(--gold);color:var(--on-gold);font-weight:600;cursor:pointer}
+.mylist li{display:flex;align-items:center;gap:8px}
+.mylist label{flex:1;min-width:0}
+.mylist .del{background:none;border:0;color:var(--muted);font-size:14px;padding:8px;cursor:pointer;text-decoration:underline}
+#uncheck{width:100%;margin:6px 0 14px}
+
+/* Tabbalk */
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:20;display:grid;grid-template-columns:repeat(4,1fr);
+  background:color-mix(in srgb,var(--surface) 88%,transparent);-webkit-backdrop-filter:saturate(1.6) blur(18px);backdrop-filter:saturate(1.6) blur(18px);
+  border-top:1px solid var(--line);
+  padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.tabbar a{display:flex;flex-direction:column;align-items:center;gap:1px;text-decoration:none;color:var(--muted);font-size:11.5px;font-weight:600;padding:4px 0}
+.tabbar .ic{font-size:20px;line-height:1.2}
+.tabbar a.on{color:var(--gold)}
+.nojs .tabbar{display:none}
+@media (prefers-reduced-motion:reduce){.seg{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<section class="view" id="v-gids">
+  <header class="hero" id="gids">
+    <p class="ar-title" lang="ar" dir="rtl">لَبَّيْكَ اللَّهُمَّ عُمْرَةً</p>
+    <h1>Umrah volgens de Sunnah</h1>
+    <p>Wat je doet, in welke volgorde, wat je zegt en waar het vandaan komt. Alles werkt offline.</p>
+    <div class="pillars"><div><span>1</span><b>Ihram</b></div><div><span>2</span><b>Tawaf</b></div><div><span>3</span><b>Sa'i</b></div><div><span>4</span><b>Haar</b></div></div>
+  </header>
+  <div class="wrap">
+    <h2 class="group">De umrah</h2><ul class="toc"><li><a href="#ch-overzicht"><span class="eyebrow-s">Begin hier</span><span class="toc-t">Overzicht</span></a></li><li><a href="#ch-voorbereiding"><span class="eyebrow-s">Voor vertrek</span><span class="toc-t">Voorbereiding</span></a></li><li><a href="#ch-miqat"><span class="eyebrow-s">De grens</span><span class="toc-t">De miqat vanuit België</span></a></li><li><a href="#ch-ihram"><span class="eyebrow-s">Stap 1</span><span class="toc-t">Ihram</span></a></li><li><a href="#ch-verboden"><span class="eyebrow-s">Tijdens de ihram</span><span class="toc-t">Wat verboden is en wat mag</span></a></li><li><a href="#ch-aankomst"><span class="eyebrow-s">In Mekka</span><span class="toc-t">Aankomst en de moskee</span></a></li><li><a href="#ch-tawaf"><span class="eyebrow-s">Stap 2</span><span class="toc-t">Tawaf</span></a></li><li><a href="#ch-sai"><span class="eyebrow-s">Stap 3</span><span class="toc-t">Sa&#x27;i</span></a></li><li><a href="#ch-haar"><span class="eyebrow-s">Stap 4</span><span class="toc-t">Haar scheren of inkorten</span></a></li></ul><h2 class="group">Du&#x27;a</h2><ul class="toc"><li><a href="#ch-dua-waar"><span class="eyebrow-s">Smeekbeden</span><span class="toc-t">Du&#x27;a: waar tijdens de umrah</span></a></li><li><a href="#ch-dua-wanneer"><span class="eyebrow-s">Smeekbeden</span><span class="toc-t">Wanneer du&#x27;a verhoord wordt</span></a></li><li><a href="#ch-dua-adab"><span class="eyebrow-s">Smeekbeden</span><span class="toc-t">Zo vraag je</span></a></li><li><a href="#ch-meenemen"><span class="eyebrow-s">Smeekbeden</span><span class="toc-t">Smeekbeden om mee te nemen</span></a></li></ul><h2 class="group">Verder</h2><ul class="toc"><li><a href="#ch-vrouwen"><span class="eyebrow-s">Specifiek</span><span class="toc-t">Voor vrouwen</span></a></li><li><a href="#ch-aanbidding"><span class="eyebrow-s">Je verblijf</span><span class="toc-t">Aanbidding in Mekka</span></a></li><li><a href="#ch-medina"><span class="eyebrow-s">Optioneel</span><span class="toc-t">Bezoek aan Medina</span></a></li><li><a href="#ch-fouten"><span class="eyebrow-s">Let op</span><span class="toc-t">Veelgemaakte fouten</span></a></li><li><a href="#ch-bronnen"><span class="eyebrow-s">Verantwoording</span><span class="toc-t">Bronnen en werkwijze</span></a></li></ul>
+    <section class="chapter" id="ch-overzicht">
+  <p class="eyebrow">Begin hier</p>
+  <h2 class="ch-title">Overzicht</h2>
+  <p class="lead">De umrah bestaat uit vier handelingen: <b>ihram</b>, <b>tawaf</b>, <b>sa&#x27;i</b> en het <b>haar scheren of inkorten</b>. De hele umrah kan in twee à vier uur. De rest van je verblijf is voor gebed, Koran, du&#x27;a en goede daden. </p><div class="table"><div class="trow"><div class="trow-h"><b>Ihram (de intentie)</b><span class="tag t-rukn">Zuil</span></div><div class="kv"><span>Als je het mist</span><span>Geen umrah zonder.</span></div></div><div class="trow"><div class="trow-h"><b>Tawaf, zeven rondes</b><span class="tag t-rukn">Zuil</span></div><div class="kv"><span>Als je het mist</span><span>De umrah is niet af tot je hem doet.</span></div></div><div class="trow"><div class="trow-h"><b>Sa&#x27;i, zeven trajecten</b><span class="tag t-rukn">Zuil</span></div><div class="kv"><span>Als je het mist</span><span>Bij de Hanafi&#x27;s verplicht (wajib); je moet hem hoe dan ook doen.</span></div></div><div class="trow"><div class="trow-h"><b>Ihram aannemen vanaf de miqat</b><span class="tag t-wajib">Verplicht</span></div><div class="kv"><span>Als je het mist</span><span>Volgens de meerderheid een offer (schaap) als compensatie.</span></div></div><div class="trow"><div class="trow-h"><b>Haar scheren of inkorten</b><span class="tag t-wajib">Verplicht</span></div><div class="kv"><span>Als je het mist</span><span>Je blijft in ihram tot je het doet.</span></div></div><div class="trow"><div class="trow-h"><b>Ghusl, parfum, talbiyah, raml, idtiba&#x27;, gebed bij de Maqam, Zamzam</b><span class="tag t-sunnah">Sunnah</span></div><div class="kv"><span>Als je het mist</span><span>Geen zonde, wel beloning gemist.</span></div></div></div><p>Deze indeling volgt de Hanbali- en Shafi&#x27;i-school. De andere scholen verschillen licht, maar in de praktijk doe je hetzelfde. </p>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-voorbereiding"><span>Volgende</span><b>Voorbereiding</b></a></div>
+</section><section class="chapter" id="ch-voorbereiding">
+  <p class="eyebrow">Voor vertrek</p>
+  <h2 class="ch-title">Voorbereiding</h2>
+  <h3>Waarom je gaat</h3><ul class="bullets"><li><b>Oprechtheid.</b> „Daden worden alleen beoordeeld naar de intenties.” Ga voor Allah, niet voor foto&#x27;s of status. <span class="src">Bukhari 1 · Muslim 1907</span></li><li><b>Een umrah wist zonden uit.</b> „Een umrah tot de volgende is een boetedoening voor wat ertussen ligt.” <span class="src">Bukhari 1773 · Muslim 1349</span></li><li><b>Hajj en umrah verdrijven armoede en zonden</b> zoals de blaasbalg het vuil van ijzer verdrijft. <span class="src">Tirmidhi 810 · sahih</span></li><li><b>Umrah in Ramadan</b> staat in beloning gelijk aan een hajj. <span class="src">Bukhari 1782 · Muslim 1256</span></li></ul><h3>Wat je vooraf regelt</h3><ul class="bullets"><li><b>Tawbah.</b> Berouw over je zonden, met de vaste intentie ze niet te herhalen. </li><li><b>Rechten van mensen.</b> Los schulden af of maak afspraken, vraag vergeving aan wie je onrecht deed, en laat een testament (wasiyyah) achter. <span class="src">Bukhari 2738</span></li><li><b>Halal geld.</b> „Allah is goed en aanvaardt alleen wat goed is.” <span class="src">Muslim 1015</span></li><li><b>Kennis.</b> Leer de stappen thuis, zodat je ter plaatse met je hart bij de aanbidding bent. </li><li><b>Goed gezelschap</b> dat je helpt geduldig te blijven in de drukte. </li></ul><h3>Checklist voor de aanbidding</h3><ul class="check"><li><label><input type="checkbox" data-check="inpak.0"><span>Twee ongestikte witte doeken (izar en rida&#x27;), bij voorkeur twee sets</span></label></li><li><label><input type="checkbox" data-check="inpak.1"><span>Sandalen die de enkels en de bovenkant van de voet vrijlaten</span></label></li><li><label><input type="checkbox" data-check="inpak.2"><span>Riem of geldbuidel voor rond de izar</span></label></li><li><label><input type="checkbox" data-check="inpak.3"><span>Ongeparfumeerde zeep, shampoo, deodorant en zonnecrème</span></label></li><li><label><input type="checkbox" data-check="inpak.4"><span>Parfum (mannen) voor op het lichaam vóór de ihram</span></label></li><li><label><input type="checkbox" data-check="inpak.5"><span>Nagelknipper en scheermes voor de verzorging vóór de ihram</span></label></li><li><label><input type="checkbox" data-check="inpak.6"><span>Schaar of tondeuse om het haar af te sluiten</span></label></li><li><label><input type="checkbox" data-check="inpak.7"><span>Mushaf of Koran-app en je du&#x27;a-lijst in deze app</span></label></li><li><label><input type="checkbox" data-check="inpak.8"><span>Kleine tas voor schoenen in de moskee</span></label></li><li><label><input type="checkbox" data-check="inpak.9"><span>Vrouwen: ruime, bedekkende kleding, geen niqab of handschoenen in ihram</span></label></li><li><label><input type="checkbox" data-check="inpak.10"><span>Weten wanneer het vliegtuig de miqat passeert</span></label></li></ul><h3>Bij het vertrek</h3><article class="dua" data-id="reis" data-search="reisdu&#x27;a als je in het voertuig of vliegtuig zit allāhu akbar, allāhu akbar, allāhu akbar. subhāna lladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā la-munqalibūn. allāhumma innā nas&#x27;aluka fī safarinā hādha l-birra wa t-taqwā, wa mina l-&#x27;amali mā tardā. allāhumma hawwin &#x27;alaynā safaranā hādhā watwi &#x27;annā bu&#x27;dah. allāhumma anta s-sāhibu fi s-safari wa l-khalīfatu fi l-ahl. allāhumma innī a&#x27;ūdhu bika min wa&#x27;thā&#x27;i s-safari, wa ka&#x27;ābati l-manzari, wa sū&#x27;i l-munqalabi fi l-māli wa l-ahl. allah is de grootste (3×). glorie aan hem die dit aan ons dienstbaar heeft gemaakt, terwijl wij dat zelf niet konden, en tot onze heer keren wij terug. o allah, wij vragen u op deze reis om vroomheid en godsvrees, en om daden waarmee u tevreden bent. o allah, maak deze reis licht voor ons en verkort de afstand. o allah, u bent de metgezel op reis en de behoeder van de familie. o allah, ik zoek bescherming bij u tegen de ontberingen van de reis, een droevig aanzicht en een slechte terugkeer bij bezit en familie. reis muslim 1342" tabindex="0" role="button" aria-label="Reisdu&#x27;a, open groot">
+  <div class="dua-head"><span class="when">Als je in het voertuig of vliegtuig zit</span><button class="star" type="button" data-star="reis" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ، اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى، اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ، اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ وَالْخَلِيفَةُ فِي الْأَهْلِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ</p>
+  <p class="tr">Allāhu akbar, Allāhu akbar, Allāhu akbar. Subhāna lladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā la-munqalibūn. Allāhumma innā nas&#x27;aluka fī safarinā hādha l-birra wa t-taqwā, wa mina l-&#x27;amali mā tardā. Allāhumma hawwin &#x27;alaynā safaranā hādhā watwi &#x27;annā bu&#x27;dah. Allāhumma anta s-sāhibu fi s-safari wa l-khalīfatu fi l-ahl. Allāhumma innī a&#x27;ūdhu bika min wa&#x27;thā&#x27;i s-safari, wa ka&#x27;ābati l-manzari, wa sū&#x27;i l-munqalabi fi l-māli wa l-ahl.</p>
+  <p class="nl">Allah is de Grootste (3×). Glorie aan Hem die dit aan ons dienstbaar heeft gemaakt, terwijl wij dat zelf niet konden, en tot onze Heer keren wij terug. O Allah, wij vragen U op deze reis om vroomheid en godsvrees, en om daden waarmee U tevreden bent. O Allah, maak deze reis licht voor ons en verkort de afstand. O Allah, U bent de Metgezel op reis en de Behoeder van de familie. O Allah, ik zoek bescherming bij U tegen de ontberingen van de reis, een droevig aanzicht en een slechte terugkeer bij bezit en familie.</p>
+  
+  <div class="foot"><span class="src">Muslim 1342</span></div>
+</article>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-miqat"><span>Volgende</span><b>De miqat vanuit België</b></a></div>
+</section><section class="chapter" id="ch-miqat">
+  <p class="eyebrow">De grens</p>
+  <h2 class="ch-title">De miqat vanuit België</h2>
+  <p>De Profeet ﷺ legde vijf grenspunten vast. Wie umrah wil doen, mag ze niet passeren zonder in ihram te zijn. „Ze zijn voor hun bewoners en voor iedereen die erlangs komt en hajj of umrah wil doen.” <span class="src">Bukhari 1524 · Muslim 1181</span></p><div class="table"><div class="trow"><div class="trow-h"><b>Dhu al-Hulayfah</b></div><div class="kv"><span>Vandaag</span><span>Abyar &#x27;Ali, bij Medina</span></div><div class="kv"><span>Voor wie</span><span>Als je eerst naar Medina gaat en daarna naar Mekka reist</span></div></div><div class="trow"><div class="trow-h"><b>Al-Juhfah</b></div><div class="kv"><span>Vandaag</span><span>Rabigh</span></div><div class="kv"><span>Voor wie</span><span>De lijn die je vlucht naar Jeddah meestal kruist</span></div></div><div class="trow"><div class="trow-h"><b>Qarn al-Manazil</b></div><div class="kv"><span>Vandaag</span><span>As-Sayl al-Kabir</span></div><div class="kv"><span>Voor wie</span><span>Via Riyad of Ta&#x27;if</span></div></div><div class="trow"><div class="trow-h"><b>Yalamlam</b></div><div class="kv"><span>Vandaag</span><span>As-Sa&#x27;diyyah</span></div><div class="kv"><span>Voor wie</span><span>Vanuit het zuiden (Jemen)</span></div></div><div class="trow"><div class="trow-h"><b>Dhat &#x27;Irq</b></div><div class="kv"><span>Vandaag</span><span>Vastgelegd door &#x27;Umar</span></div><div class="kv"><span>Voor wie</span><span>Vanuit Irak (Bukhari 1531)</span></div></div></div><div class="note"><b class="h">Vlieg je rechtstreeks naar Jeddah?</b><p>Jeddah ligt binnen de miqat-grenzen. Je vliegtuig passeert de miqat vóór de landing, vaak 20 tot 40 minuten ervoor. Doe je ihram-kleding aan op de luchthaven of aan boord en spreek je intentie uit zodra de bemanning de miqat aankondigt, of kort ervoor als je twijfelt. Wacht niet tot Jeddah. </p></div><div class="note"><b class="h">Ga je eerst naar Medina?</b><p>Dan reis je naar Medina zonder ihram en neem je de ihram aan in Abyar &#x27;Ali als je naar Mekka vertrekt. Dat is de miqat van de Profeet ﷺ zelf. </p></div>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-ihram"><span>Volgende</span><b>Ihram</b></a></div>
+</section><section class="chapter" id="ch-ihram">
+  <p class="eyebrow">Stap 1</p>
+  <h2 class="ch-title">Ihram</h2>
+  <p class="lead">Ihram is niet de kleding maar de intentie om de umrah te beginnen. De kleding hoort erbij. </p><ol class="steps"><li><b class="step-t">Lichaamsverzorging</b><p>Knip nagels, verwijder oksel- en schaamhaar en knip de snor bij als dat nodig is. Dit is algemene fitrah, geen aparte ihram-plicht.</p></li><li><span class="tag t-sunnah">Sunnah</span><b class="step-t">Ghusl</b><p>De Profeet ﷺ trok zijn kleren uit voor de ihram en waste zich. Ook een vrouw in menstruatie of kraambed doet dit.</p><div><span class="src">Tirmidhi 830 · hasan · Muslim 1209</span></div></li><li><span class="tag t-sunnah">Sunnah</span><b class="step-t">Parfum op het lichaam (mannen)</b><p>&#x27;Aisha parfumeerde de Profeet ﷺ voor zijn ihram. Op hoofd en baard, niet op de ihram-doeken. Wat na de intentie nog ruikt, is geen probleem.</p><div><span class="src">Bukhari 1539 · Muslim 1189</span></div></li><li><b class="step-t">Kleding</b><p><b>Mannen:</b> een izar (onderdoek) en rida&#x27; (bovendoek), bij voorkeur wit, en sandalen. Geen genaaide kleding die het lichaam omsluit, geen hoofddeksel. <b>Vrouwen:</b> hun gewone, bedekkende kleding, zonder niqab en handschoenen.</p><div><span class="src">Bukhari 1542 · Bukhari 1838</span></div></li><li><b class="step-t">Gebed</b><p>De Profeet ﷺ nam de ihram aan na een verplicht gebed (dhuhr). Valt de miqat op een gebedstijd, neem de ihram dan na dat gebed aan. Over een apart „gebed van de ihram” verschillen de geleerden: de meerderheid raadt twee rak&#x27;ah aan, anderen (o.a. Ibn Taymiyyah) zeggen dat daar geen specifiek bewijs voor is. In het vliegtuig vervalt dit.</p><div><span class="src">Muslim 1243</span></div></li><li><span class="tag t-rukn">Zuil</span><b class="step-t">De intentie uitspreken</b><p>Bij de miqat, gericht naar de qiblah als dat lukt.</p><article class="dua" data-id="niyyah" data-search="intentie voor umrah bij de miqat labbayka &#x27;umrah. hier ben ik, (o allah), voor een umrah. ihram muslim 1251" tabindex="0" role="button" aria-label="Intentie voor umrah, open groot">
+  <div class="dua-head"><span class="when">Bij de miqat</span><button class="star" type="button" data-star="niyyah" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">لَبَّيْكَ عُمْرَةً</p>
+  <p class="tr">Labbayka &#x27;umrah.</p>
+  <p class="nl">Hier ben ik, (o Allah), voor een umrah.</p>
+  <p class="note-s">De intentie zit in het hart; deze woorden zijn de Sunnah om haar aan te kondigen.</p>
+  <div class="foot"><span class="src">Muslim 1251</span></div>
+</article></li><li><span class="tag t-sunnah">Sunnah</span><b class="step-t">Voorwaarde bij vrees voor verhindering</b><p>Ben je ziek of vrees je dat iets je tegenhoudt, voeg dan deze voorwaarde toe.</p><article class="dua" data-id="ishtirat" data-search="voorwaarde (ishtirat) bij de intentie, als je vreest verhinderd te worden fa in habasanī hābis, fa-mahillī haythu habastanī. en als iets mij tegenhoudt, dan is mijn plaats van ontheffing waar u mij tegenhoudt. ihram bukhari 5089 · muslim 1207" tabindex="0" role="button" aria-label="Voorwaarde (ishtirat), open groot">
+  <div class="dua-head"><span class="when">Bij de intentie, als je vreest verhinderd te worden</span><button class="star" type="button" data-star="ishtirat" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">فَإِنْ حَبَسَنِي حَابِسٌ فَمَحِلِّي حَيْثُ حَبَسْتَنِي</p>
+  <p class="tr">Fa in habasanī hābis, fa-mahillī haythu habastanī.</p>
+  <p class="nl">En als iets mij tegenhoudt, dan is mijn plaats van ontheffing waar U mij tegenhoudt.</p>
+  <p class="note-s">Gezegd tegen Duba&#x27;ah bint az-Zubayr, die ziek was. Word je verhinderd, dan verlaat je de ihram zonder offer.</p>
+  <div class="foot"><span class="src">Bukhari 5089 · Muslim 1207</span></div>
+</article></li><li><span class="tag t-sunnah">Sunnah</span><b class="step-t">De talbiyah</b><p>Herhaal haar vaak, onderweg, bij het opstaan en neerdalen. Mannen verheffen hun stem, vrouwen zeggen haar zacht. Ibn &#x27;Umar stopte ermee bij het betreden van de Haram.</p><div><span class="src">Abu Dawud 1814 · Bukhari 1573</span></div><article class="dua" data-id="talbiyah" data-search="talbiyah vanaf de miqat tot het begin van de tawaf labbayka allāhumma labbayk, labbayka lā sharīka laka labbayk, inna l-hamda wa n-ni&#x27;mata laka wa l-mulk, lā sharīka lak. hier ben ik, o allah, hier ben ik. hier ben ik, u hebt geen deelgenoot, hier ben ik. alle lof en alle gunst behoren u toe, en de heerschappij. u hebt geen deelgenoot. ihram bukhari 1549 · muslim 1184" tabindex="0" role="button" aria-label="Talbiyah, open groot">
+  <div class="dua-head"><span class="when">Vanaf de miqat tot het begin van de tawaf</span><button class="star" type="button" data-star="talbiyah" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ</p>
+  <p class="tr">Labbayka Allāhumma labbayk, labbayka lā sharīka laka labbayk, inna l-hamda wa n-ni&#x27;mata laka wa l-mulk, lā sharīka lak.</p>
+  <p class="nl">Hier ben ik, o Allah, hier ben ik. Hier ben ik, U hebt geen deelgenoot, hier ben ik. Alle lof en alle gunst behoren U toe, en de heerschappij. U hebt geen deelgenoot.</p>
+  <p class="note-s">Mannen verheffen hun stem, vrouwen zeggen haar zacht (Abu Dawud 1814). Stop wanneer je aan de tawaf begint.</p>
+  <div class="foot"><span class="src">Bukhari 1549 · Muslim 1184</span></div>
+</article></li></ol>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-verboden"><span>Volgende</span><b>Wat verboden is en wat mag</b></a></div>
+</section><section class="chapter" id="ch-verboden">
+  <p class="eyebrow">Tijdens de ihram</p>
+  <h2 class="ch-title">Wat verboden is en wat mag</h2>
+  <h3>Verboden</h3><ul class="bullets"><li>Haar verwijderen <span class="src">Koran 2:196</span></li><li>Nagels knippen (naar consensus, naar analogie met haar) </li><li>Parfum gebruiken, op lichaam, kleding of eten <span class="src">Bukhari 1542</span></li><li>Mannen: genaaide kleding die het lichaam omsluit (hemd, broek, onderbroek, sokken) en het hoofd bedekken <span class="src">Bukhari 1542</span></li><li>Vrouwen: niqab en handschoenen <span class="src">Bukhari 1838</span></li><li>Huwelijk sluiten of ten huwelijk vragen <span class="src">Muslim 1409</span></li><li>Geslachtsgemeenschap en intimiteit met lust <span class="src">Koran 2:197</span></li><li>Wild jagen op het land <span class="src">Koran 5:95</span></li><li>Ruzie, ontucht en zondig gepraat <span class="src">Koran 2:197</span></li></ul><h3>Toegestaan</h3><ul class="bullets"><li>Douchen, ook het hoofd wassen, met ongeparfumeerde zeep <span class="src">Bukhari 1840</span></li><li>Je ihram-doeken wisselen of wassen </li><li>Riem, horloge, bril, ring, geldbuidel </li><li>Schaduw van een paraplu, tent of voertuig <span class="src">Muslim 1298</span></li><li>Zacht krabben aan hoofd of lichaam </li><li>Een deken over het lichaam tijdens het slapen, zolang een man zijn hoofd vrijlaat </li><li>Medische behandeling; de Profeet ﷺ liet zich cupping geven in ihram <span class="src">Bukhari 1835</span></li></ul><div class="note"><b class="h">Per vergissing of uit onwetendheid?</b><p>Wie uit vergeetachtigheid of onwetendheid iets verbodens doet, heeft geen zonde en geen boete; hij stopt meteen. Een man kwam in ihram met een mantel en parfum; de Profeet ﷺ zei hem het parfum af te wassen en de mantel uit te trekken, zonder boete. Wie uit noodzaak bewust haar verwijdert, kiest uit: drie dagen vasten, zes armen voeden of een schaap offeren. Bij twijfel: vraag het ter plaatse aan een geleerde. <span class="src">Bukhari 1536 · Bukhari 1814 · Koran 2:196</span></p></div>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-aankomst"><span>Volgende</span><b>Aankomst en de moskee</b></a></div>
+</section><section class="chapter" id="ch-aankomst">
+  <p class="eyebrow">In Mekka</p>
+  <h2 class="ch-title">Aankomst en de moskee</h2>
+  <ul class="bullets"><li><b>Rust en ghusl voor je Mekka binnengaat,</b> als dat haalbaar is. Ibn &#x27;Umar overnachtte in Dhu Tuwa, waste zich en ging dan Mekka binnen, en zei dat de Profeet ﷺ dat deed. <span class="src">Bukhari 1573 · Muslim 1259</span></li><li><b>Begin met de umrah</b> zodra je je bagage hebt weggezet; de Profeet ﷺ begon met de tawaf. <span class="src">Bukhari 1614</span></li><li><b>Rechtervoet eerst</b> en de smeekbede bij het betreden van de moskee. </li></ul><article class="dua" data-id="moskee-in" data-search="moskee binnengaan rechtervoet eerst a&#x27;ūdhu billāhi l-&#x27;azīm, wa bi-wajhihi l-karīm, wa sultānihi l-qadīm, mina sh-shaytāni r-rajīm. allāhumma-ftah lī abwāba rahmatik. ik zoek bescherming bij allah de geweldige, bij zijn edel aangezicht en zijn eeuwige heerschappij, tegen de vervloekte duivel. o allah, open voor mij de poorten van uw barmhartigheid. moskee abu dawud 466 · sahih · muslim 713" tabindex="0" role="button" aria-label="Moskee binnengaan, open groot">
+  <div class="dua-head"><span class="when">Rechtervoet eerst</span><button class="star" type="button" data-star="moskee-in" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">أَعُوذُ بِاللَّهِ الْعَظِيمِ، وَبِوَجْهِهِ الْكَرِيمِ، وَسُلْطَانِهِ الْقَدِيمِ، مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ</p>
+  <p class="tr">A&#x27;ūdhu billāhi l-&#x27;azīm, wa bi-wajhihi l-karīm, wa sultānihi l-qadīm, mina sh-shaytāni r-rajīm. Allāhumma-ftah lī abwāba rahmatik.</p>
+  <p class="nl">Ik zoek bescherming bij Allah de Geweldige, bij Zijn edel Aangezicht en Zijn eeuwige heerschappij, tegen de vervloekte duivel. O Allah, open voor mij de poorten van Uw barmhartigheid.</p>
+  
+  <div class="foot"><span class="src">Abu Dawud 466 · sahih · Muslim 713</span></div>
+</article><article class="dua" data-id="moskee-uit" data-search="moskee verlaten linkervoet eerst allāhumma innī as&#x27;aluka min fadlik. o allah, ik vraag u om uw gunst. moskee muslim 713" tabindex="0" role="button" aria-label="Moskee verlaten, open groot">
+  <div class="dua-head"><span class="when">Linkervoet eerst</span><button class="star" type="button" data-star="moskee-uit" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ</p>
+  <p class="tr">Allāhumma innī as&#x27;aluka min fadlik.</p>
+  <p class="nl">O Allah, ik vraag U om Uw gunst.</p>
+  
+  <div class="foot"><span class="src">Muslim 713</span></div>
+</article><div class="note"><b class="h">Als je de Ka&#x27;bah ziet</b><p>Er is geen authentieke, vaste smeekbede voor het moment dat je de Ka&#x27;bah ziet. De overleveringen daarover zijn zwak. Doe gerust een persoonlijke du&#x27;a uit je hart, zonder het als vaste Sunnah te zien. </p></div>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-tawaf"><span>Volgende</span><b>Tawaf</b></a></div>
+</section><section class="chapter" id="ch-tawaf">
+  <p class="eyebrow">Stap 2</p>
+  <h2 class="ch-title">Tawaf</h2>
+  <p class="lead">Zeven rondes rond de Ka&#x27;bah. De Ka&#x27;bah blijft aan je linkerkant, je loopt tegen de klok in, en elke ronde begint en eindigt bij de Zwarte Steen. Gebruik de teller om bij te houden waar je bent. </p><ol class="steps"><li><b class="step-t">Wudu</b><p>De Profeet ﷺ verrichtte wudu voor de tawaf. Volgens de meerderheid van de geleerden is reinheid een voorwaarde voor de tawaf.</p><div><span class="src">Bukhari 1614</span></div><article class="dua" data-id="na-wudu" data-search="na de wudu na de wudu, bijvoorbeeld vóór de tawaf ashhadu an lā ilāha illa llāhu wahdahu lā sharīka lah, wa ashhadu anna muhammadan &#x27;abduhu wa rasūluh. ik getuig dat er geen god is dan allah alleen, zonder deelgenoot, en ik getuig dat mohammed zijn dienaar en boodschapper is. moskee muslim 234" tabindex="0" role="button" aria-label="Na de wudu, open groot">
+  <div class="dua-head"><span class="when">Na de wudu, bijvoorbeeld vóór de tawaf</span><button class="star" type="button" data-star="na-wudu" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ</p>
+  <p class="tr">Ashhadu an lā ilāha illa llāhu wahdahu lā sharīka lah, wa ashhadu anna Muhammadan &#x27;abduhu wa rasūluh.</p>
+  <p class="nl">Ik getuig dat er geen god is dan Allah alleen, zonder deelgenoot, en ik getuig dat Mohammed Zijn dienaar en boodschapper is.</p>
+  <p class="note-s">Voor wie dit zegt, worden de acht poorten van het Paradijs geopend.</p>
+  <div class="foot"><span class="src">Muslim 234</span></div>
+</article></li><li><span class="tag t-sunnah">Sunnah</span><b class="step-t">Idtiba&#x27; (mannen)</b><p>Leg het midden van de rida&#x27; onder je rechteroksel en de uiteinden over je linkerschouder, zodat de rechterschouder bloot is. Alleen tijdens deze tawaf, niet tijdens de hele ihram.</p><div><span class="src">Abu Dawud 1883 · Tirmidhi 859 · sahih</span></div></li><li><b class="step-t">Begin bij de Zwarte Steen</b><p>Raak hem aan en kus hem als dat zonder duwen lukt. Kan dat niet: raak hem met je hand aan en kus je hand. Kan ook dat niet: wijs met je rechterhand naar de steen, zonder je hand te kussen. Doe dit bij elke ronde.</p><div><span class="src">Bukhari 1597 · Muslim 1268 · Bukhari 1612</span></div><article class="dua" data-id="zwarte-steen" data-search="bij de zwarte steen bij de steen, aan het begin van elke ronde bismillāh, wallāhu akbar. in de naam van allah, en allah is de grootste. tawaf bukhari 1613 · bayhaqi (ibn &#x27;umar)" tabindex="0" role="button" aria-label="Bij de Zwarte Steen, open groot">
+  <div class="dua-head"><span class="when">Bij de steen, aan het begin van elke ronde</span><button class="star" type="button" data-star="zwarte-steen" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">بِسْمِ اللَّهِ، وَاللَّهُ أَكْبَرُ</p>
+  <p class="tr">Bismillāh, wallāhu akbar.</p>
+  <p class="nl">In de naam van Allah, en Allah is de Grootste.</p>
+  <p class="note-s">„Allahu akbar” is van de Profeet ﷺ; „Bismillah” erbij is overgeleverd van Ibn &#x27;Umar.</p>
+  <div class="foot"><span class="src">Bukhari 1613 · Bayhaqi (Ibn &#x27;Umar)</span></div>
+</article></li><li><span class="tag t-sunnah">Sunnah</span><b class="step-t">Raml in de eerste drie rondes (mannen)</b><p>Loop met korte, snelle passen, zonder te rennen. In rondes 4 tot 7 loop je normaal. Is het te druk, dan laat je het zonder bezwaar.</p><div><span class="src">Bukhari 1603 · Muslim 1262</span></div></li><li><b class="step-t">De Jemenitische hoek</b><p>De hoek vóór de Zwarte Steen. Raak hem aan met je rechterhand als het lukt, zonder hem te kussen. Lukt het niet, loop dan door zonder te wijzen.</p><div><span class="src">Bukhari 1609 · Muslim 1267</span></div></li><li><b class="step-t">Tussen de Jemenitische hoek en de Zwarte Steen</b><p>Zeg deze du&#x27;a op dit stuk van elke ronde.</p><article class="dua" data-id="rabbana-atina" data-search="tussen de jemenitische hoek en de zwarte steen elke ronde, op het laatste stuk rabbanā ātinā fi d-dunyā hasanah, wa fi l-ākhirati hasanah, wa qinā &#x27;adhāba n-nār. onze heer, geef ons het goede in deze wereld en het goede in het hiernamaals, en bescherm ons tegen de bestraffing van het vuur. tawaf abu dawud 1892 · hasan · koran 2:201" tabindex="0" role="button" aria-label="Tussen de Jemenitische hoek en de Zwarte Steen, open groot">
+  <div class="dua-head"><span class="when">Elke ronde, op het laatste stuk</span><button class="star" type="button" data-star="rabbana-atina" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</p>
+  <p class="tr">Rabbanā ātinā fi d-dunyā hasanah, wa fi l-ākhirati hasanah, wa qinā &#x27;adhāba n-nār.</p>
+  <p class="nl">Onze Heer, geef ons het goede in deze wereld en het goede in het Hiernamaals, en bescherm ons tegen de bestraffing van het Vuur.</p>
+  
+  <div class="foot"><span class="src">Abu Dawud 1892 · hasan · Koran 2:201</span></div>
+</article></li><li><b class="step-t">De rest van elke ronde</b><p>Er is geen vaste smeekbede per ronde. De boekjes met „de du&#x27;a van de eerste ronde, tweede ronde…” hebben geen basis in de Sunnah. Doe du&#x27;a in je eigen taal, gedenk Allah en reciteer Koran.</p></li><li><b class="step-t">Loop buiten de Hijr</b><p>De halfronde muur (Hijr Isma&#x27;il) hoort bij de Ka&#x27;bah. Loop je erdoor, dan telt die ronde niet.</p><div><span class="src">Bukhari 1584 · Muslim 1333</span></div></li><li><b class="step-t">Na de zevende ronde</b><p>Bedek je rechterschouder weer. Bij twijfel over het aantal rondes ga je uit van het laagste getal. Wordt de iqamah gegeven, bid dan mee en ga daarna verder vanaf waar je was.</p><div><span class="src">Muslim 571, naar analogie</span></div></li><li><span class="tag t-sunnah">Sunnah</span><b class="step-t">Twee rak&#x27;ah achter de Maqam Ibrahim</b><p>Bid twee rak&#x27;ah met de Maqam tussen jou en de Ka&#x27;bah: in de eerste al-Kafirun (109), in de tweede al-Ikhlas (112). Is het te druk, bid ze dan ergens anders in de moskee.</p><div><span class="src">Muslim 1218</span></div><article class="dua" data-id="maqam" data-search="bij de maqam ibrahim bij het naderen van de maqam, na de tawaf wattakhidhū min maqāmi ibrāhīma musallā. en neem de staanplaats van ibrahim als gebedsplaats. tawaf koran 2:125 · muslim 1218" tabindex="0" role="button" aria-label="Bij de Maqam Ibrahim, open groot">
+  <div class="dua-head"><span class="when">Bij het naderen van de Maqam, na de tawaf</span><button class="star" type="button" data-star="maqam" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى</p>
+  <p class="tr">Wattakhidhū min maqāmi Ibrāhīma musallā.</p>
+  <p class="nl">En neem de staanplaats van Ibrahim als gebedsplaats.</p>
+  <p class="note-s">Bid daarna twee rak&#x27;ah: al-Kafirun (109) in de eerste, al-Ikhlas (112) in de tweede.</p>
+  <div class="foot"><span class="src">Koran 2:125 · Muslim 1218</span></div>
+</article></li><li><span class="tag t-sunnah">Sunnah</span><b class="step-t">Zamzam drinken</b><p>„Het water van Zamzam is voor datgene waarvoor het gedronken wordt.” Drink en maak du&#x27;a voor wat je nodig hebt. Er is geen vaste authentieke du&#x27;a voor Zamzam; vraag zelf.</p><div><span class="src">Ibn Majah 3062 · Muslim 2473</span></div></li><li><span class="tag t-sunnah">Sunnah</span><b class="step-t">Terug naar de Zwarte Steen</b><p>Na het gebed ging de Profeet ﷺ terug naar de steen, raakte hem aan en vertrok naar de Safa. Lukt aanraken niet, ga dan direct naar de Safa.</p><div><span class="src">Muslim 1218</span></div></li></ol>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-sai"><span>Volgende</span><b>Sa&#x27;i</b></a></div>
+</section><section class="chapter" id="ch-sai">
+  <p class="eyebrow">Stap 3</p>
+  <h2 class="ch-title">Sa&#x27;i</h2>
+  <p class="lead">Zeven trajecten tussen Safa en Marwah. Van Safa naar Marwah is één, terug naar Safa is twee. Je eindigt op de Marwah. Wudu is aanbevolen maar geen voorwaarde. </p><ol class="steps"><li><b class="step-t">Bij het naderen van de Safa</b><p>Alleen de eerste keer, aan het begin.</p><article class="dua" data-id="safa-begin" data-search="bij het naderen van de safa eenmalig, aan het begin van de sa&#x27;i inna s-safā wa l-marwata min sha&#x27;ā&#x27;irillāh. abda&#x27;u bimā bada&#x27;a allāhu bih. voorwaar, de safa en de marwah behoren tot de tekenen van allah. ik begin met wat allah als eerste noemde. sa&#x27;i koran 2:158 · muslim 1218" tabindex="0" role="button" aria-label="Bij het naderen van de Safa, open groot">
+  <div class="dua-head"><span class="when">Eenmalig, aan het begin van de sa&#x27;i</span><button class="star" type="button" data-star="safa-begin" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ. أَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ</p>
+  <p class="tr">Inna s-safā wa l-marwata min sha&#x27;ā&#x27;irillāh. Abda&#x27;u bimā bada&#x27;a Allāhu bih.</p>
+  <p class="nl">Voorwaar, de Safa en de Marwah behoren tot de tekenen van Allah. Ik begin met wat Allah als eerste noemde.</p>
+  
+  <div class="foot"><span class="src">Koran 2:158 · Muslim 1218</span></div>
+</article></li><li><b class="step-t">Op de Safa</b><p>Klim tot je de Ka&#x27;bah kunt zien, keer je naar de qiblah en hef je handen zoals bij een du&#x27;a, niet zoals bij de takbir van het gebed. Zeg de dhikr drie keer met een eigen du&#x27;a ertussen.</p><div><span class="src">Muslim 1218 · Muslim 1780</span></div><article class="dua" data-id="safa-dhikr" data-search="op de safa en de marwah naar de qiblah, handen omhoog, 3× met du&#x27;a ertussen allāhu akbar. lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. lā ilāha illa llāhu wahdah, anjaza wa&#x27;dah, wa nasara &#x27;abdah, wa hazama l-ahzāba wahdah. allah is de grootste. er is geen god dan allah alleen, zonder deelgenoot. aan hem behoren de heerschappij en de lof, en hij is tot alles in staat. er is geen god dan allah alleen. hij vervulde zijn belofte, hielp zijn dienaar en versloeg de bondgenoten alleen. sa&#x27;i muslim 1218" tabindex="0" role="button" aria-label="Op de Safa en de Marwah, open groot">
+  <div class="dua-head"><span class="when">Naar de qiblah, handen omhoog, 3× met du&#x27;a ertussen</span><button class="star" type="button" data-star="safa-dhikr" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُ أَكْبَرُ. لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ</p>
+  <p class="tr">Allāhu akbar. Lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. Lā ilāha illa llāhu wahdah, anjaza wa&#x27;dah, wa nasara &#x27;abdah, wa hazama l-ahzāba wahdah.</p>
+  <p class="nl">Allah is de Grootste. Er is geen god dan Allah alleen, zonder deelgenoot. Aan Hem behoren de heerschappij en de lof, en Hij is tot alles in staat. Er is geen god dan Allah alleen. Hij vervulde Zijn belofte, hielp Zijn dienaar en versloeg de bondgenoten alleen.</p>
+  <p class="note-s">Zeg dit, doe een eigen du&#x27;a, herhaal, du&#x27;a, en een derde keer. Op elke heuvel, acht stops in totaal.</p>
+  <div class="foot"><span class="src">Muslim 1218</span></div>
+</article></li><li><b class="step-t">Naar de Marwah</b><p>Loop in een normaal tempo. Tussen de twee groene lichten rennen mannen; vrouwen lopen gewoon. Onderweg is de du&#x27;a vrij.</p><div><span class="src">Muslim 1218</span></div><article class="dua" data-id="sai-onderweg" data-search="tijdens de sa&#x27;i onderweg tussen safa en marwah (van metgezellen) rabbi-ghfir warham, innaka anta l-a&#x27;azzu l-akram. mijn heer, vergeef en wees barmhartig. u bent de machtigste, de edelste. sa&#x27;i ibn abi shaybah · ibn mas&#x27;ud en ibn &#x27;umar" tabindex="0" role="button" aria-label="Tijdens de sa&#x27;i, open groot">
+  <div class="dua-head"><span class="when">Onderweg tussen Safa en Marwah (van metgezellen)</span><button class="star" type="button" data-star="sai-onderweg" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبِّ اغْفِرْ وَارْحَمْ، إِنَّكَ أَنْتَ الْأَعَزُّ الْأَكْرَمُ</p>
+  <p class="tr">Rabbi-ghfir warham, innaka anta l-a&#x27;azzu l-akram.</p>
+  <p class="nl">Mijn Heer, vergeef en wees barmhartig. U bent de Machtigste, de Edelste.</p>
+  <p class="note-s">Een uitspraak van metgezellen, niet van de Profeet ﷺ. Verder is de du&#x27;a in de sa&#x27;i vrij.</p>
+  <div class="foot"><span class="src">Ibn Abi Shaybah · Ibn Mas&#x27;ud en Ibn &#x27;Umar</span></div>
+</article></li><li><b class="step-t">Op de Marwah</b><p>Doe precies hetzelfde als op de Safa: naar de qiblah, handen heffen, de dhikr drie keer met du&#x27;a ertussen. De zin „Inna s-safa…” herhaal je niet.</p><div><span class="src">Muslim 1218</span></div></li><li><b class="step-t">Herhaal tot zeven trajecten</b><p>Je eindigt op de Marwah. Je staat vier keer op de Safa en vier keer op de Marwah: acht stops met dhikr en du&#x27;a.</p></li></ol>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-haar"><span>Volgende</span><b>Haar scheren of inkorten</b></a></div>
+</section><section class="chapter" id="ch-haar">
+  <p class="eyebrow">Stap 4</p>
+  <h2 class="ch-title">Haar scheren of inkorten</h2>
+  <ul class="bullets"><li><b>Mannen: scheren is beter.</b> De Profeet ﷺ vroeg drie keer genade voor wie scheren en pas daarna voor wie inkorten. Kies je voor inkorten, kort dan van het hele hoofd, niet een paar haren. <span class="src">Bukhari 1727 · Muslim 1301</span></li><li><b>Vrouwen: alleen inkorten.</b> „Vrouwen hoeven niet te scheren; voor vrouwen is er alleen inkorten.” Neem van de punten een stukje ter lengte van een vingerkootje, ongeveer 2 cm, zoals Ibn &#x27;Umar aangaf. Niet in het bijzijn van vreemde mannen. <span class="src">Abu Dawud 1984 · sahih</span></li></ul><div class="note"><b class="h">Je umrah is voltooid</b><p>Na het scheren of inkorten zijn alle verboden van de ihram opgeheven. Prijs Allah en vraag Hem je umrah te aanvaarden. </p></div><article class="dua" data-id="taqabbal" data-search="om aanvaarding na het scheren of inkorten rabbanā taqabbal minnā, innaka anta s-samī&#x27;u l-&#x27;alīm. onze heer, aanvaard het van ons. u bent de alhorende, de alwetende. na de umrah koran 2:127" tabindex="0" role="button" aria-label="Om aanvaarding, open groot">
+  <div class="dua-head"><span class="when">Na het scheren of inkorten</span><button class="star" type="button" data-star="taqabbal" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ</p>
+  <p class="tr">Rabbanā taqabbal minnā, innaka anta s-samī&#x27;u l-&#x27;alīm.</p>
+  <p class="nl">Onze Heer, aanvaard het van ons. U bent de Alhorende, de Alwetende.</p>
+  <p class="note-s">De du&#x27;a van Ibrahim en Isma&#x27;il toen zij de Ka&#x27;bah bouwden.</p>
+  <div class="foot"><span class="src">Koran 2:127</span></div>
+</article>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-dua-waar"><span>Volgende</span><b>Du&#x27;a: waar tijdens de umrah</b></a></div>
+</section><section class="chapter" id="ch-dua-waar">
+  <p class="eyebrow">Smeekbeden</p>
+  <h2 class="ch-title">Du&#x27;a: waar tijdens de umrah</h2>
+  <p class="lead">Als pelgrim ben je de gast van Allah: „De hajj-pelgrim en de umrah-pelgrim zijn de delegatie van Allah. Hij riep hen en zij gaven gehoor; zij vragen Hem en Hij geeft hun.” Daarbij wordt de du&#x27;a van de reiziger verhoord. <span class="src">Ibn Majah 2893 · hasan · Abu Dawud 1536</span></p><ol class="steps"><li><b class="step-t">Vertrek</b><p>De reisdu&#x27;a. Vanaf nu ben je reiziger en wordt je du&#x27;a verhoord. Gebruik de wachttijd op de luchthaven en in het vliegtuig.</p><article class="dua" data-id="reis" data-search="reisdu&#x27;a als je in het voertuig of vliegtuig zit allāhu akbar, allāhu akbar, allāhu akbar. subhāna lladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā la-munqalibūn. allāhumma innā nas&#x27;aluka fī safarinā hādha l-birra wa t-taqwā, wa mina l-&#x27;amali mā tardā. allāhumma hawwin &#x27;alaynā safaranā hādhā watwi &#x27;annā bu&#x27;dah. allāhumma anta s-sāhibu fi s-safari wa l-khalīfatu fi l-ahl. allāhumma innī a&#x27;ūdhu bika min wa&#x27;thā&#x27;i s-safari, wa ka&#x27;ābati l-manzari, wa sū&#x27;i l-munqalabi fi l-māli wa l-ahl. allah is de grootste (3×). glorie aan hem die dit aan ons dienstbaar heeft gemaakt, terwijl wij dat zelf niet konden, en tot onze heer keren wij terug. o allah, wij vragen u op deze reis om vroomheid en godsvrees, en om daden waarmee u tevreden bent. o allah, maak deze reis licht voor ons en verkort de afstand. o allah, u bent de metgezel op reis en de behoeder van de familie. o allah, ik zoek bescherming bij u tegen de ontberingen van de reis, een droevig aanzicht en een slechte terugkeer bij bezit en familie. reis muslim 1342" tabindex="0" role="button" aria-label="Reisdu&#x27;a, open groot">
+  <div class="dua-head"><span class="when">Als je in het voertuig of vliegtuig zit</span><button class="star" type="button" data-star="reis" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ، اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى، اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ، اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ وَالْخَلِيفَةُ فِي الْأَهْلِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ</p>
+  <p class="tr">Allāhu akbar, Allāhu akbar, Allāhu akbar. Subhāna lladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā la-munqalibūn. Allāhumma innā nas&#x27;aluka fī safarinā hādha l-birra wa t-taqwā, wa mina l-&#x27;amali mā tardā. Allāhumma hawwin &#x27;alaynā safaranā hādhā watwi &#x27;annā bu&#x27;dah. Allāhumma anta s-sāhibu fi s-safari wa l-khalīfatu fi l-ahl. Allāhumma innī a&#x27;ūdhu bika min wa&#x27;thā&#x27;i s-safari, wa ka&#x27;ābati l-manzari, wa sū&#x27;i l-munqalabi fi l-māli wa l-ahl.</p>
+  <p class="nl">Allah is de Grootste (3×). Glorie aan Hem die dit aan ons dienstbaar heeft gemaakt, terwijl wij dat zelf niet konden, en tot onze Heer keren wij terug. O Allah, wij vragen U op deze reis om vroomheid en godsvrees, en om daden waarmee U tevreden bent. O Allah, maak deze reis licht voor ons en verkort de afstand. O Allah, U bent de Metgezel op reis en de Behoeder van de familie. O Allah, ik zoek bescherming bij U tegen de ontberingen van de reis, een droevig aanzicht en een slechte terugkeer bij bezit en familie.</p>
+  
+  <div class="foot"><span class="src">Muslim 1342</span></div>
+</article></li><li><b class="step-t">Miqat</b><p>Intentie en talbiyah. Herhaal de talbiyah de hele weg naar Mekka. De talbiyah is dhikr; doe daarnaast gerust je eigen du&#x27;a.</p></li><li><b class="step-t">Moskee binnen</b><p>De du&#x27;a bij het binnengaan. Bij het eerste zicht op de Ka&#x27;bah: een eigen du&#x27;a uit je hart, zonder vaste tekst.</p></li><li><b class="step-t">Tawaf</b><p>Zeven rondes vrije du&#x27;a, in elke taal. Tussen de Jemenitische hoek en de Zwarte Steen: Rabbana atina.</p><div><span class="src">Abu Dawud 1892</span></div></li><li><b class="step-t">Multazam</b><p>Het stuk muur tussen de Zwarte Steen en de deur van de Ka&#x27;bah. Van metgezellen is overgeleverd dat ze zich daar met borst, wang en armen tegen de muur drukten en du&#x27;a deden. De ketens naar de Profeet ﷺ zijn zwak, maar veel geleerden (o.a. Ibn Taymiyyah) staan het toe op basis van de metgezellen. Alleen als het lukt zonder duwen, en niet tijdens je verplichte tawaf.</p><div><span class="src">Abu Dawud 1898–1899 · zwak</span></div></li><li><b class="step-t">Hijr Isma&#x27;il</b><p>Wie in de Hijr bidt, bidt in de Ka&#x27;bah. &#x27;Aisha wilde in het Huis bidden; de Profeet ﷺ bracht haar naar de Hijr en zei: „Bid hier, want het is een deel van het Huis.” Bid er een vrijwillig gebed en doe du&#x27;a in je sujud.</p><div><span class="src">Abu Dawud 2028 · Tirmidhi 876 · sahih</span></div></li><li><b class="step-t">Maqam Ibrahim</b><p>De twee rak&#x27;ah na de tawaf. Doe du&#x27;a in je sujud en na de tashahhud, vóór de taslim.</p></li><li><b class="step-t">Zamzam</b><p>Drink met een duidelijke intentie: genezing, nuttige kennis, vergeving, een goede partner, kinderen, wat je ook nodig hebt.</p><div><span class="src">Ibn Majah 3062</span></div></li><li><b class="step-t">Safa</b><p>De belangrijkste du&#x27;a-plek van de umrah. Naar de qiblah, handen omhoog, de dhikr drie keer met een eigen du&#x27;a ertussen. Neem er de tijd voor.</p><div><span class="src">Muslim 1218</span></div><article class="dua" data-id="safa-dhikr" data-search="op de safa en de marwah naar de qiblah, handen omhoog, 3× met du&#x27;a ertussen allāhu akbar. lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. lā ilāha illa llāhu wahdah, anjaza wa&#x27;dah, wa nasara &#x27;abdah, wa hazama l-ahzāba wahdah. allah is de grootste. er is geen god dan allah alleen, zonder deelgenoot. aan hem behoren de heerschappij en de lof, en hij is tot alles in staat. er is geen god dan allah alleen. hij vervulde zijn belofte, hielp zijn dienaar en versloeg de bondgenoten alleen. sa&#x27;i muslim 1218" tabindex="0" role="button" aria-label="Op de Safa en de Marwah, open groot">
+  <div class="dua-head"><span class="when">Naar de qiblah, handen omhoog, 3× met du&#x27;a ertussen</span><button class="star" type="button" data-star="safa-dhikr" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُ أَكْبَرُ. لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ</p>
+  <p class="tr">Allāhu akbar. Lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. Lā ilāha illa llāhu wahdah, anjaza wa&#x27;dah, wa nasara &#x27;abdah, wa hazama l-ahzāba wahdah.</p>
+  <p class="nl">Allah is de Grootste. Er is geen god dan Allah alleen, zonder deelgenoot. Aan Hem behoren de heerschappij en de lof, en Hij is tot alles in staat. Er is geen god dan Allah alleen. Hij vervulde Zijn belofte, hielp Zijn dienaar en versloeg de bondgenoten alleen.</p>
+  <p class="note-s">Zeg dit, doe een eigen du&#x27;a, herhaal, du&#x27;a, en een derde keer. Op elke heuvel, acht stops in totaal.</p>
+  <div class="foot"><span class="src">Muslim 1218</span></div>
+</article></li><li><b class="step-t">Onderweg in de sa&#x27;i</b><p>Vrije du&#x27;a en dhikr, en wat Ibn Mas&#x27;ud en Ibn &#x27;Umar zeiden.</p></li><li><b class="step-t">Marwah</b><p>Hetzelfde als op de Safa, bij elke aankomst.</p></li><li><b class="step-t">Na het haar</b><p>Je umrah is af. Vraag Allah haar te aanvaarden, met de woorden van Ibrahim en Isma&#x27;il.</p><article class="dua" data-id="taqabbal" data-search="om aanvaarding na het scheren of inkorten rabbanā taqabbal minnā, innaka anta s-samī&#x27;u l-&#x27;alīm. onze heer, aanvaard het van ons. u bent de alhorende, de alwetende. na de umrah koran 2:127" tabindex="0" role="button" aria-label="Om aanvaarding, open groot">
+  <div class="dua-head"><span class="when">Na het scheren of inkorten</span><button class="star" type="button" data-star="taqabbal" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ</p>
+  <p class="tr">Rabbanā taqabbal minnā, innaka anta s-samī&#x27;u l-&#x27;alīm.</p>
+  <p class="nl">Onze Heer, aanvaard het van ons. U bent de Alhorende, de Alwetende.</p>
+  <p class="note-s">De du&#x27;a van Ibrahim en Isma&#x27;il toen zij de Ka&#x27;bah bouwden.</p>
+  <div class="foot"><span class="src">Koran 2:127</span></div>
+</article></li><li><b class="step-t">Thuiskomst</b><p>De du&#x27;a van de Profeet ﷺ bij terugkomst van hajj of umrah.</p><article class="dua" data-id="terugkeer" data-search="bij thuiskomst na drie keer allahu akbar, bij terugkeer van hajj of umrah lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. āyibūna tā&#x27;ibūna &#x27;ābidūna sājidūna li-rabbinā hāmidūn. sadaqa llāhu wa&#x27;dah, wa nasara &#x27;abdah, wa hazama l-ahzāba wahdah. er is geen god dan allah alleen, zonder deelgenoot; aan hem de heerschappij en de lof, en hij is tot alles in staat. wij keren terug, berouwvol, aanbiddend, ons neerbuigend en onze heer prijzend. allah heeft zijn belofte waargemaakt, zijn dienaar geholpen en de bondgenoten alleen verslagen. reis bukhari 1797 · muslim 1344" tabindex="0" role="button" aria-label="Bij thuiskomst, open groot">
+  <div class="dua-head"><span class="when">Na drie keer Allahu akbar, bij terugkeer van hajj of umrah</span><button class="star" type="button" data-star="terugkeer" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، آيِبُونَ تَائِبُونَ عَابِدُونَ سَاجِدُونَ لِرَبِّنَا حَامِدُونَ، صَدَقَ اللَّهُ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ</p>
+  <p class="tr">Lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. Āyibūna tā&#x27;ibūna &#x27;ābidūna sājidūna li-rabbinā hāmidūn. Sadaqa llāhu wa&#x27;dah, wa nasara &#x27;abdah, wa hazama l-ahzāba wahdah.</p>
+  <p class="nl">Er is geen god dan Allah alleen, zonder deelgenoot; aan Hem de heerschappij en de lof, en Hij is tot alles in staat. Wij keren terug, berouwvol, aanbiddend, ons neerbuigend en onze Heer prijzend. Allah heeft Zijn belofte waargemaakt, Zijn dienaar geholpen en de bondgenoten alleen verslagen.</p>
+  <p class="note-s">De Profeet ﷺ zei dit bij terugkomst van hajj of umrah, telkens hij een hoogte opging.</p>
+  <div class="foot"><span class="src">Bukhari 1797 · Muslim 1344</span></div>
+</article></li></ol>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-dua-wanneer"><span>Volgende</span><b>Wanneer du&#x27;a verhoord wordt</b></a></div>
+</section><section class="chapter" id="ch-dua-wanneer">
+  <p class="eyebrow">Smeekbeden</p>
+  <h2 class="ch-title">Wanneer du&#x27;a verhoord wordt</h2>
+  <p class="lead">In Mekka zit je vlak bij de moskee, dus je kunt deze momenten bewust opzoeken. Plan ze in je dag. </p><div class="cards"><div class="card"><b>Als pelgrim</b><p>De umrah-pelgrim is de gast van Allah: „zij vragen Hem en Hij geeft hun.”</p><span class="src">Ibn Majah 2893 · hasan</span></div><div class="card"><b>Als reiziger</b><p>„Drie smeekbeden worden zonder twijfel verhoord: die van de onderdrukte, die van de reiziger en die van een ouder voor zijn kind.”</p><span class="src">Abu Dawud 1536 · Tirmidhi 1905 · hasan</span></div><div class="card"><b>Het laatste derde van de nacht</b><p>Allah daalt neer naar de laagste hemel en zegt: „Wie roept Mij aan, dan verhoor Ik hem?” Ga een uur voor de adhan van fajr naar de Haram.</p><span class="src">Bukhari 1145 · Muslim 758</span></div><div class="card"><b>Tussen adhan en iqamah</b><p>„De du&#x27;a tussen de adhan en de iqamah wordt niet afgewezen.” Kom dus vroeg voor elk gebed.</p><span class="src">Abu Dawud 521 · Tirmidhi 212 · sahih</span></div><div class="card"><b>Na de adhan</b><p>Herhaal de woorden van de muezzin, zeg de du&#x27;a na de adhan, en „wanneer je klaar bent, vraag, dan wordt het je gegeven.”</p><span class="src">Abu Dawud 524 · hasan</span></div><div class="card"><b>In de sujud</b><p>„Het dichtst bij zijn Heer is de dienaar wanneer hij in sujud is, dus doe veel du&#x27;a.”</p><span class="src">Muslim 482</span></div><div class="card"><b>Aan het eind van het gebed</b><p>Na de tashahhud, vóór de taslim: „kies dan de du&#x27;a die hij wil.” En na de verplichte gebeden.</p><span class="src">Bukhari 835 · Tirmidhi 3499 · hasan</span></div><div class="card"><b>Vrijdag</b><p>Er is een uur op vrijdag waarin elke du&#x27;a verhoord wordt, volgens de sterkste mening het laatste uur na &#x27;asr.</p><span class="src">Bukhari 935 · Abu Dawud 1048 · sahih</span></div><div class="card"><b>Als je vast</b><p>„Drie smeekbeden worden verhoord: die van de vastende, die van de onderdrukte en die van de reiziger.”</p><span class="src">Bayhaqi · as-Sahihah 1797</span></div><div class="card"><b>Bij regen</b><p>Twee worden niet afgewezen: de du&#x27;a bij de oproep tot het gebed en onder de regen. In Mekka zeldzaam, dus grijp het.</p><span class="src">Abu Dawud 2540 · al-Hakim · hasan</span></div><div class="card"><b>&#x27;s Nachts wakker worden</b><p>Wie wakker wordt, de dhikr zegt en dan om vergeving of iets anders vraagt, wordt verhoord. Zie de du&#x27;a in de bibliotheek.</p><span class="src">Bukhari 1154</span></div><div class="card"><b>Voor een afwezige broeder</b><p>Doe je du&#x27;a voor iemand die er niet bij is, dan zegt een engel: „Amin, en voor jou hetzelfde.”</p><span class="src">Muslim 2733</span></div><div class="card"><b>Bij het drinken van Zamzam</b><p>„Zamzam is voor datgene waarvoor het gedronken wordt.”</p><span class="src">Ibn Majah 3062 · sahih</span></div><div class="card"><b>Op Safa en Marwah</b><p>Acht stops tijdens de sa&#x27;i, elk met drie rondes dhikr en du&#x27;a.</p><span class="src">Muslim 1218</span></div><div class="card"><b>In nood</b><p>„Of Wie verhoort de nooddruftige wanneer hij Hem aanroept, en neemt het kwade weg?”</p><span class="src">Koran 27:62</span></div><div class="card"><b>Laylat al-Qadr</b><p>Valt je umrah in de laatste tien nachten van Ramadan, zoek dan de oneven nachten op met: Allahumma innaka &#x27;afuwwun tuhibbu l-&#x27;afwa fa&#x27;fu &#x27;anni.</p><span class="src">Bukhari 2017 · Tirmidhi 3513</span></div></div><div class="dua-list"><article class="dua" data-id="na-adhan" data-search="na de adhan na het nazeggen van de adhan allāhumma rabba hādhihi d-da&#x27;wati t-tāmmah, wa s-salāti l-qā&#x27;imah, āti muhammadan al-wasīlata wa l-fadīlah, wab&#x27;athhu maqāman mahmūdan alladhī wa&#x27;adtah. o allah, heer van deze volmaakte oproep en van het gebed dat verricht gaat worden, geef mohammed de wasilah en de voortreffelijkheid, en laat hem opstaan op de geprezen plaats die u hem beloofd hebt. gebed &amp; dhikr bukhari 614" tabindex="0" role="button" aria-label="Na de adhan, open groot">
+  <div class="dua-head"><span class="when">Na het nazeggen van de adhan</span><button class="star" type="button" data-star="na-adhan" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلَاةِ الْقَائِمَةِ، آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ</p>
+  <p class="tr">Allāhumma rabba hādhihi d-da&#x27;wati t-tāmmah, wa s-salāti l-qā&#x27;imah, āti Muhammadan al-wasīlata wa l-fadīlah, wab&#x27;athhu maqāman mahmūdan alladhī wa&#x27;adtah.</p>
+  <p class="nl">O Allah, Heer van deze volmaakte oproep en van het gebed dat verricht gaat worden, geef Mohammed de wasilah en de voortreffelijkheid, en laat hem opstaan op de geprezen plaats die U hem beloofd hebt.</p>
+  <p class="note-s">Wie dit zegt, krijgt op de Dag des Oordeels de voorspraak van de Profeet ﷺ. Daarna is het moment voor je eigen du&#x27;a (Abu Dawud 524).</p>
+  <div class="foot"><span class="src">Bukhari 614</span></div>
+</article><article class="dua" data-id="nacht-wakker" data-search="als je &#x27;s nachts wakker wordt bij het wakker worden in de nacht lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. al-hamdu lillāh, wa subhāna llāh, wa lā ilāha illa llāh, wa llāhu akbar, wa lā hawla wa lā quwwata illā billāh. allāhumma-ghfir lī. er is geen god dan allah alleen, zonder deelgenoot; aan hem de heerschappij en de lof, en hij is tot alles in staat. alle lof is voor allah, glorie aan allah, er is geen god dan allah, allah is de grootste, en er is geen kracht of macht behalve bij allah. o allah, vergeef mij. gebed &amp; dhikr bukhari 1154" tabindex="0" role="button" aria-label="Als je &#x27;s nachts wakker wordt, open groot">
+  <div class="dua-head"><span class="when">Bij het wakker worden in de nacht</span><button class="star" type="button" data-star="nacht-wakker" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، الْحَمْدُ لِلَّهِ، وَسُبْحَانَ اللَّهِ، وَلَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ. اللَّهُمَّ اغْفِرْ لِي</p>
+  <p class="tr">Lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. Al-hamdu lillāh, wa subhāna llāh, wa lā ilāha illa llāh, wa llāhu akbar, wa lā hawla wa lā quwwata illā billāh. Allāhumma-ghfir lī.</p>
+  <p class="nl">Er is geen god dan Allah alleen, zonder deelgenoot; aan Hem de heerschappij en de lof, en Hij is tot alles in staat. Alle lof is voor Allah, glorie aan Allah, er is geen god dan Allah, Allah is de Grootste, en er is geen kracht of macht behalve bij Allah. O Allah, vergeef mij.</p>
+  <p class="note-s">Wie dit zegt en dan om vergeving of iets anders vraagt, wordt verhoord. Wie daarna wudu doet en bidt, diens gebed wordt aanvaard.</p>
+  <div class="foot"><span class="src">Bukhari 1154</span></div>
+</article></div>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-dua-adab"><span>Volgende</span><b>Zo vraag je</b></a></div>
+</section><section class="chapter" id="ch-dua-adab">
+  <p class="eyebrow">Smeekbeden</p>
+  <h2 class="ch-title">Zo vraag je</h2>
+  <ul class="bullets"><li><b>Halal eten en geld.</b> De Profeet ﷺ noemde „een man die een lange reis maakt, met verward haar en stoffig, die zijn handen ten hemel heft: o Heer, o Heer, terwijl zijn eten, drinken en kleding haram zijn. Hoe zou hij verhoord worden?” Die man lijkt op een pelgrim; zorg dus dat je reisgeld halal is. <span class="src">Muslim 1015</span></li><li><b>Begin met lof op Allah en salawat op de Profeet ﷺ,</b> en vraag dan. <span class="src">Tirmidhi 3477 · sahih</span></li><li><b>Hef je handen en keer je naar de qiblah.</b> „Allah schaamt Zich om de handen van Zijn dienaar leeg terug te sturen.” <span class="src">Abu Dawud 1488 · sahih · Muslim 1763</span></li><li><b>Vraag met vastberadenheid.</b> Zeg niet „vergeef mij als U wilt”, maar vraag met zekerheid. <span class="src">Bukhari 6339 · Tirmidhi 3479</span></li><li><b>Wees niet ongeduldig.</b> Je wordt verhoord „zolang je niet zegt: ik heb gevraagd en ben niet verhoord.” <span class="src">Bukhari 6340</span></li><li><b>Herhaal drie keer,</b> zoals de Profeet ﷺ deed. <span class="src">Muslim 1794</span></li><li><b>Roep Allah aan met Zijn namen</b> en erken je zwakte en je zonden. <span class="src">Koran 7:180</span></li><li><b>Begin bij jezelf,</b> en noem daarna je ouders en anderen. <span class="src">Koran 14:41 · Tirmidhi 3385</span></li><li><b>Vraag niet om iets zondigs</b> of om banden te verbreken. <span class="src">Muslim 2735</span></li><li><b>Geen du&#x27;a is verloren.</b> Je krijgt wat je vraagt, het wordt bewaard voor het Hiernamaals, of er wordt een gelijkwaardig kwaad van je afgewend. <span class="src">Ahmad 11133 · sahih</span></li></ul><div class="dua-list"><article class="dua" data-id="grootste-naam" data-search="met de grootste naam van allah om je du&#x27;a mee te openen allāhumma innī as&#x27;aluka bi-annī ashhadu annaka anta llāhu lā ilāha illā ant, al-ahadu s-samad, alladhī lam yalid wa lam yūlad, wa lam yakun lahu kufuwan ahad. o allah, ik vraag u, omdat ik getuig dat u allah bent, er is geen god dan u, de ene, de onafhankelijke, die niet verwekt en niet verwekt is, en niemand is aan hem gelijk. gebed &amp; dhikr abu dawud 1493 · tirmidhi 3475 · sahih" tabindex="0" role="button" aria-label="Met de grootste naam van Allah, open groot">
+  <div class="dua-head"><span class="when">Om je du&#x27;a mee te openen</span><button class="star" type="button" data-star="grootste-naam" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ إِنِّي أَسْأَلُكَ بِأَنِّي أَشْهَدُ أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ، الْأَحَدُ الصَّمَدُ، الَّذِي لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ</p>
+  <p class="tr">Allāhumma innī as&#x27;aluka bi-annī ashhadu annaka anta llāhu lā ilāha illā ant, al-ahadu s-samad, alladhī lam yalid wa lam yūlad, wa lam yakun lahu kufuwan ahad.</p>
+  <p class="nl">O Allah, ik vraag U, omdat ik getuig dat U Allah bent, er is geen god dan U, de Ene, de Onafhankelijke, Die niet verwekt en niet verwekt is, en niemand is aan Hem gelijk.</p>
+  <p class="note-s">„Hij heeft Allah gevraagd met Zijn grootste naam: wie daarmee vraagt, krijgt.”</p>
+  <div class="foot"><span class="src">Abu Dawud 1493 · Tirmidhi 3475 · sahih</span></div>
+</article><article class="dua" data-id="salawat" data-search="salawat op de profeet ﷺ in de tashahhud, in het janazah-gebed, vóór je du&#x27;a allāhumma salli &#x27;alā muhammadin wa &#x27;alā āli muhammad, kamā sallayta &#x27;alā ibrāhīma wa &#x27;alā āli ibrāhīm, innaka hamīdun majīd. allāhumma bārik &#x27;alā muhammadin wa &#x27;alā āli muhammad, kamā bārakta &#x27;alā ibrāhīma wa &#x27;alā āli ibrāhīm, innaka hamīdun majīd. o allah, zegen mohammed en de familie van mohammed, zoals u ibrahim en de familie van ibrahim gezegend hebt; u bent geprezen, glorierijk. o allah, schenk overvloed aan mohammed en de familie van mohammed, zoals u overvloed hebt geschonken aan ibrahim en de familie van ibrahim; u bent geprezen, glorierijk. gebed &amp; dhikr bukhari 3370" tabindex="0" role="button" aria-label="Salawat op de Profeet ﷺ, open groot">
+  <div class="dua-head"><span class="when">In de tashahhud, in het janazah-gebed, vóór je du&#x27;a</span><button class="star" type="button" data-star="salawat" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ</p>
+  <p class="tr">Allāhumma salli &#x27;alā Muhammadin wa &#x27;alā āli Muhammad, kamā sallayta &#x27;alā Ibrāhīma wa &#x27;alā āli Ibrāhīm, innaka hamīdun majīd. Allāhumma bārik &#x27;alā Muhammadin wa &#x27;alā āli Muhammad, kamā bārakta &#x27;alā Ibrāhīma wa &#x27;alā āli Ibrāhīm, innaka hamīdun majīd.</p>
+  <p class="nl">O Allah, zegen Mohammed en de familie van Mohammed, zoals U Ibrahim en de familie van Ibrahim gezegend hebt; U bent Geprezen, Glorierijk. O Allah, schenk overvloed aan Mohammed en de familie van Mohammed, zoals U overvloed hebt geschonken aan Ibrahim en de familie van Ibrahim; U bent Geprezen, Glorierijk.</p>
+  
+  <div class="foot"><span class="src">Bukhari 3370</span></div>
+</article></div>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-meenemen"><span>Volgende</span><b>Smeekbeden om mee te nemen</b></a></div>
+</section><section class="chapter" id="ch-meenemen">
+  <p class="eyebrow">Smeekbeden</p>
+  <h2 class="ch-title">Smeekbeden om mee te nemen</h2>
+  <p class="lead">Allesomvattende du&#x27;a&#x27;s uit de Koran en de Sunnah, goed voor tijdens de tawaf, op de Safa en Marwah en in je sujud. Wissel ze af met je eigen woorden in je eigen taal. Tik op een kaart om hem groot te lezen; met de ster bewaar je hem bij je favorieten. </p><div class="dua-list"><article class="dua" data-id="taqabbal" data-search="om aanvaarding na het scheren of inkorten rabbanā taqabbal minnā, innaka anta s-samī&#x27;u l-&#x27;alīm. onze heer, aanvaard het van ons. u bent de alhorende, de alwetende. na de umrah koran 2:127" tabindex="0" role="button" aria-label="Om aanvaarding, open groot">
+  <div class="dua-head"><span class="when">Na het scheren of inkorten</span><button class="star" type="button" data-star="taqabbal" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ</p>
+  <p class="tr">Rabbanā taqabbal minnā, innaka anta s-samī&#x27;u l-&#x27;alīm.</p>
+  <p class="nl">Onze Heer, aanvaard het van ons. U bent de Alhorende, de Alwetende.</p>
+  <p class="note-s">De du&#x27;a van Ibrahim en Isma&#x27;il toen zij de Ka&#x27;bah bouwden.</p>
+  <div class="foot"><span class="src">Koran 2:127</span></div>
+</article><article class="dua" data-id="ibrahim-kinderen" data-search="voor jezelf en je kinderen de du&#x27;a van ibrahim in mekka rabbi-j&#x27;alnī muqīma s-salāti wa min dhurriyyatī, rabbanā wa taqabbal du&#x27;ā&#x27;. mijn heer, maak mij iemand die het gebed onderhoudt, en ook van mijn nakomelingen. onze heer, aanvaard mijn smeekbede. algemeen koran 14:40" tabindex="0" role="button" aria-label="Voor jezelf en je kinderen, open groot">
+  <div class="dua-head"><span class="when">De du&#x27;a van Ibrahim in Mekka</span><button class="star" type="button" data-star="ibrahim-kinderen" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءِ</p>
+  <p class="tr">Rabbi-j&#x27;alnī muqīma s-salāti wa min dhurriyyatī, rabbanā wa taqabbal du&#x27;ā&#x27;.</p>
+  <p class="nl">Mijn Heer, maak mij iemand die het gebed onderhoudt, en ook van mijn nakomelingen. Onze Heer, aanvaard mijn smeekbede.</p>
+  
+  <div class="foot"><span class="src">Koran 14:40</span></div>
+</article><article class="dua" data-id="ouders" data-search="voor je ouders en de gelovigen voor ouders, familie en alle gelovigen rabbana-ghfir lī wa li-wālidayya wa li-l-mu&#x27;minīna yawma yaqūmu l-hisāb. onze heer, vergeef mij, mijn ouders en de gelovigen op de dag van de afrekening. algemeen koran 14:41" tabindex="0" role="button" aria-label="Voor je ouders en de gelovigen, open groot">
+  <div class="dua-head"><span class="when">Voor ouders, familie en alle gelovigen</span><button class="star" type="button" data-star="ouders" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ</p>
+  <p class="tr">Rabbana-ghfir lī wa li-wālidayya wa li-l-mu&#x27;minīna yawma yaqūmu l-hisāb.</p>
+  <p class="nl">Onze Heer, vergeef mij, mijn ouders en de gelovigen op de Dag van de afrekening.</p>
+  
+  <div class="foot"><span class="src">Koran 14:41</span></div>
+</article><article class="dua" data-id="huda" data-search="leiding en godsvrees allesomvattend allāhumma innī as&#x27;aluka l-hudā wa t-tuqā wa l-&#x27;afāfa wa l-ghinā. o allah, ik vraag u om leiding, godsvrees, kuisheid en onafhankelijkheid van mensen. algemeen muslim 2721" tabindex="0" role="button" aria-label="Leiding en godsvrees, open groot">
+  <div class="dua-head"><span class="when">Allesomvattend</span><button class="star" type="button" data-star="huda" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى</p>
+  <p class="tr">Allāhumma innī as&#x27;aluka l-hudā wa t-tuqā wa l-&#x27;afāfa wa l-ghinā.</p>
+  <p class="nl">O Allah, ik vraag U om leiding, godsvrees, kuisheid en onafhankelijkheid van mensen.</p>
+  
+  <div class="foot"><span class="src">Muslim 2721</span></div>
+</article><article class="dua" data-id="afiyah" data-search="vergeving en welzijn allesomvattend allāhumma innī as&#x27;aluka l-&#x27;afwa wa l-&#x27;āfiyata fi d-dunyā wa l-ākhirah. o allah, ik vraag u om vergeving en welzijn in deze wereld en in het hiernamaals. algemeen ibn majah 3871 · sahih" tabindex="0" role="button" aria-label="Vergeving en welzijn, open groot">
+  <div class="dua-head"><span class="when">Allesomvattend</span><button class="star" type="button" data-star="afiyah" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ</p>
+  <p class="tr">Allāhumma innī as&#x27;aluka l-&#x27;afwa wa l-&#x27;āfiyata fi d-dunyā wa l-ākhirah.</p>
+  <p class="nl">O Allah, ik vraag U om vergeving en welzijn in deze wereld en in het Hiernamaals.</p>
+  
+  <div class="foot"><span class="src">Ibn Majah 3871 · sahih</span></div>
+</article><article class="dua" data-id="afw" data-search="vergeving vooral in laylat al-qadr allāhumma innaka &#x27;afuwwun tuhibbu l-&#x27;afwa fa&#x27;fu &#x27;annī. o allah, u bent de vergevende en u houdt van vergeven, vergeef mij dan. algemeen tirmidhi 3513 · sahih" tabindex="0" role="button" aria-label="Vergeving, open groot">
+  <div class="dua-head"><span class="when">Vooral in Laylat al-Qadr</span><button class="star" type="button" data-star="afw" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</p>
+  <p class="tr">Allāhumma innaka &#x27;afuwwun tuhibbu l-&#x27;afwa fa&#x27;fu &#x27;annī.</p>
+  <p class="nl">O Allah, U bent de Vergevende en U houdt van vergeven, vergeef mij dan.</p>
+  
+  <div class="foot"><span class="src">Tirmidhi 3513 · sahih</span></div>
+</article><article class="dua" data-id="muqallib" data-search="standvastigheid de du&#x27;a die de profeet ﷺ het vaakst deed yā muqalliba l-qulūb, thabbit qalbī &#x27;alā dīnik. o omkeerder van de harten, maak mijn hart standvastig op uw religie. algemeen tirmidhi 2140 · sahih" tabindex="0" role="button" aria-label="Standvastigheid, open groot">
+  <div class="dua-head"><span class="when">De du&#x27;a die de Profeet ﷺ het vaakst deed</span><button class="star" type="button" data-star="muqallib" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ</p>
+  <p class="tr">Yā muqalliba l-qulūb, thabbit qalbī &#x27;alā dīnik.</p>
+  <p class="nl">O Omkeerder van de harten, maak mijn hart standvastig op Uw religie.</p>
+  
+  <div class="foot"><span class="src">Tirmidhi 2140 · sahih</span></div>
+</article><article class="dua" data-id="la-tuzigh" data-search="dat het hart niet afdwaalt na het ontvangen van leiding rabbanā lā tuzigh qulūbanā ba&#x27;da idh hadaytanā wa hab lanā min ladunka rahmah, innaka anta l-wahhāb. onze heer, laat onze harten niet afdwalen nadat u ons geleid hebt, en schenk ons barmhartigheid van u. u bent de schenker. algemeen koran 3:8" tabindex="0" role="button" aria-label="Dat het hart niet afdwaalt, open groot">
+  <div class="dua-head"><span class="when">Na het ontvangen van leiding</span><button class="star" type="button" data-star="la-tuzigh" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الْوَهَّابُ</p>
+  <p class="tr">Rabbanā lā tuzigh qulūbanā ba&#x27;da idh hadaytanā wa hab lanā min ladunka rahmah, innaka anta l-wahhāb.</p>
+  <p class="nl">Onze Heer, laat onze harten niet afdwalen nadat U ons geleid hebt, en schenk ons barmhartigheid van U. U bent de Schenker.</p>
+  
+  <div class="foot"><span class="src">Koran 3:8</span></div>
+</article><article class="dua" data-id="aslih" data-search="religie, wereld en hiernamaals allesomvattend allāhumma aslih lī dīniya lladhī huwa &#x27;ismatu amrī, wa aslih lī dunyāya llatī fīhā ma&#x27;āshī, wa aslih lī ākhiratī llatī fīhā ma&#x27;ādī, waj&#x27;ali l-hayāta ziyādatan lī fī kulli khayr, waj&#x27;ali l-mawta rāhatan lī min kulli sharr. o allah, verbeter mijn religie, die mijn bescherming is; mijn wereld, waarin mijn levensonderhoud ligt; en mijn hiernamaals, waarnaar ik terugkeer. maak het leven voor mij een toename in al het goede, en de dood een rust van al het kwade. algemeen muslim 2720" tabindex="0" role="button" aria-label="Religie, wereld en Hiernamaals, open groot">
+  <div class="dua-head"><span class="when">Allesomvattend</span><button class="star" type="button" data-star="aslih" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ أَصْلِحْ لِي دِينِيَ الَّذِي هُوَ عِصْمَةُ أَمْرِي، وَأَصْلِحْ لِي دُنْيَايَ الَّتِي فِيهَا مَعَاشِي، وَأَصْلِحْ لِي آخِرَتِي الَّتِي فِيهَا مَعَادِي، وَاجْعَلِ الْحَيَاةَ زِيَادَةً لِي فِي كُلِّ خَيْرٍ، وَاجْعَلِ الْمَوْتَ رَاحَةً لِي مِنْ كُلِّ شَرٍّ</p>
+  <p class="tr">Allāhumma aslih lī dīniya lladhī huwa &#x27;ismatu amrī, wa aslih lī dunyāya llatī fīhā ma&#x27;āshī, wa aslih lī ākhiratī llatī fīhā ma&#x27;ādī, waj&#x27;ali l-hayāta ziyādatan lī fī kulli khayr, waj&#x27;ali l-mawta rāhatan lī min kulli sharr.</p>
+  <p class="nl">O Allah, verbeter mijn religie, die mijn bescherming is; mijn wereld, waarin mijn levensonderhoud ligt; en mijn Hiernamaals, waarnaar ik terugkeer. Maak het leven voor mij een toename in al het goede, en de dood een rust van al het kwade.</p>
+  
+  <div class="foot"><span class="src">Muslim 2720</span></div>
+</article><article class="dua" data-id="ainni" data-search="hulp bij aanbidding aan mu&#x27;adh aangeraden na elk gebed allāhumma a&#x27;innī &#x27;alā dhikrika wa shukrika wa husni &#x27;ibādatik. o allah, help mij u te gedenken, u te danken en u op de beste manier te aanbidden. algemeen abu dawud 1522 · sahih" tabindex="0" role="button" aria-label="Hulp bij aanbidding, open groot">
+  <div class="dua-head"><span class="when">Aan Mu&#x27;adh aangeraden na elk gebed</span><button class="star" type="button" data-star="ainni" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ</p>
+  <p class="tr">Allāhumma a&#x27;innī &#x27;alā dhikrika wa shukrika wa husni &#x27;ibādatik.</p>
+  <p class="nl">O Allah, help mij U te gedenken, U te danken en U op de beste manier te aanbidden.</p>
+  
+  <div class="foot"><span class="src">Abu Dawud 1522 · sahih</span></div>
+</article><article class="dua" data-id="jannah" data-search="het paradijs allesomvattend allāhumma innī as&#x27;aluka l-jannata wa a&#x27;ūdhu bika mina n-nār. o allah, ik vraag u het paradijs en zoek bescherming bij u tegen het vuur. algemeen abu dawud 792 · sahih" tabindex="0" role="button" aria-label="Het Paradijs, open groot">
+  <div class="dua-head"><span class="when">Allesomvattend</span><button class="star" type="button" data-star="jannah" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَأَعُوذُ بِكَ مِنَ النَّارِ</p>
+  <p class="tr">Allāhumma innī as&#x27;aluka l-jannata wa a&#x27;ūdhu bika mina n-nār.</p>
+  <p class="nl">O Allah, ik vraag U het Paradijs en zoek bescherming bij U tegen het Vuur.</p>
+  
+  <div class="foot"><span class="src">Abu Dawud 792 · sahih</span></div>
+</article><article class="dua" data-id="yunus" data-search="in moeilijkheid (du&#x27;a van yunus) in nood en verdriet lā ilāha illā anta subhānaka innī kuntu mina z-zālimīn. er is geen god dan u. glorie aan u, ik behoorde tot de onrechtplegers. algemeen koran 21:87 · tirmidhi 3505 · sahih" tabindex="0" role="button" aria-label="In moeilijkheid (du&#x27;a van Yunus), open groot">
+  <div class="dua-head"><span class="when">In nood en verdriet</span><button class="star" type="button" data-star="yunus" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ</p>
+  <p class="tr">Lā ilāha illā anta subhānaka innī kuntu mina z-zālimīn.</p>
+  <p class="nl">Er is geen god dan U. Glorie aan U, ik behoorde tot de onrechtplegers.</p>
+  <p class="note-s">„Geen moslim vraagt ermee om iets, of Allah verhoort hem.”</p>
+  <div class="foot"><span class="src">Koran 21:87 · Tirmidhi 3505 · sahih</span></div>
+</article><article class="dua" data-id="sayyid-istighfar" data-search="sayyid al-istighfar de meester van de vergevingsvragen, &#x27;s ochtends en &#x27;s avonds allāhumma anta rabbī lā ilāha illā ant, khalaqtanī wa ana &#x27;abduk, wa ana &#x27;alā &#x27;ahdika wa wa&#x27;dika masta-ta&#x27;t, a&#x27;ūdhu bika min sharri mā sana&#x27;t, abū&#x27;u laka bi-ni&#x27;matika &#x27;alayy, wa abū&#x27;u bi-dhanbī, faghfir lī, fa-innahu lā yaghfiru dh-dhunūba illā ant. o allah, u bent mijn heer, er is geen god dan u. u hebt mij geschapen en ik ben uw dienaar. ik houd mij aan uw verbond en belofte zoveel ik kan. ik zoek bescherming bij u tegen het kwaad dat ik gedaan heb. ik erken uw gunst over mij en ik erken mijn zonde, vergeef mij dus, want niemand vergeeft zonden behalve u. algemeen bukhari 6306" tabindex="0" role="button" aria-label="Sayyid al-istighfar, open groot">
+  <div class="dua-head"><span class="when">De meester van de vergevingsvragen, &#x27;s ochtends en &#x27;s avonds</span><button class="star" type="button" data-star="sayyid-istighfar" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي، فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ</p>
+  <p class="tr">Allāhumma anta rabbī lā ilāha illā ant, khalaqtanī wa ana &#x27;abduk, wa ana &#x27;alā &#x27;ahdika wa wa&#x27;dika masta-ta&#x27;t, a&#x27;ūdhu bika min sharri mā sana&#x27;t, abū&#x27;u laka bi-ni&#x27;matika &#x27;alayy, wa abū&#x27;u bi-dhanbī, faghfir lī, fa-innahu lā yaghfiru dh-dhunūba illā ant.</p>
+  <p class="nl">O Allah, U bent mijn Heer, er is geen god dan U. U hebt mij geschapen en ik ben Uw dienaar. Ik houd mij aan Uw verbond en belofte zoveel ik kan. Ik zoek bescherming bij U tegen het kwaad dat ik gedaan heb. Ik erken Uw gunst over mij en ik erken mijn zonde, vergeef mij dus, want niemand vergeeft zonden behalve U.</p>
+  <p class="note-s">Wie dit overdag met overtuiging zegt en die dag sterft, behoort tot de mensen van het Paradijs.</p>
+  <div class="foot"><span class="src">Bukhari 6306</span></div>
+</article><article class="dua" data-id="geliefde-woorden" data-search="de meest geliefde woorden tijdens het wachten, lopen en zitten subhāna llāh, wa l-hamdu lillāh, wa lā ilāha illa llāh, wa llāhu akbar. glorie aan allah, alle lof is voor allah, er is geen god dan allah, en allah is de grootste. gebed &amp; dhikr muslim 2137" tabindex="0" role="button" aria-label="De meest geliefde woorden, open groot">
+  <div class="dua-head"><span class="when">Tijdens het wachten, lopen en zitten</span><button class="star" type="button" data-star="geliefde-woorden" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَلَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ</p>
+  <p class="tr">Subhāna llāh, wa l-hamdu lillāh, wa lā ilāha illa llāh, wa llāhu akbar.</p>
+  <p class="nl">Glorie aan Allah, alle lof is voor Allah, er is geen god dan Allah, en Allah is de Grootste.</p>
+  <p class="note-s">De vier woorden die Allah het meest geliefd zijn.</p>
+  <div class="foot"><span class="src">Muslim 2137</span></div>
+</article></div>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-vrouwen"><span>Volgende</span><b>Voor vrouwen</b></a></div>
+</section><section class="chapter" id="ch-vrouwen">
+  <p class="eyebrow">Specifiek</p>
+  <h2 class="ch-title">Voor vrouwen</h2>
+  <ul class="bullets"><li><b>Kleding:</b> elke kleur, zolang ze bedekkend en niet opvallend is. Geen niqab en geen handschoenen; bedek je gezicht wel met je hoofddoek als vreemde mannen dichtbij komen, zoals overgeleverd is van &#x27;Aisha en Asma&#x27; bint Abi Bakr. <span class="src">Bukhari 1838 · Abu Dawud 1833 · al-Hakim</span></li><li><b>Geen raml, geen idtiba&#x27; en geen rennen</b> tussen de groene lichten. De talbiyah zeg je zacht. </li><li><b>Menstruatie of kraambed:</b> je neemt de ihram gewoon aan (met ghusl) en doet alles behalve de tawaf, tot je rein bent. „Doe alles wat de pelgrim doet, behalve de tawaf rond het Huis, tot je rein bent.” De sa&#x27;i komt na de tawaf, dus ook die wacht. <span class="src">Bukhari 305 · Muslim 1211</span></li><li><b>Haar:</b> een vingerkootje van de punten, niet scheren. <span class="src">Abu Dawud 1984</span></li><li><b>Reizen:</b> „Een vrouw reist niet behalve met een mahram.” Over georganiseerde groepsreizen zonder mahram verschillen de hedendaagse geleerden; vraag een geleerde die je vertrouwt. <span class="src">Bukhari 1862 · Muslim 1341</span></li></ul>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-aanbidding"><span>Volgende</span><b>Aanbidding in Mekka</b></a></div>
+</section><section class="chapter" id="ch-aanbidding">
+  <p class="eyebrow">Je verblijf</p>
+  <h2 class="ch-title">Aanbidding in Mekka</h2>
+  <p class="lead">Na de umrah begint het eigenlijke verblijf. Dit zijn de daden met de grootste beloning op deze plek. </p><ul class="bullets"><li><b>Bid in de Masjid al-Haram.</b> Een gebed daar is beter dan 100.000 gebeden elders. <span class="src">Ibn Majah 1406 · sahih</span></li><li><b>Doe extra tawafs.</b> „Wie zeven rondes rond dit Huis loopt en ze bijhoudt, het is als het vrijlaten van een slaaf.” Een vrijwillige tawaf heeft geen sa&#x27;i en geen haar knippen; raml en idtiba&#x27; horen er niet bij. <span class="src">Tirmidhi 959 · sahih</span></li><li><b>Tawaf en gebed op elk uur.</b> „Verhinder niemand om rond dit Huis te lopen en te bidden, op welk uur van de dag of nacht ook.” Je twee rak&#x27;ah na een tawaf mag je dus ook na fajr of &#x27;asr bidden. <span class="src">Abu Dawud 1894 · Tirmidhi 868 · sahih</span></li><li><b>Wachten op het gebed.</b> Wie in de moskee op het gebed wacht, is in gebed, en de engelen bidden voor hem zolang hij op zijn plaats zit: „O Allah, vergeef hem, o Allah, heb genade met hem.” <span class="src">Bukhari 659 · Muslim 649</span></li><li><b>Bid mee met de imam, volledig.</b> Achter de imam bid je vier rak&#x27;ah, ook als reiziger; Ibn &#x27;Abbas noemde dat de Sunnah. Bid je alleen, dan mag je als reiziger inkorten; over hoe lang je verblijf mag duren om nog als reiziger te gelden, verschillen de geleerden. <span class="src">Muslim 688</span></li><li><b>Sunnah-gebeden op reis.</b> Op reis liet de Profeet ﷺ de vaste sunnah-gebeden bij de verplichte gebeden vallen, behalve de twee rak&#x27;ah vóór fajr en de witr. Vrijwillige gebeden zoals tahiyyat al-masjid, duha en het nachtgebed blijven aanbevolen. <span class="src">Bukhari 1101 · Bukhari 1159 · Muslim 720</span></li><li><b>Het janazah-gebed.</b> Na bijna elk verplicht gebed in de Haram volgt een janazah-gebed. Wie meebidt, krijgt een qirat beloning, „zoals de berg Uhud”. Vier takbirs, staand: na de eerste de Fatiha, na de tweede de salawat, na de derde du&#x27;a voor de overledene, na de vierde een korte stilte en dan de taslim. <span class="src">Bukhari 1325 · Muslim 945</span><article class="dua" data-id="janazah" data-search="voor de overledene (janazah) na de derde takbir van het janazah-gebed allāhumma-ghfir lahu warhamhu, wa &#x27;āfihi wa&#x27;fu &#x27;anhu, wa akrim nuzulahu, wa wassi&#x27; mudkhalahu, waghsilhu bi l-mā&#x27;i wa th-thalji wa l-barad, wa naqqihi mina l-khatāyā kamā naqqayta th-thawba l-abyada mina d-danas. o allah, vergeef hem en wees hem genadig, geef hem welzijn en scheld hem kwijt, maak zijn ontvangst eervol en zijn graf ruim, was hem met water, sneeuw en hagel, en reinig hem van zonden zoals u een wit kleed reinigt van vuil. gebed &amp; dhikr muslim 963" tabindex="0" role="button" aria-label="Voor de overledene (janazah), open groot">
+  <div class="dua-head"><span class="when">Na de derde takbir van het janazah-gebed</span><button class="star" type="button" data-star="janazah" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ، وَعَافِهِ وَاعْفُ عَنْهُ، وَأَكْرِمْ نُزُلَهُ، وَوَسِّعْ مُدْخَلَهُ، وَاغْسِلْهُ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ، وَنَقِّهِ مِنَ الْخَطَايَا كَمَا نَقَّيْتَ الثَّوْبَ الْأَبْيَضَ مِنَ الدَّنَسِ</p>
+  <p class="tr">Allāhumma-ghfir lahu warhamhu, wa &#x27;āfihi wa&#x27;fu &#x27;anhu, wa akrim nuzulahu, wa wassi&#x27; mudkhalahu, waghsilhu bi l-mā&#x27;i wa th-thalji wa l-barad, wa naqqihi mina l-khatāyā kamā naqqayta th-thawba l-abyada mina d-danas.</p>
+  <p class="nl">O Allah, vergeef hem en wees hem genadig, geef hem welzijn en scheld hem kwijt, maak zijn ontvangst eervol en zijn graf ruim, was hem met water, sneeuw en hagel, en reinig hem van zonden zoals U een wit kleed reinigt van vuil.</p>
+  <p class="note-s">Het begin van de du&#x27;a. Voor een vrouw: lahā, warhamhā, wa &#x27;āfihā… Een eigen du&#x27;a voor de overledene mag ook.</p>
+  <div class="foot"><span class="src">Muslim 963</span></div>
+</article></li><li><b>Koran.</b> Neem je voor om tijdens je verblijf de Koran uit te lezen. Elke letter is een goede daad, vertienvoudigd. <span class="src">Tirmidhi 2910 · sahih</span></li><li><b>Dhikr.</b> De ochtend- en avondadhkar, de dhikr na elk gebed, en vaak de vier geliefde woorden. <span class="src">Muslim 2137</span></li><li><b>Sadaqah en goed karakter.</b> Help ouderen en zwakkeren in de drukte, deel water en eten, geef wat je kunt. Duw niemand, kwets niemand bij de Zwarte Steen en houd je tong in toom. </li></ul><div class="note"><b class="h">Meerdere umrahs vanuit Tan&#x27;im?</b><p>De Profeet ﷺ en zijn metgezellen deden tijdens één verblijf geen herhaalde umrahs vanuit Mekka. &#x27;Aisha deed er één vanuit Tan&#x27;im omdat ze door haar menstruatie haar eigen umrah had gemist. Veel geleerden raden daarom extra tawafs aan in plaats van telkens een nieuwe umrah; anderen staan het toe. Volg wat je vertrouwde geleerde aanraadt. <span class="src">Bukhari 1785</span></p></div><div class="note"><b class="h">Afscheidstawaf (tawaf al-wada&#x27;)</b><p>Bij de hajj is die verplicht: „Laat niemand vertrekken voordat zijn laatste moment bij het Huis is.” Voor de umrah verschillen de geleerden. Doe hem vlak voor vertrek om zeker te zijn. Een vrouw in menstruatie is ervan vrijgesteld. <span class="src">Muslim 1327 · Bukhari 1755</span></p></div>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-medina"><span>Volgende</span><b>Bezoek aan Medina</b></a></div>
+</section><section class="chapter" id="ch-medina">
+  <p class="eyebrow">Optioneel</p>
+  <h2 class="ch-title">Bezoek aan Medina</h2>
+  <p class="lead">Het bezoek aan Medina is geen deel van de umrah, maar wel een grote kans op beloning. </p><ul class="bullets"><li><b>Intentie: de moskee van de Profeet ﷺ.</b> „Reis alleen speciaal naar drie moskeeën: de Masjid al-Haram, mijn moskee en de Masjid al-Aqsa.” <span class="src">Bukhari 1189 · Muslim 1397</span></li><li><b>Bid er veel.</b> Een gebed daar is beter dan duizend elders, behalve de Masjid al-Haram. <span class="src">Bukhari 1190 · Muslim 1394</span></li><li><b>De Rawdah.</b> „Tussen mijn huis en mijn minbar ligt een tuin van de tuinen van het Paradijs.” Een bezoek vereist een afspraak via de Nusuk-app. <span class="src">Bukhari 1196 · Muslim 1391</span></li><li><b>Masjid Quba&#x27;.</b> „Wie zich thuis reinigt en dan in Masjid Quba&#x27; bidt, krijgt de beloning van een umrah.” De Profeet ﷺ ging er elke zaterdag heen. <span class="src">Ibn Majah 1412 · sahih · Bukhari 1193</span></li></ul><div class="dua-list"><article class="dua" data-id="graf-groet" data-search="groet aan de profeet ﷺ en zijn metgezellen bij het graf in de profetenmoskee as-salāmu &#x27;alayka yā rasūlallāh. as-salāmu &#x27;alayka yā abā bakr. as-salāmu &#x27;alayka yā &#x27;umar. vrede zij met u, o boodschapper van allah. vrede zij met u, abu bakr. vrede zij met u, &#x27;umar. medina zo deed ibn &#x27;umar · muwatta, bayhaqi" tabindex="0" role="button" aria-label="Groet aan de Profeet ﷺ en zijn metgezellen, open groot">
+  <div class="dua-head"><span class="when">Bij het graf in de Profetenmoskee</span><button class="star" type="button" data-star="graf-groet" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">السَّلَامُ عَلَيْكَ يَا رَسُولَ اللَّهِ، السَّلَامُ عَلَيْكَ يَا أَبَا بَكْرٍ، السَّلَامُ عَلَيْكَ يَا عُمَرُ</p>
+  <p class="tr">As-salāmu &#x27;alayka yā Rasūlallāh. As-salāmu &#x27;alayka yā Abā Bakr. As-salāmu &#x27;alayka yā &#x27;Umar.</p>
+  <p class="nl">Vrede zij met u, o Boodschapper van Allah. Vrede zij met u, Abu Bakr. Vrede zij met u, &#x27;Umar.</p>
+  <p class="note-s">Rustig en met zachte stem. Voor je eigen du&#x27;a keer je je naar de qiblah, niet naar het graf.</p>
+  <div class="foot"><span class="src">Zo deed Ibn &#x27;Umar · Muwatta, Bayhaqi</span></div>
+</article><article class="dua" data-id="baqi" data-search="bij de begraafplaats al-baqi&#x27;, uhud en elke begraafplaats as-salāmu &#x27;alaykum ahla d-diyāri mina l-mu&#x27;minīna wa l-muslimīn, wa innā in shā&#x27; allāhu la-lāhiqūn, as&#x27;alu llāha lanā wa lakumu l-&#x27;āfiyah. vrede zij met jullie, bewoners van deze woningen, gelovigen en moslims. wij zullen, als allah het wil, bij jullie komen. ik vraag allah welzijn voor ons en voor jullie. medina muslim 975" tabindex="0" role="button" aria-label="Bij de begraafplaats, open groot">
+  <div class="dua-head"><span class="when">Al-Baqi&#x27;, Uhud en elke begraafplaats</span><button class="star" type="button" data-star="baqi" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">السَّلَامُ عَلَيْكُمْ أَهْلَ الدِّيَارِ مِنَ الْمُؤْمِنِينَ وَالْمُسْلِمِينَ، وَإِنَّا إِنْ شَاءَ اللَّهُ لَلَاحِقُونَ، أَسْأَلُ اللَّهَ لَنَا وَلَكُمُ الْعَافِيَةَ</p>
+  <p class="tr">As-salāmu &#x27;alaykum ahla d-diyāri mina l-mu&#x27;minīna wa l-muslimīn, wa innā in shā&#x27; Allāhu la-lāhiqūn, as&#x27;alu llāha lanā wa lakumu l-&#x27;āfiyah.</p>
+  <p class="nl">Vrede zij met jullie, bewoners van deze woningen, gelovigen en moslims. Wij zullen, als Allah het wil, bij jullie komen. Ik vraag Allah welzijn voor ons en voor jullie.</p>
+  
+  <div class="foot"><span class="src">Muslim 975</span></div>
+</article></div>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-fouten"><span>Volgende</span><b>Veelgemaakte fouten</b></a></div>
+</section><section class="chapter" id="ch-fouten">
+  <p class="eyebrow">Let op</p>
+  <h2 class="ch-title">Veelgemaakte fouten</h2>
+  <ul class="bullets"><li>De miqat in het vliegtuig voorbijvliegen en pas in Jeddah de ihram aannemen. </li><li>De rechterschouder de hele ihram bloot laten. Idtiba&#x27; geldt alleen tijdens de eerste tawaf. </li><li>Duwen of anderen pijn doen om de Zwarte Steen te kussen. Kussen is sunnah, iemand kwetsen is haram. </li><li>Je hand kussen nadat je naar de steen hebt gewezen, of met beide handen wijzen zoals bij de takbir van het gebed. </li><li>De Jemenitische hoek kussen of ernaar wijzen. </li><li>Door de Hijr Isma&#x27;il lopen tijdens de tawaf. </li><li>Een boekje volgen met een vaste du&#x27;a per ronde, of in groep luidop nazeggen en zo anderen storen. </li><li>De muren, de Maqam of de kiswah aanraken en wrijven voor zegen. </li><li>Een paar losse haren knippen in plaats van het hele hoofd in te korten (mannen). </li><li>Vrouwen die rennen tussen de groene lichten of die de niqab dragen in ihram. </li><li>Zo bezig zijn met foto&#x27;s en video&#x27;s dat de aanbidding erbij inschiet. </li></ul>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a><a class="next" href="#ch-bronnen"><span>Volgende</span><b>Bronnen en werkwijze</b></a></div>
+</section><section class="chapter" id="ch-bronnen">
+  <p class="eyebrow">Verantwoording</p>
+  <h2 class="ch-title">Bronnen en werkwijze</h2>
+  <p>De kern van deze gids is de lange hadith van Jabir ibn &#x27;Abdillah over de pelgrimstocht van de Profeet ﷺ (Muslim 1218), aangevuld met hadith uit Sahih al-Bukhari, Sahih Muslim en de Sunan. Waar iets van een metgezel komt in plaats van de Profeet ﷺ, staat dat erbij. </p><ul class="bullets"><li><b>Nummering:</b> Bukhari volgens Fath al-Bari, Muslim volgens Muhammad Fu&#x27;ad &#x27;Abd al-Baqi, de Sunan volgens de gangbare nummering op sunnah.com. Andere edities kunnen een paar nummers afwijken. </li><li><b>Gradering:</b> voor hadith buiten Bukhari en Muslim staat de beoordeling erbij, grotendeels volgens al-Albani. </li><li><b>Meningsverschillen:</b> waar de rechtsscholen verschillen (het gebed van de ihram, de afscheidstawaf, herhaalde umrahs, reizen zonder mahram) staat dat vermeld. Volg in zulke punten een geleerde die je vertrouwt. </li><li><b>Controle:</b> de bronnummers zijn samengesteld uit de hadithverzamelingen en niet een voor een online nagekeken. Kijk ze na op sunnah.com. </li></ul><p>Aanbevolen om verder te lezen: <i>Manasik al-Hajj wa al-&#x27;Umrah</i> van al-Albani, en de umrah-uitleg van Ibn &#x27;Uthaymin en Ibn Baz. </p><div class="note"><b class="h">Moge Allah je umrah aanvaarden</b><p>en je veilig terugbrengen. Vergeet in je du&#x27;a&#x27;s ook de mensen niet die je om du&#x27;a vroegen. </p></div>
+  <div class="ch-nav"><a class="up" href="#gids">↑ Inhoud</a></div>
+</section>
+  </div>
+</section>
+
+<section class="view" id="v-dua">
+  <div class="wrap">
+    <header class="vhead">
+      <h1>Du'a's</h1>
+      <div class="sizer" aria-label="Grootte Arabische tekst">
+        <button type="button" data-size="-1" aria-label="Arabisch kleiner">A−</button>
+        <button type="button" data-size="1" aria-label="Arabisch groter">A+</button>
+      </div>
+    </header>
+    <input type="search" id="q" class="search" placeholder="Zoek op woord, moment of bron" aria-label="Zoek in du'a's">
+    <section class="cat" id="favs" hidden><h2 class="group">Favorieten</h2><div class="dua-list" id="favlist"></div></section>
+    <section class="cat" data-cat="Reis"><h2 class="group">Reis</h2><div class="dua-list"><article class="dua" data-id="reis" data-search="reisdu&#x27;a als je in het voertuig of vliegtuig zit allāhu akbar, allāhu akbar, allāhu akbar. subhāna lladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā la-munqalibūn. allāhumma innā nas&#x27;aluka fī safarinā hādha l-birra wa t-taqwā, wa mina l-&#x27;amali mā tardā. allāhumma hawwin &#x27;alaynā safaranā hādhā watwi &#x27;annā bu&#x27;dah. allāhumma anta s-sāhibu fi s-safari wa l-khalīfatu fi l-ahl. allāhumma innī a&#x27;ūdhu bika min wa&#x27;thā&#x27;i s-safari, wa ka&#x27;ābati l-manzari, wa sū&#x27;i l-munqalabi fi l-māli wa l-ahl. allah is de grootste (3×). glorie aan hem die dit aan ons dienstbaar heeft gemaakt, terwijl wij dat zelf niet konden, en tot onze heer keren wij terug. o allah, wij vragen u op deze reis om vroomheid en godsvrees, en om daden waarmee u tevreden bent. o allah, maak deze reis licht voor ons en verkort de afstand. o allah, u bent de metgezel op reis en de behoeder van de familie. o allah, ik zoek bescherming bij u tegen de ontberingen van de reis, een droevig aanzicht en een slechte terugkeer bij bezit en familie. reis muslim 1342" tabindex="0" role="button" aria-label="Reisdu&#x27;a, open groot">
+  <div class="dua-head"><span class="when">Als je in het voertuig of vliegtuig zit</span><button class="star" type="button" data-star="reis" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ، اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى، اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ، اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ وَالْخَلِيفَةُ فِي الْأَهْلِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ</p>
+  <p class="tr">Allāhu akbar, Allāhu akbar, Allāhu akbar. Subhāna lladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā la-munqalibūn. Allāhumma innā nas&#x27;aluka fī safarinā hādha l-birra wa t-taqwā, wa mina l-&#x27;amali mā tardā. Allāhumma hawwin &#x27;alaynā safaranā hādhā watwi &#x27;annā bu&#x27;dah. Allāhumma anta s-sāhibu fi s-safari wa l-khalīfatu fi l-ahl. Allāhumma innī a&#x27;ūdhu bika min wa&#x27;thā&#x27;i s-safari, wa ka&#x27;ābati l-manzari, wa sū&#x27;i l-munqalabi fi l-māli wa l-ahl.</p>
+  <p class="nl">Allah is de Grootste (3×). Glorie aan Hem die dit aan ons dienstbaar heeft gemaakt, terwijl wij dat zelf niet konden, en tot onze Heer keren wij terug. O Allah, wij vragen U op deze reis om vroomheid en godsvrees, en om daden waarmee U tevreden bent. O Allah, maak deze reis licht voor ons en verkort de afstand. O Allah, U bent de Metgezel op reis en de Behoeder van de familie. O Allah, ik zoek bescherming bij U tegen de ontberingen van de reis, een droevig aanzicht en een slechte terugkeer bij bezit en familie.</p>
+  
+  <div class="foot"><span class="src">Muslim 1342</span></div>
+</article><article class="dua" data-id="terugkeer" data-search="bij thuiskomst na drie keer allahu akbar, bij terugkeer van hajj of umrah lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. āyibūna tā&#x27;ibūna &#x27;ābidūna sājidūna li-rabbinā hāmidūn. sadaqa llāhu wa&#x27;dah, wa nasara &#x27;abdah, wa hazama l-ahzāba wahdah. er is geen god dan allah alleen, zonder deelgenoot; aan hem de heerschappij en de lof, en hij is tot alles in staat. wij keren terug, berouwvol, aanbiddend, ons neerbuigend en onze heer prijzend. allah heeft zijn belofte waargemaakt, zijn dienaar geholpen en de bondgenoten alleen verslagen. reis bukhari 1797 · muslim 1344" tabindex="0" role="button" aria-label="Bij thuiskomst, open groot">
+  <div class="dua-head"><span class="when">Na drie keer Allahu akbar, bij terugkeer van hajj of umrah</span><button class="star" type="button" data-star="terugkeer" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، آيِبُونَ تَائِبُونَ عَابِدُونَ سَاجِدُونَ لِرَبِّنَا حَامِدُونَ، صَدَقَ اللَّهُ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ</p>
+  <p class="tr">Lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. Āyibūna tā&#x27;ibūna &#x27;ābidūna sājidūna li-rabbinā hāmidūn. Sadaqa llāhu wa&#x27;dah, wa nasara &#x27;abdah, wa hazama l-ahzāba wahdah.</p>
+  <p class="nl">Er is geen god dan Allah alleen, zonder deelgenoot; aan Hem de heerschappij en de lof, en Hij is tot alles in staat. Wij keren terug, berouwvol, aanbiddend, ons neerbuigend en onze Heer prijzend. Allah heeft Zijn belofte waargemaakt, Zijn dienaar geholpen en de bondgenoten alleen verslagen.</p>
+  <p class="note-s">De Profeet ﷺ zei dit bij terugkomst van hajj of umrah, telkens hij een hoogte opging.</p>
+  <div class="foot"><span class="src">Bukhari 1797 · Muslim 1344</span></div>
+</article></div></section><section class="cat" data-cat="Ihram"><h2 class="group">Ihram</h2><div class="dua-list"><article class="dua" data-id="niyyah" data-search="intentie voor umrah bij de miqat labbayka &#x27;umrah. hier ben ik, (o allah), voor een umrah. ihram muslim 1251" tabindex="0" role="button" aria-label="Intentie voor umrah, open groot">
+  <div class="dua-head"><span class="when">Bij de miqat</span><button class="star" type="button" data-star="niyyah" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">لَبَّيْكَ عُمْرَةً</p>
+  <p class="tr">Labbayka &#x27;umrah.</p>
+  <p class="nl">Hier ben ik, (o Allah), voor een umrah.</p>
+  <p class="note-s">De intentie zit in het hart; deze woorden zijn de Sunnah om haar aan te kondigen.</p>
+  <div class="foot"><span class="src">Muslim 1251</span></div>
+</article><article class="dua" data-id="ishtirat" data-search="voorwaarde (ishtirat) bij de intentie, als je vreest verhinderd te worden fa in habasanī hābis, fa-mahillī haythu habastanī. en als iets mij tegenhoudt, dan is mijn plaats van ontheffing waar u mij tegenhoudt. ihram bukhari 5089 · muslim 1207" tabindex="0" role="button" aria-label="Voorwaarde (ishtirat), open groot">
+  <div class="dua-head"><span class="when">Bij de intentie, als je vreest verhinderd te worden</span><button class="star" type="button" data-star="ishtirat" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">فَإِنْ حَبَسَنِي حَابِسٌ فَمَحِلِّي حَيْثُ حَبَسْتَنِي</p>
+  <p class="tr">Fa in habasanī hābis, fa-mahillī haythu habastanī.</p>
+  <p class="nl">En als iets mij tegenhoudt, dan is mijn plaats van ontheffing waar U mij tegenhoudt.</p>
+  <p class="note-s">Gezegd tegen Duba&#x27;ah bint az-Zubayr, die ziek was. Word je verhinderd, dan verlaat je de ihram zonder offer.</p>
+  <div class="foot"><span class="src">Bukhari 5089 · Muslim 1207</span></div>
+</article><article class="dua" data-id="talbiyah" data-search="talbiyah vanaf de miqat tot het begin van de tawaf labbayka allāhumma labbayk, labbayka lā sharīka laka labbayk, inna l-hamda wa n-ni&#x27;mata laka wa l-mulk, lā sharīka lak. hier ben ik, o allah, hier ben ik. hier ben ik, u hebt geen deelgenoot, hier ben ik. alle lof en alle gunst behoren u toe, en de heerschappij. u hebt geen deelgenoot. ihram bukhari 1549 · muslim 1184" tabindex="0" role="button" aria-label="Talbiyah, open groot">
+  <div class="dua-head"><span class="when">Vanaf de miqat tot het begin van de tawaf</span><button class="star" type="button" data-star="talbiyah" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ</p>
+  <p class="tr">Labbayka Allāhumma labbayk, labbayka lā sharīka laka labbayk, inna l-hamda wa n-ni&#x27;mata laka wa l-mulk, lā sharīka lak.</p>
+  <p class="nl">Hier ben ik, o Allah, hier ben ik. Hier ben ik, U hebt geen deelgenoot, hier ben ik. Alle lof en alle gunst behoren U toe, en de heerschappij. U hebt geen deelgenoot.</p>
+  <p class="note-s">Mannen verheffen hun stem, vrouwen zeggen haar zacht (Abu Dawud 1814). Stop wanneer je aan de tawaf begint.</p>
+  <div class="foot"><span class="src">Bukhari 1549 · Muslim 1184</span></div>
+</article></div></section><section class="cat" data-cat="Moskee"><h2 class="group">Moskee</h2><div class="dua-list"><article class="dua" data-id="moskee-in" data-search="moskee binnengaan rechtervoet eerst a&#x27;ūdhu billāhi l-&#x27;azīm, wa bi-wajhihi l-karīm, wa sultānihi l-qadīm, mina sh-shaytāni r-rajīm. allāhumma-ftah lī abwāba rahmatik. ik zoek bescherming bij allah de geweldige, bij zijn edel aangezicht en zijn eeuwige heerschappij, tegen de vervloekte duivel. o allah, open voor mij de poorten van uw barmhartigheid. moskee abu dawud 466 · sahih · muslim 713" tabindex="0" role="button" aria-label="Moskee binnengaan, open groot">
+  <div class="dua-head"><span class="when">Rechtervoet eerst</span><button class="star" type="button" data-star="moskee-in" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">أَعُوذُ بِاللَّهِ الْعَظِيمِ، وَبِوَجْهِهِ الْكَرِيمِ، وَسُلْطَانِهِ الْقَدِيمِ، مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ</p>
+  <p class="tr">A&#x27;ūdhu billāhi l-&#x27;azīm, wa bi-wajhihi l-karīm, wa sultānihi l-qadīm, mina sh-shaytāni r-rajīm. Allāhumma-ftah lī abwāba rahmatik.</p>
+  <p class="nl">Ik zoek bescherming bij Allah de Geweldige, bij Zijn edel Aangezicht en Zijn eeuwige heerschappij, tegen de vervloekte duivel. O Allah, open voor mij de poorten van Uw barmhartigheid.</p>
+  
+  <div class="foot"><span class="src">Abu Dawud 466 · sahih · Muslim 713</span></div>
+</article><article class="dua" data-id="moskee-uit" data-search="moskee verlaten linkervoet eerst allāhumma innī as&#x27;aluka min fadlik. o allah, ik vraag u om uw gunst. moskee muslim 713" tabindex="0" role="button" aria-label="Moskee verlaten, open groot">
+  <div class="dua-head"><span class="when">Linkervoet eerst</span><button class="star" type="button" data-star="moskee-uit" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ</p>
+  <p class="tr">Allāhumma innī as&#x27;aluka min fadlik.</p>
+  <p class="nl">O Allah, ik vraag U om Uw gunst.</p>
+  
+  <div class="foot"><span class="src">Muslim 713</span></div>
+</article><article class="dua" data-id="na-wudu" data-search="na de wudu na de wudu, bijvoorbeeld vóór de tawaf ashhadu an lā ilāha illa llāhu wahdahu lā sharīka lah, wa ashhadu anna muhammadan &#x27;abduhu wa rasūluh. ik getuig dat er geen god is dan allah alleen, zonder deelgenoot, en ik getuig dat mohammed zijn dienaar en boodschapper is. moskee muslim 234" tabindex="0" role="button" aria-label="Na de wudu, open groot">
+  <div class="dua-head"><span class="when">Na de wudu, bijvoorbeeld vóór de tawaf</span><button class="star" type="button" data-star="na-wudu" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ</p>
+  <p class="tr">Ashhadu an lā ilāha illa llāhu wahdahu lā sharīka lah, wa ashhadu anna Muhammadan &#x27;abduhu wa rasūluh.</p>
+  <p class="nl">Ik getuig dat er geen god is dan Allah alleen, zonder deelgenoot, en ik getuig dat Mohammed Zijn dienaar en boodschapper is.</p>
+  <p class="note-s">Voor wie dit zegt, worden de acht poorten van het Paradijs geopend.</p>
+  <div class="foot"><span class="src">Muslim 234</span></div>
+</article></div></section><section class="cat" data-cat="Tawaf"><h2 class="group">Tawaf</h2><div class="dua-list"><article class="dua" data-id="zwarte-steen" data-search="bij de zwarte steen bij de steen, aan het begin van elke ronde bismillāh, wallāhu akbar. in de naam van allah, en allah is de grootste. tawaf bukhari 1613 · bayhaqi (ibn &#x27;umar)" tabindex="0" role="button" aria-label="Bij de Zwarte Steen, open groot">
+  <div class="dua-head"><span class="when">Bij de steen, aan het begin van elke ronde</span><button class="star" type="button" data-star="zwarte-steen" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">بِسْمِ اللَّهِ، وَاللَّهُ أَكْبَرُ</p>
+  <p class="tr">Bismillāh, wallāhu akbar.</p>
+  <p class="nl">In de naam van Allah, en Allah is de Grootste.</p>
+  <p class="note-s">„Allahu akbar” is van de Profeet ﷺ; „Bismillah” erbij is overgeleverd van Ibn &#x27;Umar.</p>
+  <div class="foot"><span class="src">Bukhari 1613 · Bayhaqi (Ibn &#x27;Umar)</span></div>
+</article><article class="dua" data-id="rabbana-atina" data-search="tussen de jemenitische hoek en de zwarte steen elke ronde, op het laatste stuk rabbanā ātinā fi d-dunyā hasanah, wa fi l-ākhirati hasanah, wa qinā &#x27;adhāba n-nār. onze heer, geef ons het goede in deze wereld en het goede in het hiernamaals, en bescherm ons tegen de bestraffing van het vuur. tawaf abu dawud 1892 · hasan · koran 2:201" tabindex="0" role="button" aria-label="Tussen de Jemenitische hoek en de Zwarte Steen, open groot">
+  <div class="dua-head"><span class="when">Elke ronde, op het laatste stuk</span><button class="star" type="button" data-star="rabbana-atina" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ</p>
+  <p class="tr">Rabbanā ātinā fi d-dunyā hasanah, wa fi l-ākhirati hasanah, wa qinā &#x27;adhāba n-nār.</p>
+  <p class="nl">Onze Heer, geef ons het goede in deze wereld en het goede in het Hiernamaals, en bescherm ons tegen de bestraffing van het Vuur.</p>
+  
+  <div class="foot"><span class="src">Abu Dawud 1892 · hasan · Koran 2:201</span></div>
+</article><article class="dua" data-id="maqam" data-search="bij de maqam ibrahim bij het naderen van de maqam, na de tawaf wattakhidhū min maqāmi ibrāhīma musallā. en neem de staanplaats van ibrahim als gebedsplaats. tawaf koran 2:125 · muslim 1218" tabindex="0" role="button" aria-label="Bij de Maqam Ibrahim, open groot">
+  <div class="dua-head"><span class="when">Bij het naderen van de Maqam, na de tawaf</span><button class="star" type="button" data-star="maqam" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى</p>
+  <p class="tr">Wattakhidhū min maqāmi Ibrāhīma musallā.</p>
+  <p class="nl">En neem de staanplaats van Ibrahim als gebedsplaats.</p>
+  <p class="note-s">Bid daarna twee rak&#x27;ah: al-Kafirun (109) in de eerste, al-Ikhlas (112) in de tweede.</p>
+  <div class="foot"><span class="src">Koran 2:125 · Muslim 1218</span></div>
+</article></div></section><section class="cat" data-cat="Sa&#x27;i"><h2 class="group">Sa&#x27;i</h2><div class="dua-list"><article class="dua" data-id="safa-begin" data-search="bij het naderen van de safa eenmalig, aan het begin van de sa&#x27;i inna s-safā wa l-marwata min sha&#x27;ā&#x27;irillāh. abda&#x27;u bimā bada&#x27;a allāhu bih. voorwaar, de safa en de marwah behoren tot de tekenen van allah. ik begin met wat allah als eerste noemde. sa&#x27;i koran 2:158 · muslim 1218" tabindex="0" role="button" aria-label="Bij het naderen van de Safa, open groot">
+  <div class="dua-head"><span class="when">Eenmalig, aan het begin van de sa&#x27;i</span><button class="star" type="button" data-star="safa-begin" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ. أَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ</p>
+  <p class="tr">Inna s-safā wa l-marwata min sha&#x27;ā&#x27;irillāh. Abda&#x27;u bimā bada&#x27;a Allāhu bih.</p>
+  <p class="nl">Voorwaar, de Safa en de Marwah behoren tot de tekenen van Allah. Ik begin met wat Allah als eerste noemde.</p>
+  
+  <div class="foot"><span class="src">Koran 2:158 · Muslim 1218</span></div>
+</article><article class="dua" data-id="safa-dhikr" data-search="op de safa en de marwah naar de qiblah, handen omhoog, 3× met du&#x27;a ertussen allāhu akbar. lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. lā ilāha illa llāhu wahdah, anjaza wa&#x27;dah, wa nasara &#x27;abdah, wa hazama l-ahzāba wahdah. allah is de grootste. er is geen god dan allah alleen, zonder deelgenoot. aan hem behoren de heerschappij en de lof, en hij is tot alles in staat. er is geen god dan allah alleen. hij vervulde zijn belofte, hielp zijn dienaar en versloeg de bondgenoten alleen. sa&#x27;i muslim 1218" tabindex="0" role="button" aria-label="Op de Safa en de Marwah, open groot">
+  <div class="dua-head"><span class="when">Naar de qiblah, handen omhoog, 3× met du&#x27;a ertussen</span><button class="star" type="button" data-star="safa-dhikr" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُ أَكْبَرُ. لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ</p>
+  <p class="tr">Allāhu akbar. Lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. Lā ilāha illa llāhu wahdah, anjaza wa&#x27;dah, wa nasara &#x27;abdah, wa hazama l-ahzāba wahdah.</p>
+  <p class="nl">Allah is de Grootste. Er is geen god dan Allah alleen, zonder deelgenoot. Aan Hem behoren de heerschappij en de lof, en Hij is tot alles in staat. Er is geen god dan Allah alleen. Hij vervulde Zijn belofte, hielp Zijn dienaar en versloeg de bondgenoten alleen.</p>
+  <p class="note-s">Zeg dit, doe een eigen du&#x27;a, herhaal, du&#x27;a, en een derde keer. Op elke heuvel, acht stops in totaal.</p>
+  <div class="foot"><span class="src">Muslim 1218</span></div>
+</article><article class="dua" data-id="sai-onderweg" data-search="tijdens de sa&#x27;i onderweg tussen safa en marwah (van metgezellen) rabbi-ghfir warham, innaka anta l-a&#x27;azzu l-akram. mijn heer, vergeef en wees barmhartig. u bent de machtigste, de edelste. sa&#x27;i ibn abi shaybah · ibn mas&#x27;ud en ibn &#x27;umar" tabindex="0" role="button" aria-label="Tijdens de sa&#x27;i, open groot">
+  <div class="dua-head"><span class="when">Onderweg tussen Safa en Marwah (van metgezellen)</span><button class="star" type="button" data-star="sai-onderweg" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبِّ اغْفِرْ وَارْحَمْ، إِنَّكَ أَنْتَ الْأَعَزُّ الْأَكْرَمُ</p>
+  <p class="tr">Rabbi-ghfir warham, innaka anta l-a&#x27;azzu l-akram.</p>
+  <p class="nl">Mijn Heer, vergeef en wees barmhartig. U bent de Machtigste, de Edelste.</p>
+  <p class="note-s">Een uitspraak van metgezellen, niet van de Profeet ﷺ. Verder is de du&#x27;a in de sa&#x27;i vrij.</p>
+  <div class="foot"><span class="src">Ibn Abi Shaybah · Ibn Mas&#x27;ud en Ibn &#x27;Umar</span></div>
+</article></div></section><section class="cat" data-cat="Na de umrah"><h2 class="group">Na de umrah</h2><div class="dua-list"><article class="dua" data-id="taqabbal" data-search="om aanvaarding na het scheren of inkorten rabbanā taqabbal minnā, innaka anta s-samī&#x27;u l-&#x27;alīm. onze heer, aanvaard het van ons. u bent de alhorende, de alwetende. na de umrah koran 2:127" tabindex="0" role="button" aria-label="Om aanvaarding, open groot">
+  <div class="dua-head"><span class="when">Na het scheren of inkorten</span><button class="star" type="button" data-star="taqabbal" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ</p>
+  <p class="tr">Rabbanā taqabbal minnā, innaka anta s-samī&#x27;u l-&#x27;alīm.</p>
+  <p class="nl">Onze Heer, aanvaard het van ons. U bent de Alhorende, de Alwetende.</p>
+  <p class="note-s">De du&#x27;a van Ibrahim en Isma&#x27;il toen zij de Ka&#x27;bah bouwden.</p>
+  <div class="foot"><span class="src">Koran 2:127</span></div>
+</article></div></section><section class="cat" data-cat="Gebed &amp; dhikr"><h2 class="group">Gebed &amp; dhikr</h2><div class="dua-list"><article class="dua" data-id="na-adhan" data-search="na de adhan na het nazeggen van de adhan allāhumma rabba hādhihi d-da&#x27;wati t-tāmmah, wa s-salāti l-qā&#x27;imah, āti muhammadan al-wasīlata wa l-fadīlah, wab&#x27;athhu maqāman mahmūdan alladhī wa&#x27;adtah. o allah, heer van deze volmaakte oproep en van het gebed dat verricht gaat worden, geef mohammed de wasilah en de voortreffelijkheid, en laat hem opstaan op de geprezen plaats die u hem beloofd hebt. gebed &amp; dhikr bukhari 614" tabindex="0" role="button" aria-label="Na de adhan, open groot">
+  <div class="dua-head"><span class="when">Na het nazeggen van de adhan</span><button class="star" type="button" data-star="na-adhan" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلَاةِ الْقَائِمَةِ، آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ</p>
+  <p class="tr">Allāhumma rabba hādhihi d-da&#x27;wati t-tāmmah, wa s-salāti l-qā&#x27;imah, āti Muhammadan al-wasīlata wa l-fadīlah, wab&#x27;athhu maqāman mahmūdan alladhī wa&#x27;adtah.</p>
+  <p class="nl">O Allah, Heer van deze volmaakte oproep en van het gebed dat verricht gaat worden, geef Mohammed de wasilah en de voortreffelijkheid, en laat hem opstaan op de geprezen plaats die U hem beloofd hebt.</p>
+  <p class="note-s">Wie dit zegt, krijgt op de Dag des Oordeels de voorspraak van de Profeet ﷺ. Daarna is het moment voor je eigen du&#x27;a (Abu Dawud 524).</p>
+  <div class="foot"><span class="src">Bukhari 614</span></div>
+</article><article class="dua" data-id="salawat" data-search="salawat op de profeet ﷺ in de tashahhud, in het janazah-gebed, vóór je du&#x27;a allāhumma salli &#x27;alā muhammadin wa &#x27;alā āli muhammad, kamā sallayta &#x27;alā ibrāhīma wa &#x27;alā āli ibrāhīm, innaka hamīdun majīd. allāhumma bārik &#x27;alā muhammadin wa &#x27;alā āli muhammad, kamā bārakta &#x27;alā ibrāhīma wa &#x27;alā āli ibrāhīm, innaka hamīdun majīd. o allah, zegen mohammed en de familie van mohammed, zoals u ibrahim en de familie van ibrahim gezegend hebt; u bent geprezen, glorierijk. o allah, schenk overvloed aan mohammed en de familie van mohammed, zoals u overvloed hebt geschonken aan ibrahim en de familie van ibrahim; u bent geprezen, glorierijk. gebed &amp; dhikr bukhari 3370" tabindex="0" role="button" aria-label="Salawat op de Profeet ﷺ, open groot">
+  <div class="dua-head"><span class="when">In de tashahhud, in het janazah-gebed, vóór je du&#x27;a</span><button class="star" type="button" data-star="salawat" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ</p>
+  <p class="tr">Allāhumma salli &#x27;alā Muhammadin wa &#x27;alā āli Muhammad, kamā sallayta &#x27;alā Ibrāhīma wa &#x27;alā āli Ibrāhīm, innaka hamīdun majīd. Allāhumma bārik &#x27;alā Muhammadin wa &#x27;alā āli Muhammad, kamā bārakta &#x27;alā Ibrāhīma wa &#x27;alā āli Ibrāhīm, innaka hamīdun majīd.</p>
+  <p class="nl">O Allah, zegen Mohammed en de familie van Mohammed, zoals U Ibrahim en de familie van Ibrahim gezegend hebt; U bent Geprezen, Glorierijk. O Allah, schenk overvloed aan Mohammed en de familie van Mohammed, zoals U overvloed hebt geschonken aan Ibrahim en de familie van Ibrahim; U bent Geprezen, Glorierijk.</p>
+  
+  <div class="foot"><span class="src">Bukhari 3370</span></div>
+</article><article class="dua" data-id="grootste-naam" data-search="met de grootste naam van allah om je du&#x27;a mee te openen allāhumma innī as&#x27;aluka bi-annī ashhadu annaka anta llāhu lā ilāha illā ant, al-ahadu s-samad, alladhī lam yalid wa lam yūlad, wa lam yakun lahu kufuwan ahad. o allah, ik vraag u, omdat ik getuig dat u allah bent, er is geen god dan u, de ene, de onafhankelijke, die niet verwekt en niet verwekt is, en niemand is aan hem gelijk. gebed &amp; dhikr abu dawud 1493 · tirmidhi 3475 · sahih" tabindex="0" role="button" aria-label="Met de grootste naam van Allah, open groot">
+  <div class="dua-head"><span class="when">Om je du&#x27;a mee te openen</span><button class="star" type="button" data-star="grootste-naam" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ إِنِّي أَسْأَلُكَ بِأَنِّي أَشْهَدُ أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ، الْأَحَدُ الصَّمَدُ، الَّذِي لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ</p>
+  <p class="tr">Allāhumma innī as&#x27;aluka bi-annī ashhadu annaka anta llāhu lā ilāha illā ant, al-ahadu s-samad, alladhī lam yalid wa lam yūlad, wa lam yakun lahu kufuwan ahad.</p>
+  <p class="nl">O Allah, ik vraag U, omdat ik getuig dat U Allah bent, er is geen god dan U, de Ene, de Onafhankelijke, Die niet verwekt en niet verwekt is, en niemand is aan Hem gelijk.</p>
+  <p class="note-s">„Hij heeft Allah gevraagd met Zijn grootste naam: wie daarmee vraagt, krijgt.”</p>
+  <div class="foot"><span class="src">Abu Dawud 1493 · Tirmidhi 3475 · sahih</span></div>
+</article><article class="dua" data-id="nacht-wakker" data-search="als je &#x27;s nachts wakker wordt bij het wakker worden in de nacht lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. al-hamdu lillāh, wa subhāna llāh, wa lā ilāha illa llāh, wa llāhu akbar, wa lā hawla wa lā quwwata illā billāh. allāhumma-ghfir lī. er is geen god dan allah alleen, zonder deelgenoot; aan hem de heerschappij en de lof, en hij is tot alles in staat. alle lof is voor allah, glorie aan allah, er is geen god dan allah, allah is de grootste, en er is geen kracht of macht behalve bij allah. o allah, vergeef mij. gebed &amp; dhikr bukhari 1154" tabindex="0" role="button" aria-label="Als je &#x27;s nachts wakker wordt, open groot">
+  <div class="dua-head"><span class="when">Bij het wakker worden in de nacht</span><button class="star" type="button" data-star="nacht-wakker" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، الْحَمْدُ لِلَّهِ، وَسُبْحَانَ اللَّهِ، وَلَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ. اللَّهُمَّ اغْفِرْ لِي</p>
+  <p class="tr">Lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa &#x27;alā kulli shay&#x27;in qadīr. Al-hamdu lillāh, wa subhāna llāh, wa lā ilāha illa llāh, wa llāhu akbar, wa lā hawla wa lā quwwata illā billāh. Allāhumma-ghfir lī.</p>
+  <p class="nl">Er is geen god dan Allah alleen, zonder deelgenoot; aan Hem de heerschappij en de lof, en Hij is tot alles in staat. Alle lof is voor Allah, glorie aan Allah, er is geen god dan Allah, Allah is de Grootste, en er is geen kracht of macht behalve bij Allah. O Allah, vergeef mij.</p>
+  <p class="note-s">Wie dit zegt en dan om vergeving of iets anders vraagt, wordt verhoord. Wie daarna wudu doet en bidt, diens gebed wordt aanvaard.</p>
+  <div class="foot"><span class="src">Bukhari 1154</span></div>
+</article><article class="dua" data-id="geliefde-woorden" data-search="de meest geliefde woorden tijdens het wachten, lopen en zitten subhāna llāh, wa l-hamdu lillāh, wa lā ilāha illa llāh, wa llāhu akbar. glorie aan allah, alle lof is voor allah, er is geen god dan allah, en allah is de grootste. gebed &amp; dhikr muslim 2137" tabindex="0" role="button" aria-label="De meest geliefde woorden, open groot">
+  <div class="dua-head"><span class="when">Tijdens het wachten, lopen en zitten</span><button class="star" type="button" data-star="geliefde-woorden" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَلَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ</p>
+  <p class="tr">Subhāna llāh, wa l-hamdu lillāh, wa lā ilāha illa llāh, wa llāhu akbar.</p>
+  <p class="nl">Glorie aan Allah, alle lof is voor Allah, er is geen god dan Allah, en Allah is de Grootste.</p>
+  <p class="note-s">De vier woorden die Allah het meest geliefd zijn.</p>
+  <div class="foot"><span class="src">Muslim 2137</span></div>
+</article><article class="dua" data-id="janazah" data-search="voor de overledene (janazah) na de derde takbir van het janazah-gebed allāhumma-ghfir lahu warhamhu, wa &#x27;āfihi wa&#x27;fu &#x27;anhu, wa akrim nuzulahu, wa wassi&#x27; mudkhalahu, waghsilhu bi l-mā&#x27;i wa th-thalji wa l-barad, wa naqqihi mina l-khatāyā kamā naqqayta th-thawba l-abyada mina d-danas. o allah, vergeef hem en wees hem genadig, geef hem welzijn en scheld hem kwijt, maak zijn ontvangst eervol en zijn graf ruim, was hem met water, sneeuw en hagel, en reinig hem van zonden zoals u een wit kleed reinigt van vuil. gebed &amp; dhikr muslim 963" tabindex="0" role="button" aria-label="Voor de overledene (janazah), open groot">
+  <div class="dua-head"><span class="when">Na de derde takbir van het janazah-gebed</span><button class="star" type="button" data-star="janazah" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ، وَعَافِهِ وَاعْفُ عَنْهُ، وَأَكْرِمْ نُزُلَهُ، وَوَسِّعْ مُدْخَلَهُ، وَاغْسِلْهُ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ، وَنَقِّهِ مِنَ الْخَطَايَا كَمَا نَقَّيْتَ الثَّوْبَ الْأَبْيَضَ مِنَ الدَّنَسِ</p>
+  <p class="tr">Allāhumma-ghfir lahu warhamhu, wa &#x27;āfihi wa&#x27;fu &#x27;anhu, wa akrim nuzulahu, wa wassi&#x27; mudkhalahu, waghsilhu bi l-mā&#x27;i wa th-thalji wa l-barad, wa naqqihi mina l-khatāyā kamā naqqayta th-thawba l-abyada mina d-danas.</p>
+  <p class="nl">O Allah, vergeef hem en wees hem genadig, geef hem welzijn en scheld hem kwijt, maak zijn ontvangst eervol en zijn graf ruim, was hem met water, sneeuw en hagel, en reinig hem van zonden zoals U een wit kleed reinigt van vuil.</p>
+  <p class="note-s">Het begin van de du&#x27;a. Voor een vrouw: lahā, warhamhā, wa &#x27;āfihā… Een eigen du&#x27;a voor de overledene mag ook.</p>
+  <div class="foot"><span class="src">Muslim 963</span></div>
+</article></div></section><section class="cat" data-cat="Medina"><h2 class="group">Medina</h2><div class="dua-list"><article class="dua" data-id="graf-groet" data-search="groet aan de profeet ﷺ en zijn metgezellen bij het graf in de profetenmoskee as-salāmu &#x27;alayka yā rasūlallāh. as-salāmu &#x27;alayka yā abā bakr. as-salāmu &#x27;alayka yā &#x27;umar. vrede zij met u, o boodschapper van allah. vrede zij met u, abu bakr. vrede zij met u, &#x27;umar. medina zo deed ibn &#x27;umar · muwatta, bayhaqi" tabindex="0" role="button" aria-label="Groet aan de Profeet ﷺ en zijn metgezellen, open groot">
+  <div class="dua-head"><span class="when">Bij het graf in de Profetenmoskee</span><button class="star" type="button" data-star="graf-groet" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">السَّلَامُ عَلَيْكَ يَا رَسُولَ اللَّهِ، السَّلَامُ عَلَيْكَ يَا أَبَا بَكْرٍ، السَّلَامُ عَلَيْكَ يَا عُمَرُ</p>
+  <p class="tr">As-salāmu &#x27;alayka yā Rasūlallāh. As-salāmu &#x27;alayka yā Abā Bakr. As-salāmu &#x27;alayka yā &#x27;Umar.</p>
+  <p class="nl">Vrede zij met u, o Boodschapper van Allah. Vrede zij met u, Abu Bakr. Vrede zij met u, &#x27;Umar.</p>
+  <p class="note-s">Rustig en met zachte stem. Voor je eigen du&#x27;a keer je je naar de qiblah, niet naar het graf.</p>
+  <div class="foot"><span class="src">Zo deed Ibn &#x27;Umar · Muwatta, Bayhaqi</span></div>
+</article><article class="dua" data-id="baqi" data-search="bij de begraafplaats al-baqi&#x27;, uhud en elke begraafplaats as-salāmu &#x27;alaykum ahla d-diyāri mina l-mu&#x27;minīna wa l-muslimīn, wa innā in shā&#x27; allāhu la-lāhiqūn, as&#x27;alu llāha lanā wa lakumu l-&#x27;āfiyah. vrede zij met jullie, bewoners van deze woningen, gelovigen en moslims. wij zullen, als allah het wil, bij jullie komen. ik vraag allah welzijn voor ons en voor jullie. medina muslim 975" tabindex="0" role="button" aria-label="Bij de begraafplaats, open groot">
+  <div class="dua-head"><span class="when">Al-Baqi&#x27;, Uhud en elke begraafplaats</span><button class="star" type="button" data-star="baqi" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">السَّلَامُ عَلَيْكُمْ أَهْلَ الدِّيَارِ مِنَ الْمُؤْمِنِينَ وَالْمُسْلِمِينَ، وَإِنَّا إِنْ شَاءَ اللَّهُ لَلَاحِقُونَ، أَسْأَلُ اللَّهَ لَنَا وَلَكُمُ الْعَافِيَةَ</p>
+  <p class="tr">As-salāmu &#x27;alaykum ahla d-diyāri mina l-mu&#x27;minīna wa l-muslimīn, wa innā in shā&#x27; Allāhu la-lāhiqūn, as&#x27;alu llāha lanā wa lakumu l-&#x27;āfiyah.</p>
+  <p class="nl">Vrede zij met jullie, bewoners van deze woningen, gelovigen en moslims. Wij zullen, als Allah het wil, bij jullie komen. Ik vraag Allah welzijn voor ons en voor jullie.</p>
+  
+  <div class="foot"><span class="src">Muslim 975</span></div>
+</article></div></section><section class="cat" data-cat="Algemeen"><h2 class="group">Algemeen</h2><div class="dua-list"><article class="dua" data-id="ibrahim-kinderen" data-search="voor jezelf en je kinderen de du&#x27;a van ibrahim in mekka rabbi-j&#x27;alnī muqīma s-salāti wa min dhurriyyatī, rabbanā wa taqabbal du&#x27;ā&#x27;. mijn heer, maak mij iemand die het gebed onderhoudt, en ook van mijn nakomelingen. onze heer, aanvaard mijn smeekbede. algemeen koran 14:40" tabindex="0" role="button" aria-label="Voor jezelf en je kinderen, open groot">
+  <div class="dua-head"><span class="when">De du&#x27;a van Ibrahim in Mekka</span><button class="star" type="button" data-star="ibrahim-kinderen" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءِ</p>
+  <p class="tr">Rabbi-j&#x27;alnī muqīma s-salāti wa min dhurriyyatī, rabbanā wa taqabbal du&#x27;ā&#x27;.</p>
+  <p class="nl">Mijn Heer, maak mij iemand die het gebed onderhoudt, en ook van mijn nakomelingen. Onze Heer, aanvaard mijn smeekbede.</p>
+  
+  <div class="foot"><span class="src">Koran 14:40</span></div>
+</article><article class="dua" data-id="ouders" data-search="voor je ouders en de gelovigen voor ouders, familie en alle gelovigen rabbana-ghfir lī wa li-wālidayya wa li-l-mu&#x27;minīna yawma yaqūmu l-hisāb. onze heer, vergeef mij, mijn ouders en de gelovigen op de dag van de afrekening. algemeen koran 14:41" tabindex="0" role="button" aria-label="Voor je ouders en de gelovigen, open groot">
+  <div class="dua-head"><span class="when">Voor ouders, familie en alle gelovigen</span><button class="star" type="button" data-star="ouders" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ</p>
+  <p class="tr">Rabbana-ghfir lī wa li-wālidayya wa li-l-mu&#x27;minīna yawma yaqūmu l-hisāb.</p>
+  <p class="nl">Onze Heer, vergeef mij, mijn ouders en de gelovigen op de Dag van de afrekening.</p>
+  
+  <div class="foot"><span class="src">Koran 14:41</span></div>
+</article><article class="dua" data-id="huda" data-search="leiding en godsvrees allesomvattend allāhumma innī as&#x27;aluka l-hudā wa t-tuqā wa l-&#x27;afāfa wa l-ghinā. o allah, ik vraag u om leiding, godsvrees, kuisheid en onafhankelijkheid van mensen. algemeen muslim 2721" tabindex="0" role="button" aria-label="Leiding en godsvrees, open groot">
+  <div class="dua-head"><span class="when">Allesomvattend</span><button class="star" type="button" data-star="huda" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى</p>
+  <p class="tr">Allāhumma innī as&#x27;aluka l-hudā wa t-tuqā wa l-&#x27;afāfa wa l-ghinā.</p>
+  <p class="nl">O Allah, ik vraag U om leiding, godsvrees, kuisheid en onafhankelijkheid van mensen.</p>
+  
+  <div class="foot"><span class="src">Muslim 2721</span></div>
+</article><article class="dua" data-id="afiyah" data-search="vergeving en welzijn allesomvattend allāhumma innī as&#x27;aluka l-&#x27;afwa wa l-&#x27;āfiyata fi d-dunyā wa l-ākhirah. o allah, ik vraag u om vergeving en welzijn in deze wereld en in het hiernamaals. algemeen ibn majah 3871 · sahih" tabindex="0" role="button" aria-label="Vergeving en welzijn, open groot">
+  <div class="dua-head"><span class="when">Allesomvattend</span><button class="star" type="button" data-star="afiyah" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ</p>
+  <p class="tr">Allāhumma innī as&#x27;aluka l-&#x27;afwa wa l-&#x27;āfiyata fi d-dunyā wa l-ākhirah.</p>
+  <p class="nl">O Allah, ik vraag U om vergeving en welzijn in deze wereld en in het Hiernamaals.</p>
+  
+  <div class="foot"><span class="src">Ibn Majah 3871 · sahih</span></div>
+</article><article class="dua" data-id="afw" data-search="vergeving vooral in laylat al-qadr allāhumma innaka &#x27;afuwwun tuhibbu l-&#x27;afwa fa&#x27;fu &#x27;annī. o allah, u bent de vergevende en u houdt van vergeven, vergeef mij dan. algemeen tirmidhi 3513 · sahih" tabindex="0" role="button" aria-label="Vergeving, open groot">
+  <div class="dua-head"><span class="when">Vooral in Laylat al-Qadr</span><button class="star" type="button" data-star="afw" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي</p>
+  <p class="tr">Allāhumma innaka &#x27;afuwwun tuhibbu l-&#x27;afwa fa&#x27;fu &#x27;annī.</p>
+  <p class="nl">O Allah, U bent de Vergevende en U houdt van vergeven, vergeef mij dan.</p>
+  
+  <div class="foot"><span class="src">Tirmidhi 3513 · sahih</span></div>
+</article><article class="dua" data-id="muqallib" data-search="standvastigheid de du&#x27;a die de profeet ﷺ het vaakst deed yā muqalliba l-qulūb, thabbit qalbī &#x27;alā dīnik. o omkeerder van de harten, maak mijn hart standvastig op uw religie. algemeen tirmidhi 2140 · sahih" tabindex="0" role="button" aria-label="Standvastigheid, open groot">
+  <div class="dua-head"><span class="when">De du&#x27;a die de Profeet ﷺ het vaakst deed</span><button class="star" type="button" data-star="muqallib" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ</p>
+  <p class="tr">Yā muqalliba l-qulūb, thabbit qalbī &#x27;alā dīnik.</p>
+  <p class="nl">O Omkeerder van de harten, maak mijn hart standvastig op Uw religie.</p>
+  
+  <div class="foot"><span class="src">Tirmidhi 2140 · sahih</span></div>
+</article><article class="dua" data-id="la-tuzigh" data-search="dat het hart niet afdwaalt na het ontvangen van leiding rabbanā lā tuzigh qulūbanā ba&#x27;da idh hadaytanā wa hab lanā min ladunka rahmah, innaka anta l-wahhāb. onze heer, laat onze harten niet afdwalen nadat u ons geleid hebt, en schenk ons barmhartigheid van u. u bent de schenker. algemeen koran 3:8" tabindex="0" role="button" aria-label="Dat het hart niet afdwaalt, open groot">
+  <div class="dua-head"><span class="when">Na het ontvangen van leiding</span><button class="star" type="button" data-star="la-tuzigh" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الْوَهَّابُ</p>
+  <p class="tr">Rabbanā lā tuzigh qulūbanā ba&#x27;da idh hadaytanā wa hab lanā min ladunka rahmah, innaka anta l-wahhāb.</p>
+  <p class="nl">Onze Heer, laat onze harten niet afdwalen nadat U ons geleid hebt, en schenk ons barmhartigheid van U. U bent de Schenker.</p>
+  
+  <div class="foot"><span class="src">Koran 3:8</span></div>
+</article><article class="dua" data-id="aslih" data-search="religie, wereld en hiernamaals allesomvattend allāhumma aslih lī dīniya lladhī huwa &#x27;ismatu amrī, wa aslih lī dunyāya llatī fīhā ma&#x27;āshī, wa aslih lī ākhiratī llatī fīhā ma&#x27;ādī, waj&#x27;ali l-hayāta ziyādatan lī fī kulli khayr, waj&#x27;ali l-mawta rāhatan lī min kulli sharr. o allah, verbeter mijn religie, die mijn bescherming is; mijn wereld, waarin mijn levensonderhoud ligt; en mijn hiernamaals, waarnaar ik terugkeer. maak het leven voor mij een toename in al het goede, en de dood een rust van al het kwade. algemeen muslim 2720" tabindex="0" role="button" aria-label="Religie, wereld en Hiernamaals, open groot">
+  <div class="dua-head"><span class="when">Allesomvattend</span><button class="star" type="button" data-star="aslih" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ أَصْلِحْ لِي دِينِيَ الَّذِي هُوَ عِصْمَةُ أَمْرِي، وَأَصْلِحْ لِي دُنْيَايَ الَّتِي فِيهَا مَعَاشِي، وَأَصْلِحْ لِي آخِرَتِي الَّتِي فِيهَا مَعَادِي، وَاجْعَلِ الْحَيَاةَ زِيَادَةً لِي فِي كُلِّ خَيْرٍ، وَاجْعَلِ الْمَوْتَ رَاحَةً لِي مِنْ كُلِّ شَرٍّ</p>
+  <p class="tr">Allāhumma aslih lī dīniya lladhī huwa &#x27;ismatu amrī, wa aslih lī dunyāya llatī fīhā ma&#x27;āshī, wa aslih lī ākhiratī llatī fīhā ma&#x27;ādī, waj&#x27;ali l-hayāta ziyādatan lī fī kulli khayr, waj&#x27;ali l-mawta rāhatan lī min kulli sharr.</p>
+  <p class="nl">O Allah, verbeter mijn religie, die mijn bescherming is; mijn wereld, waarin mijn levensonderhoud ligt; en mijn Hiernamaals, waarnaar ik terugkeer. Maak het leven voor mij een toename in al het goede, en de dood een rust van al het kwade.</p>
+  
+  <div class="foot"><span class="src">Muslim 2720</span></div>
+</article><article class="dua" data-id="ainni" data-search="hulp bij aanbidding aan mu&#x27;adh aangeraden na elk gebed allāhumma a&#x27;innī &#x27;alā dhikrika wa shukrika wa husni &#x27;ibādatik. o allah, help mij u te gedenken, u te danken en u op de beste manier te aanbidden. algemeen abu dawud 1522 · sahih" tabindex="0" role="button" aria-label="Hulp bij aanbidding, open groot">
+  <div class="dua-head"><span class="when">Aan Mu&#x27;adh aangeraden na elk gebed</span><button class="star" type="button" data-star="ainni" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ</p>
+  <p class="tr">Allāhumma a&#x27;innī &#x27;alā dhikrika wa shukrika wa husni &#x27;ibādatik.</p>
+  <p class="nl">O Allah, help mij U te gedenken, U te danken en U op de beste manier te aanbidden.</p>
+  
+  <div class="foot"><span class="src">Abu Dawud 1522 · sahih</span></div>
+</article><article class="dua" data-id="jannah" data-search="het paradijs allesomvattend allāhumma innī as&#x27;aluka l-jannata wa a&#x27;ūdhu bika mina n-nār. o allah, ik vraag u het paradijs en zoek bescherming bij u tegen het vuur. algemeen abu dawud 792 · sahih" tabindex="0" role="button" aria-label="Het Paradijs, open groot">
+  <div class="dua-head"><span class="when">Allesomvattend</span><button class="star" type="button" data-star="jannah" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَأَعُوذُ بِكَ مِنَ النَّارِ</p>
+  <p class="tr">Allāhumma innī as&#x27;aluka l-jannata wa a&#x27;ūdhu bika mina n-nār.</p>
+  <p class="nl">O Allah, ik vraag U het Paradijs en zoek bescherming bij U tegen het Vuur.</p>
+  
+  <div class="foot"><span class="src">Abu Dawud 792 · sahih</span></div>
+</article><article class="dua" data-id="yunus" data-search="in moeilijkheid (du&#x27;a van yunus) in nood en verdriet lā ilāha illā anta subhānaka innī kuntu mina z-zālimīn. er is geen god dan u. glorie aan u, ik behoorde tot de onrechtplegers. algemeen koran 21:87 · tirmidhi 3505 · sahih" tabindex="0" role="button" aria-label="In moeilijkheid (du&#x27;a van Yunus), open groot">
+  <div class="dua-head"><span class="when">In nood en verdriet</span><button class="star" type="button" data-star="yunus" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ</p>
+  <p class="tr">Lā ilāha illā anta subhānaka innī kuntu mina z-zālimīn.</p>
+  <p class="nl">Er is geen god dan U. Glorie aan U, ik behoorde tot de onrechtplegers.</p>
+  <p class="note-s">„Geen moslim vraagt ermee om iets, of Allah verhoort hem.”</p>
+  <div class="foot"><span class="src">Koran 21:87 · Tirmidhi 3505 · sahih</span></div>
+</article><article class="dua" data-id="sayyid-istighfar" data-search="sayyid al-istighfar de meester van de vergevingsvragen, &#x27;s ochtends en &#x27;s avonds allāhumma anta rabbī lā ilāha illā ant, khalaqtanī wa ana &#x27;abduk, wa ana &#x27;alā &#x27;ahdika wa wa&#x27;dika masta-ta&#x27;t, a&#x27;ūdhu bika min sharri mā sana&#x27;t, abū&#x27;u laka bi-ni&#x27;matika &#x27;alayy, wa abū&#x27;u bi-dhanbī, faghfir lī, fa-innahu lā yaghfiru dh-dhunūba illā ant. o allah, u bent mijn heer, er is geen god dan u. u hebt mij geschapen en ik ben uw dienaar. ik houd mij aan uw verbond en belofte zoveel ik kan. ik zoek bescherming bij u tegen het kwaad dat ik gedaan heb. ik erken uw gunst over mij en ik erken mijn zonde, vergeef mij dus, want niemand vergeeft zonden behalve u. algemeen bukhari 6306" tabindex="0" role="button" aria-label="Sayyid al-istighfar, open groot">
+  <div class="dua-head"><span class="when">De meester van de vergevingsvragen, &#x27;s ochtends en &#x27;s avonds</span><button class="star" type="button" data-star="sayyid-istighfar" aria-label="Bewaar bij favorieten" aria-pressed="false">☆</button></div>
+  <p class="ar" lang="ar" dir="rtl">اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي، فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ</p>
+  <p class="tr">Allāhumma anta rabbī lā ilāha illā ant, khalaqtanī wa ana &#x27;abduk, wa ana &#x27;alā &#x27;ahdika wa wa&#x27;dika masta-ta&#x27;t, a&#x27;ūdhu bika min sharri mā sana&#x27;t, abū&#x27;u laka bi-ni&#x27;matika &#x27;alayy, wa abū&#x27;u bi-dhanbī, faghfir lī, fa-innahu lā yaghfiru dh-dhunūba illā ant.</p>
+  <p class="nl">O Allah, U bent mijn Heer, er is geen god dan U. U hebt mij geschapen en ik ben Uw dienaar. Ik houd mij aan Uw verbond en belofte zoveel ik kan. Ik zoek bescherming bij U tegen het kwaad dat ik gedaan heb. Ik erken Uw gunst over mij en ik erken mijn zonde, vergeef mij dus, want niemand vergeeft zonden behalve U.</p>
+  <p class="note-s">Wie dit overdag met overtuiging zegt en die dag sterft, behoort tot de mensen van het Paradijs.</p>
+  <div class="foot"><span class="src">Bukhari 6306</span></div>
+</article></div></section>
+    <p class="empty" id="noresult" hidden>Geen du'a gevonden.</p>
+  </div>
+</section>
+
+<section class="view" id="v-teller">
+  <div class="wrap">
+    <header class="vhead"><h1>Rondeteller</h1></header>
+    <p class="nojs-only">De teller werkt alleen als de pagina in Safari draait, niet in een voorbeeldweergave.</p>
+    <div class="seg-ctl" role="tablist">
+      <button type="button" role="tab" data-mode="tawaf" aria-selected="true">Tawaf</button>
+      <button type="button" role="tab" data-mode="sai" aria-selected="false">Sa'i</button>
+    </div>
+    <button type="button" class="ring" id="ring" aria-label="Ronde klaar">
+      <svg viewBox="0 0 240 240" aria-hidden="true"><g transform="rotate(-90 120 120)"><circle cx="120" cy="120" r="100" class="seg" data-seg="0" stroke-dasharray="65.76 562.56" stroke-dashoffset="-12.00"/><circle cx="120" cy="120" r="100" class="seg" data-seg="1" stroke-dasharray="65.76 562.56" stroke-dashoffset="-101.76"/><circle cx="120" cy="120" r="100" class="seg" data-seg="2" stroke-dasharray="65.76 562.56" stroke-dashoffset="-191.52"/><circle cx="120" cy="120" r="100" class="seg" data-seg="3" stroke-dasharray="65.76 562.56" stroke-dashoffset="-281.28"/><circle cx="120" cy="120" r="100" class="seg" data-seg="4" stroke-dasharray="65.76 562.56" stroke-dashoffset="-371.04"/><circle cx="120" cy="120" r="100" class="seg" data-seg="5" stroke-dasharray="65.76 562.56" stroke-dashoffset="-460.80"/><circle cx="120" cy="120" r="100" class="seg" data-seg="6" stroke-dasharray="65.76 562.56" stroke-dashoffset="-550.56"/></g></svg>
+      <span class="ring-n"><b id="num">0</b><small>van 7</small></span>
+    </button>
+    <p class="hint" id="hint" aria-live="polite"></p>
+    <button type="button" class="primary" id="plus">Ronde klaar</button>
+    <div class="row2">
+      <button type="button" class="ghost" id="minus">↶ Eén terug</button>
+      <button type="button" class="ghost" id="reset">↻ Opnieuw</button>
+    </div>
+    <label class="awake"><input type="checkbox" id="awake" checked> Scherm aan houden</label>
+  </div>
+</section>
+
+<section class="view" id="v-lijst">
+  <div class="wrap">
+    <header class="vhead"><h1>Mijn du'a-lijst</h1></header>
+    <p class="nojs-only">De lijst werkt alleen als de pagina in Safari draait.</p>
+    <form class="addrow" id="addform" autocomplete="off">
+      <input type="text" id="addin" placeholder="Naam of wens toevoegen" aria-label="Naam of wens toevoegen">
+      <button type="submit">Toevoegen</button>
+    </form>
+    <p class="muted" id="count"></p>
+    <ul class="check mylist" id="mylist"></ul>
+    <button type="button" class="ghost" id="uncheck">Vinkjes wissen voor de volgende stop</button>
+    <p class="muted small">Doe je du'a voor iemand die er niet bij is, dan zegt een engel: „Amin, en voor jou hetzelfde.” (Muslim 2733)</p>
+  </div>
+</section>
+</main>
+
+<nav class="tabbar" aria-label="Onderdelen">
+  <a href="#gids" data-tab="gids"><span class="ic">☰</span>Gids</a>
+  <a href="#dua" data-tab="dua"><span class="ic">✦</span>Du'a</a>
+  <a href="#teller" data-tab="teller"><span class="ic">◌</span>Teller</a>
+  <a href="#lijst" data-tab="lijst"><span class="ic">✓</span>Mijn lijst</a>
+</nav>
+
+<div class="detail" id="detail" hidden role="dialog" aria-modal="true" aria-labelledby="d-title">
+  <div class="detail-bar">
+    <button type="button" id="d-close">Sluit</button>
+    <span class="grow"></span>
+    <button type="button" data-size="-1" aria-label="Arabisch kleiner">A−</button>
+    <button type="button" data-size="1" aria-label="Arabisch groter">A+</button>
+    <button type="button" id="d-star" aria-label="Bewaar bij favorieten">☆</button>
+  </div>
+  <div class="detail-body">
+    <p class="eyebrow" id="d-cat"></p>
+    <h2 id="d-title"></h2>
+    <p class="muted" id="d-when"></p>
+    <p class="ar big" lang="ar" dir="rtl" id="d-ar"></p>
+    <p class="eyebrow">Transliteratie</p>
+    <p class="tr big-tr" id="d-tr"></p>
+    <p class="eyebrow">Vertaling</p>
+    <p id="d-nl"></p>
+    <p class="note-s" id="d-note"></p>
+    <div id="d-src"></div>
+  </div>
+</div>
+
+<script type="application/json" id="dua-data">{"reis": {"id": "reis", "category": "Reis", "title": "Reisdu'a", "when": "Als je in het voertuig of vliegtuig zit", "ar": "اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ، وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ، اللَّهُمَّ إِنَّا نَسْأَلُكَ فِي سَفَرِنَا هَذَا الْبِرَّ وَالتَّقْوَى، وَمِنَ الْعَمَلِ مَا تَرْضَى، اللَّهُمَّ هَوِّنْ عَلَيْنَا سَفَرَنَا هَذَا وَاطْوِ عَنَّا بُعْدَهُ، اللَّهُمَّ أَنْتَ الصَّاحِبُ فِي السَّفَرِ وَالْخَلِيفَةُ فِي الْأَهْلِ، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ وَعْثَاءِ السَّفَرِ، وَكَآبَةِ الْمَنْظَرِ، وَسُوءِ الْمُنْقَلَبِ فِي الْمَالِ وَالْأَهْلِ", "tr": "Allāhu akbar, Allāhu akbar, Allāhu akbar. Subhāna lladhī sakhkhara lanā hādhā wa mā kunnā lahu muqrinīn, wa innā ilā rabbinā la-munqalibūn. Allāhumma innā nas'aluka fī safarinā hādha l-birra wa t-taqwā, wa mina l-'amali mā tardā. Allāhumma hawwin 'alaynā safaranā hādhā watwi 'annā bu'dah. Allāhumma anta s-sāhibu fi s-safari wa l-khalīfatu fi l-ahl. Allāhumma innī a'ūdhu bika min wa'thā'i s-safari, wa ka'ābati l-manzari, wa sū'i l-munqalabi fi l-māli wa l-ahl.", "nl": "Allah is de Grootste (3×). Glorie aan Hem die dit aan ons dienstbaar heeft gemaakt, terwijl wij dat zelf niet konden, en tot onze Heer keren wij terug. O Allah, wij vragen U op deze reis om vroomheid en godsvrees, en om daden waarmee U tevreden bent. O Allah, maak deze reis licht voor ons en verkort de afstand. O Allah, U bent de Metgezel op reis en de Behoeder van de familie. O Allah, ik zoek bescherming bij U tegen de ontberingen van de reis, een droevig aanzicht en een slechte terugkeer bij bezit en familie.", "src": "Muslim 1342"}, "terugkeer": {"id": "terugkeer", "category": "Reis", "title": "Bij thuiskomst", "when": "Na drie keer Allahu akbar, bij terugkeer van hajj of umrah", "ar": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، آيِبُونَ تَائِبُونَ عَابِدُونَ سَاجِدُونَ لِرَبِّنَا حَامِدُونَ، صَدَقَ اللَّهُ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ", "tr": "Lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa 'alā kulli shay'in qadīr. Āyibūna tā'ibūna 'ābidūna sājidūna li-rabbinā hāmidūn. Sadaqa llāhu wa'dah, wa nasara 'abdah, wa hazama l-ahzāba wahdah.", "nl": "Er is geen god dan Allah alleen, zonder deelgenoot; aan Hem de heerschappij en de lof, en Hij is tot alles in staat. Wij keren terug, berouwvol, aanbiddend, ons neerbuigend en onze Heer prijzend. Allah heeft Zijn belofte waargemaakt, Zijn dienaar geholpen en de bondgenoten alleen verslagen.", "src": "Bukhari 1797 · Muslim 1344", "note": "De Profeet ﷺ zei dit bij terugkomst van hajj of umrah, telkens hij een hoogte opging."}, "niyyah": {"id": "niyyah", "category": "Ihram", "title": "Intentie voor umrah", "when": "Bij de miqat", "ar": "لَبَّيْكَ عُمْرَةً", "tr": "Labbayka 'umrah.", "nl": "Hier ben ik, (o Allah), voor een umrah.", "src": "Muslim 1251", "note": "De intentie zit in het hart; deze woorden zijn de Sunnah om haar aan te kondigen."}, "ishtirat": {"id": "ishtirat", "category": "Ihram", "title": "Voorwaarde (ishtirat)", "when": "Bij de intentie, als je vreest verhinderd te worden", "ar": "فَإِنْ حَبَسَنِي حَابِسٌ فَمَحِلِّي حَيْثُ حَبَسْتَنِي", "tr": "Fa in habasanī hābis, fa-mahillī haythu habastanī.", "nl": "En als iets mij tegenhoudt, dan is mijn plaats van ontheffing waar U mij tegenhoudt.", "src": "Bukhari 5089 · Muslim 1207", "note": "Gezegd tegen Duba'ah bint az-Zubayr, die ziek was. Word je verhinderd, dan verlaat je de ihram zonder offer."}, "talbiyah": {"id": "talbiyah", "category": "Ihram", "title": "Talbiyah", "when": "Vanaf de miqat tot het begin van de tawaf", "ar": "لَبَّيْكَ اللَّهُمَّ لَبَّيْكَ، لَبَّيْكَ لَا شَرِيكَ لَكَ لَبَّيْكَ، إِنَّ الْحَمْدَ وَالنِّعْمَةَ لَكَ وَالْمُلْكَ، لَا شَرِيكَ لَكَ", "tr": "Labbayka Allāhumma labbayk, labbayka lā sharīka laka labbayk, inna l-hamda wa n-ni'mata laka wa l-mulk, lā sharīka lak.", "nl": "Hier ben ik, o Allah, hier ben ik. Hier ben ik, U hebt geen deelgenoot, hier ben ik. Alle lof en alle gunst behoren U toe, en de heerschappij. U hebt geen deelgenoot.", "src": "Bukhari 1549 · Muslim 1184", "note": "Mannen verheffen hun stem, vrouwen zeggen haar zacht (Abu Dawud 1814). Stop wanneer je aan de tawaf begint."}, "moskee-in": {"id": "moskee-in", "category": "Moskee", "title": "Moskee binnengaan", "when": "Rechtervoet eerst", "ar": "أَعُوذُ بِاللَّهِ الْعَظِيمِ، وَبِوَجْهِهِ الْكَرِيمِ، وَسُلْطَانِهِ الْقَدِيمِ، مِنَ الشَّيْطَانِ الرَّجِيمِ. اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ", "tr": "A'ūdhu billāhi l-'azīm, wa bi-wajhihi l-karīm, wa sultānihi l-qadīm, mina sh-shaytāni r-rajīm. Allāhumma-ftah lī abwāba rahmatik.", "nl": "Ik zoek bescherming bij Allah de Geweldige, bij Zijn edel Aangezicht en Zijn eeuwige heerschappij, tegen de vervloekte duivel. O Allah, open voor mij de poorten van Uw barmhartigheid.", "src": "Abu Dawud 466 · sahih · Muslim 713"}, "moskee-uit": {"id": "moskee-uit", "category": "Moskee", "title": "Moskee verlaten", "when": "Linkervoet eerst", "ar": "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ", "tr": "Allāhumma innī as'aluka min fadlik.", "nl": "O Allah, ik vraag U om Uw gunst.", "src": "Muslim 713"}, "na-wudu": {"id": "na-wudu", "category": "Moskee", "title": "Na de wudu", "when": "Na de wudu, bijvoorbeeld vóór de tawaf", "ar": "أَشْهَدُ أَنْ لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، وَأَشْهَدُ أَنَّ مُحَمَّدًا عَبْدُهُ وَرَسُولُهُ", "tr": "Ashhadu an lā ilāha illa llāhu wahdahu lā sharīka lah, wa ashhadu anna Muhammadan 'abduhu wa rasūluh.", "nl": "Ik getuig dat er geen god is dan Allah alleen, zonder deelgenoot, en ik getuig dat Mohammed Zijn dienaar en boodschapper is.", "src": "Muslim 234", "note": "Voor wie dit zegt, worden de acht poorten van het Paradijs geopend."}, "zwarte-steen": {"id": "zwarte-steen", "category": "Tawaf", "title": "Bij de Zwarte Steen", "when": "Bij de steen, aan het begin van elke ronde", "ar": "بِسْمِ اللَّهِ، وَاللَّهُ أَكْبَرُ", "tr": "Bismillāh, wallāhu akbar.", "nl": "In de naam van Allah, en Allah is de Grootste.", "src": "Bukhari 1613 · Bayhaqi (Ibn 'Umar)", "note": "„Allahu akbar” is van de Profeet ﷺ; „Bismillah” erbij is overgeleverd van Ibn 'Umar."}, "rabbana-atina": {"id": "rabbana-atina", "category": "Tawaf", "title": "Tussen de Jemenitische hoek en de Zwarte Steen", "when": "Elke ronde, op het laatste stuk", "ar": "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ", "tr": "Rabbanā ātinā fi d-dunyā hasanah, wa fi l-ākhirati hasanah, wa qinā 'adhāba n-nār.", "nl": "Onze Heer, geef ons het goede in deze wereld en het goede in het Hiernamaals, en bescherm ons tegen de bestraffing van het Vuur.", "src": "Abu Dawud 1892 · hasan · Koran 2:201"}, "maqam": {"id": "maqam", "category": "Tawaf", "title": "Bij de Maqam Ibrahim", "when": "Bij het naderen van de Maqam, na de tawaf", "ar": "وَاتَّخِذُوا مِنْ مَقَامِ إِبْرَاهِيمَ مُصَلًّى", "tr": "Wattakhidhū min maqāmi Ibrāhīma musallā.", "nl": "En neem de staanplaats van Ibrahim als gebedsplaats.", "src": "Koran 2:125 · Muslim 1218", "note": "Bid daarna twee rak'ah: al-Kafirun (109) in de eerste, al-Ikhlas (112) in de tweede."}, "safa-begin": {"id": "safa-begin", "category": "Sa'i", "title": "Bij het naderen van de Safa", "when": "Eenmalig, aan het begin van de sa'i", "ar": "إِنَّ الصَّفَا وَالْمَرْوَةَ مِنْ شَعَائِرِ اللَّهِ. أَبْدَأُ بِمَا بَدَأَ اللَّهُ بِهِ", "tr": "Inna s-safā wa l-marwata min sha'ā'irillāh. Abda'u bimā bada'a Allāhu bih.", "nl": "Voorwaar, de Safa en de Marwah behoren tot de tekenen van Allah. Ik begin met wat Allah als eerste noemde.", "src": "Koran 2:158 · Muslim 1218"}, "safa-dhikr": {"id": "safa-dhikr", "category": "Sa'i", "title": "Op de Safa en de Marwah", "when": "Naar de qiblah, handen omhoog, 3× met du'a ertussen", "ar": "اللَّهُ أَكْبَرُ. لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ، أَنْجَزَ وَعْدَهُ، وَنَصَرَ عَبْدَهُ، وَهَزَمَ الْأَحْزَابَ وَحْدَهُ", "tr": "Allāhu akbar. Lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa 'alā kulli shay'in qadīr. Lā ilāha illa llāhu wahdah, anjaza wa'dah, wa nasara 'abdah, wa hazama l-ahzāba wahdah.", "nl": "Allah is de Grootste. Er is geen god dan Allah alleen, zonder deelgenoot. Aan Hem behoren de heerschappij en de lof, en Hij is tot alles in staat. Er is geen god dan Allah alleen. Hij vervulde Zijn belofte, hielp Zijn dienaar en versloeg de bondgenoten alleen.", "src": "Muslim 1218", "note": "Zeg dit, doe een eigen du'a, herhaal, du'a, en een derde keer. Op elke heuvel, acht stops in totaal."}, "sai-onderweg": {"id": "sai-onderweg", "category": "Sa'i", "title": "Tijdens de sa'i", "when": "Onderweg tussen Safa en Marwah (van metgezellen)", "ar": "رَبِّ اغْفِرْ وَارْحَمْ، إِنَّكَ أَنْتَ الْأَعَزُّ الْأَكْرَمُ", "tr": "Rabbi-ghfir warham, innaka anta l-a'azzu l-akram.", "nl": "Mijn Heer, vergeef en wees barmhartig. U bent de Machtigste, de Edelste.", "src": "Ibn Abi Shaybah · Ibn Mas'ud en Ibn 'Umar", "note": "Een uitspraak van metgezellen, niet van de Profeet ﷺ. Verder is de du'a in de sa'i vrij."}, "taqabbal": {"id": "taqabbal", "category": "Na de umrah", "title": "Om aanvaarding", "when": "Na het scheren of inkorten", "ar": "رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنْتَ السَّمِيعُ الْعَلِيمُ", "tr": "Rabbanā taqabbal minnā, innaka anta s-samī'u l-'alīm.", "nl": "Onze Heer, aanvaard het van ons. U bent de Alhorende, de Alwetende.", "src": "Koran 2:127", "note": "De du'a van Ibrahim en Isma'il toen zij de Ka'bah bouwden."}, "na-adhan": {"id": "na-adhan", "category": "Gebed & dhikr", "title": "Na de adhan", "when": "Na het nazeggen van de adhan", "ar": "اللَّهُمَّ رَبَّ هَذِهِ الدَّعْوَةِ التَّامَّةِ، وَالصَّلَاةِ الْقَائِمَةِ، آتِ مُحَمَّدًا الْوَسِيلَةَ وَالْفَضِيلَةَ، وَابْعَثْهُ مَقَامًا مَحْمُودًا الَّذِي وَعَدْتَهُ", "tr": "Allāhumma rabba hādhihi d-da'wati t-tāmmah, wa s-salāti l-qā'imah, āti Muhammadan al-wasīlata wa l-fadīlah, wab'athhu maqāman mahmūdan alladhī wa'adtah.", "nl": "O Allah, Heer van deze volmaakte oproep en van het gebed dat verricht gaat worden, geef Mohammed de wasilah en de voortreffelijkheid, en laat hem opstaan op de geprezen plaats die U hem beloofd hebt.", "src": "Bukhari 614", "note": "Wie dit zegt, krijgt op de Dag des Oordeels de voorspraak van de Profeet ﷺ. Daarna is het moment voor je eigen du'a (Abu Dawud 524)."}, "salawat": {"id": "salawat", "category": "Gebed & dhikr", "title": "Salawat op de Profeet ﷺ", "when": "In de tashahhud, in het janazah-gebed, vóór je du'a", "ar": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ", "tr": "Allāhumma salli 'alā Muhammadin wa 'alā āli Muhammad, kamā sallayta 'alā Ibrāhīma wa 'alā āli Ibrāhīm, innaka hamīdun majīd. Allāhumma bārik 'alā Muhammadin wa 'alā āli Muhammad, kamā bārakta 'alā Ibrāhīma wa 'alā āli Ibrāhīm, innaka hamīdun majīd.", "nl": "O Allah, zegen Mohammed en de familie van Mohammed, zoals U Ibrahim en de familie van Ibrahim gezegend hebt; U bent Geprezen, Glorierijk. O Allah, schenk overvloed aan Mohammed en de familie van Mohammed, zoals U overvloed hebt geschonken aan Ibrahim en de familie van Ibrahim; U bent Geprezen, Glorierijk.", "src": "Bukhari 3370"}, "grootste-naam": {"id": "grootste-naam", "category": "Gebed & dhikr", "title": "Met de grootste naam van Allah", "when": "Om je du'a mee te openen", "ar": "اللَّهُمَّ إِنِّي أَسْأَلُكَ بِأَنِّي أَشْهَدُ أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ، الْأَحَدُ الصَّمَدُ، الَّذِي لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ", "tr": "Allāhumma innī as'aluka bi-annī ashhadu annaka anta llāhu lā ilāha illā ant, al-ahadu s-samad, alladhī lam yalid wa lam yūlad, wa lam yakun lahu kufuwan ahad.", "nl": "O Allah, ik vraag U, omdat ik getuig dat U Allah bent, er is geen god dan U, de Ene, de Onafhankelijke, Die niet verwekt en niet verwekt is, en niemand is aan Hem gelijk.", "src": "Abu Dawud 1493 · Tirmidhi 3475 · sahih", "note": "„Hij heeft Allah gevraagd met Zijn grootste naam: wie daarmee vraagt, krijgt.”"}, "nacht-wakker": {"id": "nacht-wakker", "category": "Gebed & dhikr", "title": "Als je 's nachts wakker wordt", "when": "Bij het wakker worden in de nacht", "ar": "لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، الْحَمْدُ لِلَّهِ، وَسُبْحَانَ اللَّهِ، وَلَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ. اللَّهُمَّ اغْفِرْ لِي", "tr": "Lā ilāha illa llāhu wahdahu lā sharīka lah, lahu l-mulku wa lahu l-hamd, wa huwa 'alā kulli shay'in qadīr. Al-hamdu lillāh, wa subhāna llāh, wa lā ilāha illa llāh, wa llāhu akbar, wa lā hawla wa lā quwwata illā billāh. Allāhumma-ghfir lī.", "nl": "Er is geen god dan Allah alleen, zonder deelgenoot; aan Hem de heerschappij en de lof, en Hij is tot alles in staat. Alle lof is voor Allah, glorie aan Allah, er is geen god dan Allah, Allah is de Grootste, en er is geen kracht of macht behalve bij Allah. O Allah, vergeef mij.", "src": "Bukhari 1154", "note": "Wie dit zegt en dan om vergeving of iets anders vraagt, wordt verhoord. Wie daarna wudu doet en bidt, diens gebed wordt aanvaard."}, "geliefde-woorden": {"id": "geliefde-woorden", "category": "Gebed & dhikr", "title": "De meest geliefde woorden", "when": "Tijdens het wachten, lopen en zitten", "ar": "سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَلَا إِلَهَ إِلَّا اللَّهُ، وَاللَّهُ أَكْبَرُ", "tr": "Subhāna llāh, wa l-hamdu lillāh, wa lā ilāha illa llāh, wa llāhu akbar.", "nl": "Glorie aan Allah, alle lof is voor Allah, er is geen god dan Allah, en Allah is de Grootste.", "src": "Muslim 2137", "note": "De vier woorden die Allah het meest geliefd zijn."}, "janazah": {"id": "janazah", "category": "Gebed & dhikr", "title": "Voor de overledene (janazah)", "when": "Na de derde takbir van het janazah-gebed", "ar": "اللَّهُمَّ اغْفِرْ لَهُ وَارْحَمْهُ، وَعَافِهِ وَاعْفُ عَنْهُ، وَأَكْرِمْ نُزُلَهُ، وَوَسِّعْ مُدْخَلَهُ، وَاغْسِلْهُ بِالْمَاءِ وَالثَّلْجِ وَالْبَرَدِ، وَنَقِّهِ مِنَ الْخَطَايَا كَمَا نَقَّيْتَ الثَّوْبَ الْأَبْيَضَ مِنَ الدَّنَسِ", "tr": "Allāhumma-ghfir lahu warhamhu, wa 'āfihi wa'fu 'anhu, wa akrim nuzulahu, wa wassi' mudkhalahu, waghsilhu bi l-mā'i wa th-thalji wa l-barad, wa naqqihi mina l-khatāyā kamā naqqayta th-thawba l-abyada mina d-danas.", "nl": "O Allah, vergeef hem en wees hem genadig, geef hem welzijn en scheld hem kwijt, maak zijn ontvangst eervol en zijn graf ruim, was hem met water, sneeuw en hagel, en reinig hem van zonden zoals U een wit kleed reinigt van vuil.", "src": "Muslim 963", "note": "Het begin van de du'a. Voor een vrouw: lahā, warhamhā, wa 'āfihā… Een eigen du'a voor de overledene mag ook."}, "graf-groet": {"id": "graf-groet", "category": "Medina", "title": "Groet aan de Profeet ﷺ en zijn metgezellen", "when": "Bij het graf in de Profetenmoskee", "ar": "السَّلَامُ عَلَيْكَ يَا رَسُولَ اللَّهِ، السَّلَامُ عَلَيْكَ يَا أَبَا بَكْرٍ، السَّلَامُ عَلَيْكَ يَا عُمَرُ", "tr": "As-salāmu 'alayka yā Rasūlallāh. As-salāmu 'alayka yā Abā Bakr. As-salāmu 'alayka yā 'Umar.", "nl": "Vrede zij met u, o Boodschapper van Allah. Vrede zij met u, Abu Bakr. Vrede zij met u, 'Umar.", "src": "Zo deed Ibn 'Umar · Muwatta, Bayhaqi", "note": "Rustig en met zachte stem. Voor je eigen du'a keer je je naar de qiblah, niet naar het graf."}, "baqi": {"id": "baqi", "category": "Medina", "title": "Bij de begraafplaats", "when": "Al-Baqi', Uhud en elke begraafplaats", "ar": "السَّلَامُ عَلَيْكُمْ أَهْلَ الدِّيَارِ مِنَ الْمُؤْمِنِينَ وَالْمُسْلِمِينَ، وَإِنَّا إِنْ شَاءَ اللَّهُ لَلَاحِقُونَ، أَسْأَلُ اللَّهَ لَنَا وَلَكُمُ الْعَافِيَةَ", "tr": "As-salāmu 'alaykum ahla d-diyāri mina l-mu'minīna wa l-muslimīn, wa innā in shā' Allāhu la-lāhiqūn, as'alu llāha lanā wa lakumu l-'āfiyah.", "nl": "Vrede zij met jullie, bewoners van deze woningen, gelovigen en moslims. Wij zullen, als Allah het wil, bij jullie komen. Ik vraag Allah welzijn voor ons en voor jullie.", "src": "Muslim 975"}, "ibrahim-kinderen": {"id": "ibrahim-kinderen", "category": "Algemeen", "title": "Voor jezelf en je kinderen", "when": "De du'a van Ibrahim in Mekka", "ar": "رَبِّ اجْعَلْنِي مُقِيمَ الصَّلَاةِ وَمِنْ ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءِ", "tr": "Rabbi-j'alnī muqīma s-salāti wa min dhurriyyatī, rabbanā wa taqabbal du'ā'.", "nl": "Mijn Heer, maak mij iemand die het gebed onderhoudt, en ook van mijn nakomelingen. Onze Heer, aanvaard mijn smeekbede.", "src": "Koran 14:40"}, "ouders": {"id": "ouders", "category": "Algemeen", "title": "Voor je ouders en de gelovigen", "when": "Voor ouders, familie en alle gelovigen", "ar": "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ", "tr": "Rabbana-ghfir lī wa li-wālidayya wa li-l-mu'minīna yawma yaqūmu l-hisāb.", "nl": "Onze Heer, vergeef mij, mijn ouders en de gelovigen op de Dag van de afrekening.", "src": "Koran 14:41"}, "huda": {"id": "huda", "category": "Algemeen", "title": "Leiding en godsvrees", "when": "Allesomvattend", "ar": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْهُدَى وَالتُّقَى وَالْعَفَافَ وَالْغِنَى", "tr": "Allāhumma innī as'aluka l-hudā wa t-tuqā wa l-'afāfa wa l-ghinā.", "nl": "O Allah, ik vraag U om leiding, godsvrees, kuisheid en onafhankelijkheid van mensen.", "src": "Muslim 2721"}, "afiyah": {"id": "afiyah", "category": "Algemeen", "title": "Vergeving en welzijn", "when": "Allesomvattend", "ar": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ", "tr": "Allāhumma innī as'aluka l-'afwa wa l-'āfiyata fi d-dunyā wa l-ākhirah.", "nl": "O Allah, ik vraag U om vergeving en welzijn in deze wereld en in het Hiernamaals.", "src": "Ibn Majah 3871 · sahih"}, "afw": {"id": "afw", "category": "Algemeen", "title": "Vergeving", "when": "Vooral in Laylat al-Qadr", "ar": "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي", "tr": "Allāhumma innaka 'afuwwun tuhibbu l-'afwa fa'fu 'annī.", "nl": "O Allah, U bent de Vergevende en U houdt van vergeven, vergeef mij dan.", "src": "Tirmidhi 3513 · sahih"}, "muqallib": {"id": "muqallib", "category": "Algemeen", "title": "Standvastigheid", "when": "De du'a die de Profeet ﷺ het vaakst deed", "ar": "يَا مُقَلِّبَ الْقُلُوبِ ثَبِّتْ قَلْبِي عَلَى دِينِكَ", "tr": "Yā muqalliba l-qulūb, thabbit qalbī 'alā dīnik.", "nl": "O Omkeerder van de harten, maak mijn hart standvastig op Uw religie.", "src": "Tirmidhi 2140 · sahih"}, "la-tuzigh": {"id": "la-tuzigh", "category": "Algemeen", "title": "Dat het hart niet afdwaalt", "when": "Na het ontvangen van leiding", "ar": "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً إِنَّكَ أَنْتَ الْوَهَّابُ", "tr": "Rabbanā lā tuzigh qulūbanā ba'da idh hadaytanā wa hab lanā min ladunka rahmah, innaka anta l-wahhāb.", "nl": "Onze Heer, laat onze harten niet afdwalen nadat U ons geleid hebt, en schenk ons barmhartigheid van U. U bent de Schenker.", "src": "Koran 3:8"}, "aslih": {"id": "aslih", "category": "Algemeen", "title": "Religie, wereld en Hiernamaals", "when": "Allesomvattend", "ar": "اللَّهُمَّ أَصْلِحْ لِي دِينِيَ الَّذِي هُوَ عِصْمَةُ أَمْرِي، وَأَصْلِحْ لِي دُنْيَايَ الَّتِي فِيهَا مَعَاشِي، وَأَصْلِحْ لِي آخِرَتِي الَّتِي فِيهَا مَعَادِي، وَاجْعَلِ الْحَيَاةَ زِيَادَةً لِي فِي كُلِّ خَيْرٍ، وَاجْعَلِ الْمَوْتَ رَاحَةً لِي مِنْ كُلِّ شَرٍّ", "tr": "Allāhumma aslih lī dīniya lladhī huwa 'ismatu amrī, wa aslih lī dunyāya llatī fīhā ma'āshī, wa aslih lī ākhiratī llatī fīhā ma'ādī, waj'ali l-hayāta ziyādatan lī fī kulli khayr, waj'ali l-mawta rāhatan lī min kulli sharr.", "nl": "O Allah, verbeter mijn religie, die mijn bescherming is; mijn wereld, waarin mijn levensonderhoud ligt; en mijn Hiernamaals, waarnaar ik terugkeer. Maak het leven voor mij een toename in al het goede, en de dood een rust van al het kwade.", "src": "Muslim 2720"}, "ainni": {"id": "ainni", "category": "Algemeen", "title": "Hulp bij aanbidding", "when": "Aan Mu'adh aangeraden na elk gebed", "ar": "اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ", "tr": "Allāhumma a'innī 'alā dhikrika wa shukrika wa husni 'ibādatik.", "nl": "O Allah, help mij U te gedenken, U te danken en U op de beste manier te aanbidden.", "src": "Abu Dawud 1522 · sahih"}, "jannah": {"id": "jannah", "category": "Algemeen", "title": "Het Paradijs", "when": "Allesomvattend", "ar": "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْجَنَّةَ وَأَعُوذُ بِكَ مِنَ النَّارِ", "tr": "Allāhumma innī as'aluka l-jannata wa a'ūdhu bika mina n-nār.", "nl": "O Allah, ik vraag U het Paradijs en zoek bescherming bij U tegen het Vuur.", "src": "Abu Dawud 792 · sahih"}, "yunus": {"id": "yunus", "category": "Algemeen", "title": "In moeilijkheid (du'a van Yunus)", "when": "In nood en verdriet", "ar": "لَا إِلَهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ", "tr": "Lā ilāha illā anta subhānaka innī kuntu mina z-zālimīn.", "nl": "Er is geen god dan U. Glorie aan U, ik behoorde tot de onrechtplegers.", "src": "Koran 21:87 · Tirmidhi 3505 · sahih", "note": "„Geen moslim vraagt ermee om iets, of Allah verhoort hem.”"}, "sayyid-istighfar": {"id": "sayyid-istighfar", "category": "Algemeen", "title": "Sayyid al-istighfar", "when": "De meester van de vergevingsvragen, 's ochtends en 's avonds", "ar": "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي، فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ", "tr": "Allāhumma anta rabbī lā ilāha illā ant, khalaqtanī wa ana 'abduk, wa ana 'alā 'ahdika wa wa'dika masta-ta't, a'ūdhu bika min sharri mā sana't, abū'u laka bi-ni'matika 'alayy, wa abū'u bi-dhanbī, faghfir lī, fa-innahu lā yaghfiru dh-dhunūba illā ant.", "nl": "O Allah, U bent mijn Heer, er is geen god dan U. U hebt mij geschapen en ik ben Uw dienaar. Ik houd mij aan Uw verbond en belofte zoveel ik kan. Ik zoek bescherming bij U tegen het kwaad dat ik gedaan heb. Ik erken Uw gunst over mij en ik erken mijn zonde, vergeef mij dus, want niemand vergeeft zonden behalve U.", "src": "Bukhari 6306", "note": "Wie dit overdag met overtuiging zegt en die dag sterft, behoort tot de mensen van het Paradijs."}}</script>
+<script>(function () {
+  "use strict";
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  function load(k, d) { try { var v = localStorage.getItem("umrah." + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } }
+  function save(k, v) { try { localStorage.setItem("umrah." + k, JSON.stringify(v)); } catch (e) {} }
+  var DUAS = JSON.parse($("#dua-data").textContent);
+
+  /* ---------- Arabische lettergrootte ---------- */
+  var arSize = load("arsize", 26);
+  function applySize() { document.documentElement.style.setProperty("--ar", arSize + "px"); }
+  applySize();
+  $$("[data-size]").forEach(function (b) {
+    b.addEventListener("click", function (ev) {
+      ev.stopPropagation();
+      arSize = Math.max(18, Math.min(44, arSize + 2 * Number(b.dataset.size)));
+      save("arsize", arSize); applySize();
+    });
+  });
+
+  /* ---------- Weergaven (tabbalk) ---------- */
+  var VIEWS = ["gids", "dua", "teller", "lijst"];
+  var current = null, scrollPos = load("scroll", {});
+  function show(view, anchor) {
+    if (current) scrollPos[current] = window.scrollY;
+    var changed = view !== current;
+    current = view;
+    $$(".view").forEach(function (v) { v.classList.toggle("active", v.id === "v-" + view); });
+    $$(".tabbar a").forEach(function (a) {
+      var on = a.dataset.tab === view;
+      a.classList.toggle("on", on);
+      if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+    });
+    save("tab", view);
+    if (anchor) { var el = document.getElementById(anchor); if (el) el.scrollIntoView(); }
+    else if (changed) window.scrollTo(0, scrollPos[view] || 0);
+    keepAwake();
+  }
+  function route() {
+    var h = decodeURIComponent(location.hash.replace("#", ""));
+    if (h.indexOf("ch-") === 0) return show("gids", h);
+    if (VIEWS.indexOf(h) >= 0) return show(h, h === "gids" && current === "gids" ? "gids" : null);
+    show(load("tab", "gids"));
+  }
+  window.addEventListener("hashchange", route);
+  $$(".tabbar a").forEach(function (a) {
+    a.addEventListener("click", function (ev) {
+      if (a.dataset.tab === current) { ev.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+    });
+  });
+  window.addEventListener("pagehide", function () { if (current) scrollPos[current] = window.scrollY; save("scroll", scrollPos); });
+
+  /* ---------- Checklist ---------- */
+  var checks = load("checks", {});
+  $$("[data-check]").forEach(function (cb) {
+    cb.checked = !!checks[cb.dataset.check];
+    cb.addEventListener("change", function () { checks[cb.dataset.check] = cb.checked; save("checks", checks); });
+  });
+
+  /* ---------- Favorieten ---------- */
+  var favs = load("favs", []);
+  function isFav(id) { return favs.indexOf(id) >= 0; }
+  function paintStars() {
+    $$("[data-star]").forEach(function (b) {
+      var on = isFav(b.dataset.star);
+      b.textContent = on ? "★" : "☆";
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+      b.setAttribute("aria-label", on ? "Verwijder uit favorieten" : "Bewaar bij favorieten");
+    });
+    var ds = $("#d-star");
+    if (ds && openId) { ds.textContent = isFav(openId) ? "★" : "☆"; }
+    var list = $("#favlist");
+    list.innerHTML = "";
+    favs.forEach(function (id) {
+      var src = $('.cat[data-cat] .dua[data-id="' + id + '"]');
+      if (src) list.appendChild(src.cloneNode(true));
+    });
+    $("#favs").hidden = favs.length === 0;
+    filter();
+  }
+  function toggleFav(id) {
+    if (isFav(id)) favs.splice(favs.indexOf(id), 1); else favs.push(id);
+    save("favs", favs); paintStars();
+  }
+
+  /* ---------- Volledig scherm ---------- */
+  var openId = null, lastFocus = null;
+  function openDua(id) {
+    var d = DUAS[id]; if (!d) return;
+    openId = id; lastFocus = document.activeElement;
+    $("#d-cat").textContent = d.category;
+    $("#d-title").textContent = d.title;
+    $("#d-when").textContent = d.when || "";
+    $("#d-ar").textContent = d.ar;
+    $("#d-tr").textContent = d.tr;
+    $("#d-nl").textContent = d.nl;
+    $("#d-note").textContent = d.note || "";
+    $("#d-src").innerHTML = "";
+    if (d.src) { var s = document.createElement("span"); s.className = "src"; s.textContent = d.src; $("#d-src").appendChild(s); }
+    $("#detail").hidden = false;
+    $("#detail").scrollTop = 0;
+    document.body.style.overflow = "hidden";
+    paintStars();
+    $("#d-close").focus();
+  }
+  function closeDua() {
+    $("#detail").hidden = true; openId = null;
+    document.body.style.overflow = "";
+    if (lastFocus) lastFocus.focus();
+  }
+  $("#d-close").addEventListener("click", closeDua);
+  $("#d-star").addEventListener("click", function () { if (openId) toggleFav(openId); });
+  document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && openId) closeDua(); });
+
+  document.addEventListener("click", function (ev) {
+    var star = ev.target.closest("[data-star]");
+    if (star) { ev.stopPropagation(); toggleFav(star.dataset.star); return; }
+    var card = ev.target.closest(".dua[data-id]");
+    if (card && !window.getSelection().toString()) openDua(card.dataset.id);
+  });
+  document.addEventListener("keydown", function (ev) {
+    var card = ev.target.closest && ev.target.closest(".dua[data-id]");
+    if (card && ev.target === card && (ev.key === "Enter" || ev.key === " ")) { ev.preventDefault(); openDua(card.dataset.id); }
+  });
+
+  /* ---------- Zoeken ---------- */
+  var q = $("#q");
+  function filter() {
+    var term = (q.value || "").trim().toLowerCase(), any = false;
+    $$("#v-dua .cat").forEach(function (cat) {
+      var shown = 0;
+      $$(".dua", cat).forEach(function (c) {
+        var hit = !term || c.dataset.search.indexOf(term) >= 0 || (DUAS[c.dataset.id] && DUAS[c.dataset.id].ar.indexOf(term) >= 0);
+        c.hidden = !hit; if (hit) shown++;
+      });
+      if (cat.id === "favs") { cat.hidden = favs.length === 0 || shown === 0; }
+      else cat.hidden = shown === 0;
+      if (shown) any = true;
+    });
+    $("#noresult").hidden = any;
+  }
+  q.addEventListener("input", filter);
+
+  /* ---------- Teller ---------- */
+  var mode = load("mode", "tawaf");
+  var counts = load("counts", { tawaf: 0, sai: 0 });
+  function hint(n) {
+    if (mode === "tawaf") {
+      if (n === 0) return "Begin bij de Zwarte Steen: Bismillah, Allahu akbar.";
+      if (n < 3) return "Ronde " + (n + 1) + " bezig. Mannen: raml, korte snelle passen.";
+      if (n < 7) return "Ronde " + (n + 1) + " bezig. Normaal lopen.";
+      return "Tawaf voltooid. Schouder bedekken, twee rak'ah bij de Maqam, Zamzam.";
+    }
+    if (n === 7) return "Sa'i voltooid op de Marwah. Nu haar scheren of inkorten.";
+    var from = n % 2 === 0 ? "Safa" : "Marwah", to = n % 2 === 0 ? "Marwah" : "Safa";
+    return "Traject " + (n + 1) + ": van " + from + " naar " + to + ". Mannen rennen tussen de groene lichten.";
+  }
+  function renderCounter() {
+    var n = counts[mode] || 0;
+    $("#num").textContent = n;
+    $$(".seg").forEach(function (s, i) { s.classList.toggle("on", i < n); });
+    $("#hint").textContent = hint(n);
+    var plus = $("#plus");
+    plus.textContent = n >= 7 ? "Voltooid" : (mode === "tawaf" ? "Ronde klaar" : "Traject klaar");
+    plus.disabled = n >= 7;
+    $("#minus").disabled = n <= 0;
+    $("#ring").setAttribute("aria-label", n + " van 7. Tik voor de volgende.");
+    $$("[data-mode]").forEach(function (b) { b.setAttribute("aria-selected", b.dataset.mode === mode ? "true" : "false"); });
+    save("counts", counts); save("mode", mode);
+  }
+  function step(d) {
+    var n = Math.max(0, Math.min(7, (counts[mode] || 0) + d));
+    counts[mode] = n; renderCounter();
+    if (navigator.vibrate) navigator.vibrate(n === 7 ? [40, 60, 40] : 25);
+  }
+  $("#plus").addEventListener("click", function () { step(1); });
+  $("#ring").addEventListener("click", function () { if ((counts[mode] || 0) < 7) step(1); });
+  $("#minus").addEventListener("click", function () { step(-1); });
+  $("#reset").addEventListener("click", function () { counts[mode] = 0; renderCounter(); });
+  $$("[data-mode]").forEach(function (b) { b.addEventListener("click", function () { mode = b.dataset.mode; renderCounter(); }); });
+  renderCounter();
+
+  /* Scherm aan houden tijdens de teller */
+  var awakeBox = $("#awake"), lock = null;
+  awakeBox.checked = load("awake", true);
+  function keepAwake() {
+    var want = current === "teller" && awakeBox.checked && document.visibilityState === "visible";
+    if (want && !lock && navigator.wakeLock) {
+      navigator.wakeLock.request("screen").then(function (l) { lock = l; l.addEventListener("release", function () { lock = null; }); }).catch(function () {});
+    } else if (!want && lock) { lock.release().catch(function () {}); lock = null; }
+  }
+  awakeBox.addEventListener("change", function () { save("awake", awakeBox.checked); keepAwake(); });
+  document.addEventListener("visibilitychange", keepAwake);
+
+  /* ---------- Mijn du'a-lijst ---------- */
+  var defaults = ["Aanvaarding van mijn umrah", "Mijn ouders", "Mijn partner en kinderen", "Overleden familieleden", "Iedereen die mij om du'a vroeg", "Zieke en verdrukte moslims"];
+  var items = load("mylist", null);
+  if (!Array.isArray(items)) items = defaults.map(function (t) { return { t: t, d: false }; });
+  function renderList() {
+    var ul = $("#mylist"); ul.innerHTML = "";
+    items.forEach(function (it, i) {
+      var li = document.createElement("li"), lab = document.createElement("label"), cb = document.createElement("input"), sp = document.createElement("span"), del = document.createElement("button");
+      cb.type = "checkbox"; cb.checked = !!it.d; cb.id = "my-" + i;
+      cb.addEventListener("change", function () { it.d = cb.checked; save("mylist", items); count(); });
+      sp.textContent = it.t;
+      del.type = "button"; del.className = "del"; del.textContent = "Verwijder"; del.setAttribute("aria-label", "Verwijder: " + it.t);
+      del.addEventListener("click", function () { items.splice(i, 1); save("mylist", items); renderList(); });
+      lab.appendChild(cb); lab.appendChild(sp); li.appendChild(lab); li.appendChild(del); ul.appendChild(li);
+    });
+    count();
+  }
+  function count() {
+    var done = items.filter(function (x) { return x.d; }).length;
+    $("#count").textContent = items.length ? done + " van " + items.length + " gedaan" : "Je lijst is leeg. Voeg hierboven een naam of wens toe.";
+    $("#uncheck").disabled = done === 0;
+  }
+  $("#addform").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var t = $("#addin").value.trim(); if (!t) return;
+    items.push({ t: t, d: false }); $("#addin").value = ""; save("mylist", items); renderList();
+  });
+  $("#uncheck").addEventListener("click", function () { items.forEach(function (x) { x.d = false; }); save("mylist", items); renderList(); });
+  renderList();
+
+  /* ---------- Start ---------- */
+  paintStars();
+  route();
+
+  if (window.USE_SW && "serviceWorker" in navigator && /^https?:/.test(location.protocol)) {
+    navigator.serviceWorker.register("sw.js").catch(function () {});
+  }
+})();
+</script>
+</body>
+</html>
